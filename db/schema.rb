@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180319172902) do
+ActiveRecord::Schema.define(version: 20180319203818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,8 +101,8 @@ ActiveRecord::Schema.define(version: 20180319172902) do
     t.boolean "is_done"
     t.date "date"
     t.bigint "surgeon_id"
-    t.boolean "pre_form_answered"
-    t.boolean "post_form_answered"
+    t.boolean "pre_form_answered", default: false
+    t.boolean "post_form_answered", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "pre_form_id"
