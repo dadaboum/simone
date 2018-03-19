@@ -1,0 +1,2 @@
+class Surgeon < ApplicationRecord
+end
