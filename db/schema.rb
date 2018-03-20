@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180319203818) do
+ActiveRecord::Schema.define(version: 20180320133037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,15 @@ ActiveRecord::Schema.define(version: 20180319203818) do
     t.boolean "is_mandatory"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.bigint "surgeries_id"
+    t.string "description"
+    t.string "flag"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["surgeries_id"], name: "index_events_on_surgeries_id"
   end
 
   create_table "forms", force: :cascade do |t|
@@ -138,6 +147,7 @@ ActiveRecord::Schema.define(version: 20180319203818) do
   end
 
   add_foreign_key "alert_raisers", "questions"
+  add_foreign_key "events", "surgeries", column: "surgeries_id"
   add_foreign_key "forms", "hospitals"
   add_foreign_key "forms", "surgery_types"
   add_foreign_key "patient_answers", "questions"
