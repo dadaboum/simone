@@ -1,0 +1,15 @@
+.wrap {
+  display: flex;
+  height: 100vh;
+}
+
+.core {
+  flex: 1 0 600px;
+  background-color: $light-gray;
+  border: 1px solid black;
+}
+
+.show {
+  flex: 0 0 200px;
+  background-color: $gray;
+}

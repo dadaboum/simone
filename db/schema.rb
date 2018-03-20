@@ -10,28 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180320160909) do
+ActiveRecord::Schema.define(version: 20180320170604) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "alert_raisers", force: :cascade do |t|
-    t.integer "alert_type"
-    t.bigint "question_id"
-    t.string "field_to_check"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["question_id"], name: "index_alert_raisers_on_question_id"
-  end
-
-  create_table "answer_types", force: :cascade do |t|
-    t.string "description"
-    t.boolean "has_photo"
-    t.boolean "accept_multiple_answers"
-    t.boolean "is_mandatory"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "events", force: :cascade do |t|
     t.bigint "surgery_id"
@@ -42,12 +24,22 @@ ActiveRecord::Schema.define(version: 20180320160909) do
     t.index ["surgery_id"], name: "index_events_on_surgery_id"
   end
 
+  create_table "form_answers", force: :cascade do |t|
+    t.bigint "form_id"
+    t.bigint "surgery_id"
+    t.jsonb "answer_hash"
+    t.index ["form_id"], name: "index_form_answers_on_form_id"
+    t.index ["surgery_id"], name: "index_form_answers_on_surgery_id"
+  end
+
   create_table "forms", force: :cascade do |t|
     t.bigint "surgery_type_id"
     t.string "pre_or_post"
     t.bigint "hospital_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "typeform_id"
+    t.jsonb "question_array"
     t.index ["hospital_id"], name: "index_forms_on_hospital_id"
     t.index ["surgery_type_id"], name: "index_forms_on_surgery_type_id"
   end
@@ -58,16 +50,6 @@ ActiveRecord::Schema.define(version: 20180320160909) do
     t.string "name"
   end
 
-  create_table "patient_answers", force: :cascade do |t|
-    t.string "content"
-    t.bigint "question_id"
-    t.bigint "surgery_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["question_id"], name: "index_patient_answers_on_question_id"
-    t.index ["surgery_id"], name: "index_patient_answers_on_surgery_id"
-  end
-
   create_table "patients", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -76,24 +58,6 @@ ActiveRecord::Schema.define(version: 20180320160909) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["hospital_id"], name: "index_patients_on_hospital_id"
-  end
-
-  create_table "questions", force: :cascade do |t|
-    t.bigint "form_id"
-    t.string "content"
-    t.bigint "answer_type_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["answer_type_id"], name: "index_questions_on_answer_type_id"
-    t.index ["form_id"], name: "index_questions_on_form_id"
-  end
-
-  create_table "suggested_answers", force: :cascade do |t|
-    t.string "content"
-    t.bigint "question_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["question_id"], name: "index_suggested_answers_on_question_id"
   end
 
   create_table "surgeons", force: :cascade do |t|
@@ -145,17 +109,14 @@ ActiveRecord::Schema.define(version: 20180320160909) do
     t.index ["hospital_id"], name: "index_users_on_hospital_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+  
+  add_foreign_key "events", "surgeries", column: "surgeries_id"
+  add_foreign_key "form_answers", "forms"
+  add_foreign_key "form_answers", "surgeries"
 
-  add_foreign_key "alert_raisers", "questions"
-  add_foreign_key "events", "surgeries"
   add_foreign_key "forms", "hospitals"
   add_foreign_key "forms", "surgery_types"
-  add_foreign_key "patient_answers", "questions"
-  add_foreign_key "patient_answers", "surgeries"
   add_foreign_key "patients", "hospitals"
-  add_foreign_key "questions", "answer_types"
-  add_foreign_key "questions", "forms"
-  add_foreign_key "suggested_answers", "questions"
   add_foreign_key "surgeries", "patients"
   add_foreign_key "surgeries", "surgeons"
   add_foreign_key "surgeries", "surgery_types"
