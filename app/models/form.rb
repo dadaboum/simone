@@ -4,4 +4,5 @@ class Form < ApplicationRecord
   belongs_to :surgery_type
   has_many :questions
   belongs_to :hospital
+  validates :typeform_id, uniqueness: :true
 end

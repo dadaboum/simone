@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4">
+      <%= simple_form_for(@form) do |f| %>
+        <%= f.label 'hospital id' %>
+        <%= f.text_field :hospital_id %>
+        <%= f.label 'typeform id' %>
+        <%= f.text_field :typeform_id %>
+        <%= f.label 'surgery_type id' %>
+        <%= f.text_field :surgery_type_id %>
+        <%= f.label :pre_or_post %>
+        <%= f.text_field :pre_or_post %>
+        <%= f.submit class: 'btn btn-primary'%>
+      <% end %>
+    </div>
+  </div>
+</div>
