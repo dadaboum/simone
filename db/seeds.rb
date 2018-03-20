@@ -1,8 +1,4 @@
-PatientAnswer.destroy_all
-AlertRaiser.destroy_all
-SuggestedAnswer.destroy_all
-Question.destroy_all
-AnswerType.destroy_all
+FormAnswer.destroy_all
 Surgery.destroy_all
 Form.destroy_all
 SurgeryType.destroy_all
@@ -41,9 +37,64 @@ knee = SurgeryType.create(description: "Ligamentoplastie du genou")
 
 puts "Created surgery type Ligamentoplastie"
 
-pre_form_knee = Form.new(pre_or_post: "pre")
+pre_form_knee = Form.new(
+  pre_or_post: "pre",
+  question_array: [
+    {
+    id: "textfield_BwkrCAIZf9zq",
+    question: "Prénom",
+    field_id: 77285180
+    },
+    {
+    id: "textfield_Uo8nUKpsBX5q",
+    question: "Bonjour {{answer_77285180}}, bienvenue à la clinique du sport. <br>Quel est votre nom de famille?",
+    field_id: 77285181
+    },
+    {
+    id: "yesno_ojzWDYIPq11H",
+    question: "Avez-vous eu la consultation avec l'anesthésiste? ",
+    field_id: 77286396
+    },
+    {
+    id: "yesno_hbYvshy1Y5s6",
+    question: "Avez-vous eu un problème de santé depuis la dernière consultation avec l'anesthésiste?",
+    field_id: 77286397
+    },
+    {
+    id: "textfield_OTOFL68Qk05p",
+    question: "Pouvez-vous me confirmer l'intitulé de votre intervention?",
+    field_id: 77286395
+    },
+    {
+    id: "yesno_DX2VOxlsaWkH",
+    question: "Avez-vous prévu un accompagnant pour votre retour à domicile?",
+    field_id: 77286398
+    },
+    {
+    id: "yesno_rsQYJ9O2HGTl",
+    question: "Avez-vous prévu de ne pas rester seul la nuit suivant votre intervention?",
+    field_id: 77286399
+    },
+    {
+    id: "yesno_OwPttXRme0l4",
+    question: "Avez-vous besoin d'un arrêt de travail?",
+    field_id: 77286400
+    },
+    {
+    id: "yesno_C3MW1kwGj4z7",
+    question: "Avez-vous besoin d'un bon de transport?",
+    field_id: 77286401
+    },
+    {
+    id: "statement_YoQYVTNdmXUd",
+    question: "Rappel:<br># Une douche et un shampoing avec vos produits habituels doivent etre pris la veille au soir ou le matin de votre intervention, une douche a la betadine sera prise a la clinique<br># Depilez la zone a operer si besoin avec une tondeuse ou de la creme depilatoire<br># Le vernis a ongles et le maquillage doivent etre retires la veille de l'intervention<br># Il est deconseille de garder avec vous bijoux et objets de valeurs le jour de votre intervention<br># Un jeune strict (interdiction de manger, de boire et de fumer) doit etre respecte 6h avant l'heure de convocation a la clinique<br># Les derniers examens radiologiques et ou biologiques demandes par l'anesthesiste doivent etre apportes le jour de l'intervention<br># Votre traitement habituel et l'ordonnance associee doivent etre apportes le jour de l'intervention<br># Porter des vetements amples car le pansement peut etre volumineux",
+    field_id: 77286394
+    }
+  ]
+)
 pre_form_knee.surgery_type = knee
 pre_form_knee.hospital = clinique_du_sport
+pre_form_knee.typeform_id = "Dcyfaj"
 pre_form_knee.save
 
 post_form_knee = Form.new(pre_or_post: "post")
@@ -51,41 +102,32 @@ post_form_knee.surgery_type = knee
 post_form_knee.hospital = clinique_du_sport
 post_form_knee.save
 
-yes_or_no_mandatory = AnswerType.create(description: "Yes or No", has_photo: false, accept_multiple_answers: false, is_mandatory: true)
-
-question_anesth = Question.new(content: "Avez vous eu la consultation avec l anesthesiste ?")
-question_anesth.form = pre_form_knee
-question_anesth.answer_type = yes_or_no_mandatory
-question_anesth.save
-
-yes = SuggestedAnswer.new(content: "Yes")
-yes.question = question_anesth
-yes.save
-
-no = SuggestedAnswer.new(content: "No")
-no.question = question_anesth
-no.save
-
-first_alert = AlertRaiser.new(alert_type: 1, field_to_check: "No")
-first_alert.question = question_anesth
-first_alert.save
-
-puts "Created pre and post forms for Ligamentoplasty surgery in clinique du sport"
-
-patient_pre = Surgery.new(is_done: false, date: Date.today)
-patient_pre.patient = david
-patient_pre.surgery_type = knee
-patient_pre.surgeon = guilhem
-patient_pre.pre_form = pre_form_knee
-patient_pre.post_form = post_form_knee
-patient_pre.save
+david_operation = Surgery.new(is_done: false, date: Date.today)
+david_operation.patient = david
+david_operation.surgery_type = knee
+david_operation.surgeon = guilhem
+david_operation.pre_form = pre_form_knee
+david_operation.post_form = post_form_knee
+david_operation.save
 
 puts "Created a patient entry"
 
-david_answer = PatientAnswer.new(content: "No")
-david_answer.question = question_anesth
-david_answer.surgery = patient_pre
-david_answer.save
+#Fill David's form answer
+david_answer = FormAnswer.new(
+  answer_hash: {
+    textfield_BwkrCAIZf9zq: "David",
+    textfield_Uo8nUKpsBX5q: "Benamran",
+    yesno_ojzWDYIPq11H: "1",
+    yesno_hbYvshy1Y5s6: "1",
+    textfield_OTOFL68Qk05p: "Genou",
+    yesno_DX2VOxlsaWkH: "1",
+    yesno_rsQYJ9O2HGTl: "1",
+    yesno_OwPttXRme0l4: "0",
+    yesno_C3MW1kwGj4z7: "0"
+    }
+)
+david_answer.form = pre_form_knee
+david_answer.surgery = david_operation
 
 puts "David has answered!"
 
