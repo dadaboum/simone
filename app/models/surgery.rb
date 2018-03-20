@@ -5,4 +5,5 @@ class Surgery < ApplicationRecord
   belongs_to :surgery_type
   belongs_to :surgeon
   has_many :patient_answers
+  has_many :events
 end
