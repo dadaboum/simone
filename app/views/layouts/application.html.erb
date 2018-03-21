@@ -12,17 +12,9 @@
   <body>
     <%= render 'shared/navbarwagon' %>
     <%= render 'shared/flashes' %>
-    <div class="wrap">
-      <%= render 'shared/navbar' %>
-
-
-      <div class="core">
-        <%= yield %>
-
-      </div>
-      <div class="show">
-
-      </div>
+    <%= render 'shared/navbar' %>
+    <div class="container">
+      <%= yield %>
     </div>
 
     <%= javascript_include_tag 'application' %>

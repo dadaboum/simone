@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180320170604) do
+ActiveRecord::Schema.define(version: 20180321104722) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,8 @@ ActiveRecord::Schema.define(version: 20180320170604) do
     t.datetime "updated_at", null: false
     t.integer "pre_form_id"
     t.integer "post_form_id"
+    t.text "pre_comments"
+    t.text "post_comments"
     t.index ["patient_id"], name: "index_surgeries_on_patient_id"
     t.index ["surgeon_id"], name: "index_surgeries_on_surgeon_id"
     t.index ["surgery_type_id"], name: "index_surgeries_on_surgery_type_id"
@@ -109,11 +111,10 @@ ActiveRecord::Schema.define(version: 20180320170604) do
     t.index ["hospital_id"], name: "index_users_on_hospital_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-  
-  add_foreign_key "events", "surgeries", column: "surgeries_id"
+
+  add_foreign_key "events", "surgeries"
   add_foreign_key "form_answers", "forms"
   add_foreign_key "form_answers", "surgeries"
-
   add_foreign_key "forms", "hospitals"
   add_foreign_key "forms", "surgery_types"
   add_foreign_key "patients", "hospitals"

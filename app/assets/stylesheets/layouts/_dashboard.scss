@@ -1,15 +1,10 @@
-.wrap {
+.content-container {
   display: flex;
-  height: 100vh;
+  height: calc(100vh - 70px);
 }
-
-.core {
-  flex: 1 0 600px;
-  background-color: $light-gray;
-  border: 1px solid black;
+.core-left {
+  flex: 0 0 50%;
 }
-
-.show {
-  flex: 0 0 200px;
-  background-color: $gray;
+.core-right {
+  flex: 0 0 50%;
 }
