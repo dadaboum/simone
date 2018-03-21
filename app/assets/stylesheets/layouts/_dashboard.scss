@@ -1,11 +1,19 @@
 .content-container {
   display: flex;
+<<<<<<< HEAD
 }
 
 .core-left {
   flex: 0 0 50%;
 }
 
+=======
+  height: calc(100vh - 70px);
+}
+.core-left {
+  flex: 0 0 50%;
+}
+>>>>>>> master
 .core-right {
   flex: 0 0 50%;
 }
