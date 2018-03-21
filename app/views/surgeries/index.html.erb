@@ -7,4 +7,5 @@
   <p><%= surgery.patient.first_name %></p>
   <p><%= surgery.patient.last_name %></p>
   <p><%= surgery.surgery_type.description %></p>
+  <%= link_to 'Surgery', surgery_path(surgery) %>
 <% end %>
