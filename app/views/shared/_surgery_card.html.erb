@@ -1,0 +1,13 @@
+<div class="surgery-card-wrapper">
+  <%= link_to surgery_path(surgery) do %>
+    <div class="surgery-form-date">
+      J-1
+    </div>
+    <div class="surgery-content">
+      <p><%= surgery.patient.first_name %></p>
+      <p><%= surgery.patient.last_name %></p>
+      <p><%= surgery.surgeon.name %></p>
+      <p><%= surgery.surgery_type.description %></p>
+    </div>
+  <% end %>
+</div>

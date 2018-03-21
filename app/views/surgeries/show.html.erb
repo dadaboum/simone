@@ -1,12 +1,16 @@
 <div class="content-container">
   <div class="core-left">
-    <div id="pre-form-embed"></div>
-    <div class="comment-box text-center">
-      <%= simple_form_for(@surgery) do |f| %>
-        <%= f.text_area :pre_comments, placeholder: "Ecrivez votre commentaire...", class: 'comment-field' %>
-        <%= f.submit 'Ajouter un commentaire', class: 'btn btn-sm btn-primary' %>
-      <% end %>
-    </div>
+    <% if params[:feature] == "form" %>
+      <div id="pre-form-embed"></div>
+      <div class="comment-box text-center">
+        <%= simple_form_for(@surgery) do |f| %>
+          <%= f.text_area :pre_comments, placeholder: "Ecrivez votre commentaire...", class: 'comment-field' %>
+          <%= f.submit 'Ajouter un commentaire', class: 'btn btn-sm btn-primary' %>
+        <% end %>
+      </div>
+    <% else %>
+
+    <% end %>
   </div>
   <div class="core-right">
     <%= @surgery.patient %>

@@ -9,7 +9,7 @@
 
     <% if user_signed_in? %>
 
-      <li id="selected" class="small-font"><%= link_to "Patients", surgeries_path %></li>
+      <li id="selected" class="small-font">Patients<%#= link_to "Patients", surgery_path(@surgery) %></li>
       <li class="small-font"><%= link_to "Questionnaires", forms_path %></li>
       <li class="small-font">
         <%= link_to destroy_user_session_path, method: :delete do %>
