@@ -1,6 +1,5 @@
 .content-container {
   display: flex;
-  height: calc(100vh - 70px);
   width: calc(100vw - 180px);
   margin-left: 180px;
   padding: 5px;
@@ -13,4 +12,5 @@
 .core-right {
   flex: 0 0 50%;
 }
+
 

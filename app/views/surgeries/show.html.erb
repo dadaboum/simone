@@ -1,15 +1,37 @@
 <div class="content-container">
-  <div class="core-left">
-    <% if params[:feature] == "form" %>
-      <div id="pre-form-embed"></div>
+  <% if params[:feature] == "form" %>
+    <div class="core-left-surgery">
+      <% if @pre_form_answer %>
+        <p class='text-center'>Formulaire pré-admission</p>
+        <div class="form-answered pre-scrollable">
+          <ol>
+            <% @pre_form_answer.form.question_array.each do |question| %>
+              <li>
+                <%= question['question'] %>:
+                <% answer = @pre_form_answer.answer_hash[question["id"]] %>
+                <% if answer == '0' %>
+                  Oui
+                <% elsif answer == '1' %>
+                  Non
+                <% else %>
+                  <%= answer %>
+                <% end %>
+              </li>
+            <% end %>
+          </ol>
+        </div>
+      <% else %>
+        <div id="pre-form-embed" data-surgeryid="<%= @surgery.id %>" data-typeformid="<%= @surgery.pre_form.typeform_id %>"></div>
+      <% end %>
       <div class="comment-box text-center">
         <%= simple_form_for(@surgery) do |f| %>
           <%= f.text_area :pre_comments, placeholder: "Ecrivez votre commentaire...", class: 'comment-field' %>
           <%= f.submit 'Ajouter un commentaire', class: 'btn btn-sm btn-primary' %>
         <% end %>
       </div>
-    <% else %>
-
+    </div>
+  <% else %>
+    <div class="core-left">
       <div class="surgery-cards-wrapper">
         <% @surgeries.each do |surgery| %>
           <div class="surgery-card small-font">
@@ -26,11 +48,9 @@
           </div>
         <% end %>
       </div>
+    </div>
+  <% end %>
 
-
-
-    <% end %>
-  </div>
   <div class="core-right">
     <%= @surgery.patient %>
     <%= @surgery.pre_form %>

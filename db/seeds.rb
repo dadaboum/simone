@@ -245,6 +245,7 @@ david_answer = FormAnswer.new(
 )
 david_answer.form = pre_form_knee
 david_answer.surgery = david_operation
+david_answer.save!
 
 puts "David has answered!"
 

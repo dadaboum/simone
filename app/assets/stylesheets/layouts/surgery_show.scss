@@ -1,11 +1,21 @@
+.core-left-surgery {
+  flex: 0 0 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 #pre-form-embed {
   height: 70%;
+}
+.form-answered {
+
 }
 .comment-box {
   height: 30%;
   .comment-field {
     width: 100%;
     height: 150px;
-    margin-bottom: 5px;
+    margin: 10px 0px;
   }
 }
