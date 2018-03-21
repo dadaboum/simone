@@ -109,7 +109,7 @@ david_operation.surgery_type = knee
 david_operation.surgeon = guilhem
 david_operation.pre_form = pre_form_knee
 david_operation.pre_form_answered = true
-david_operation.post_form_answered = true
+david_operation.post_form_answered = false
 david_operation.post_form = post_form_knee
 david_operation.save
 
@@ -152,6 +152,7 @@ david_answer = FormAnswer.new(
 )
 david_answer.form = pre_form_knee
 david_answer.surgery = david_operation
+david_answer.save!
 
 puts "David has answered!"
 
