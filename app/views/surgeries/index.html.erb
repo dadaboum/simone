@@ -1,10 +1,13 @@
-<% @surgeries.each do |surgery| %>
-  <% if surgery.is_done %>
-    <p>POST</p>
-  <% else %>
-    <p>PRE</p>
-  <% end %>
-  <p><%= surgery.patient.first_name %></p>
-  <p><%= surgery.patient.last_name %></p>
-  <p><%= surgery.surgery_type.description %></p>
-<% end %>
+
+<div class="content-container">
+  <div class="core-left">
+    <% @surgeries.each do |surgery| %>
+    render card
+    <% end %>
+  </div>
+
+  <div class="core-right">
+
+  </div>
+
+</div>
