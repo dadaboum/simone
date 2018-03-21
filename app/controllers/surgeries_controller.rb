@@ -8,4 +8,12 @@ class SurgeriesController < ApplicationController
     @surgery = Surgery.find(params[:id])
   end
 
+
+
+
+  def pre_op_yellow_flag
+  end
+
+  def pre_op_green_fag
+  end
 end
