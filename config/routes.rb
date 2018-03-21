@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   resources :forms, only: [ :index, :new, :create]
-  resources :surgeries, only: [ :index, :show ]
+  resources :surgeries, only: [ :show ]
 end
