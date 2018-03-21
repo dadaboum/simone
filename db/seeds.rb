@@ -1,4 +1,5 @@
 FormAnswer.destroy_all
+Event.destroy_all
 Surgery.destroy_all
 Form.destroy_all
 SurgeryType.destroy_all
@@ -102,15 +103,38 @@ post_form_knee.surgery_type = knee
 post_form_knee.hospital = clinique_du_sport
 post_form_knee.save
 
-david_operation = Surgery.new(is_done: false, date: Date.today)
+david_operation = Surgery.new(is_done: true, date: Date.yesterday)
 david_operation.patient = david
 david_operation.surgery_type = knee
 david_operation.surgeon = guilhem
 david_operation.pre_form = pre_form_knee
+david_operation.pre_form_answered = true
+david_operation.post_form_answered = true
 david_operation.post_form = post_form_knee
 david_operation.save
 
-puts "Created a patient entry"
+david_event = Event.new(description: "message pre op sent")
+david_event.surgery = david_operation
+david_event.save!
+
+david_event2 = Event.new(description: "message post op sent")
+david_event2.surgery = david_operation
+david_event2.save!
+
+jonathan_operation = Surgery.new(is_done: false, date: Date.tomorrow)
+jonathan_operation.patient = jonathan
+jonathan_operation.surgery_type = knee
+jonathan_operation.surgeon = guilhem
+jonathan_operation.pre_form_answered = true
+jonathan_operation.pre_form = pre_form_knee
+jonathan_operation.post_form = post_form_knee
+jonathan_operation.save!
+
+jonathan_event = Event.new(description: "message pre op sent")
+jonathan_event.surgery = jonathan_operation
+jonathan_event.save!
+
+puts "Created a patients entries"
 
 #Fill David's form answer
 david_answer = FormAnswer.new(

@@ -1,3 +1,3 @@
 class Event < ApplicationRecord
-  belongs_to :surgeries
+  belongs_to :surgery
 end

@@ -109,11 +109,10 @@ ActiveRecord::Schema.define(version: 20180320170604) do
     t.index ["hospital_id"], name: "index_users_on_hospital_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-  
-  add_foreign_key "events", "surgeries", column: "surgeries_id"
+
+  add_foreign_key "events", "surgeries"
   add_foreign_key "form_answers", "forms"
   add_foreign_key "form_answers", "surgeries"
-
   add_foreign_key "forms", "hospitals"
   add_foreign_key "forms", "surgery_types"
   add_foreign_key "patients", "hospitals"
