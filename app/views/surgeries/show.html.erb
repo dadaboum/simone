@@ -40,12 +40,24 @@
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
+            <!-- link_to surgery_path(surgery)flag?red -->
             <li><a href="#">Red</a></li>
             <li><a href="#">Orange</a></li>
             <li><a href="#">Yellow</a></li>
             <li><a href="#">Green</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">All</a></li>
+          </ul>
+        </div>
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            J+/-1
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
+            <!-- link_to surgery_path(surgery)flag?red -->
+            <li><a href="#">J-1</a></li>
+            <li><a href="#">J+1</a></li>
           </ul>
         </div>
       </div>
@@ -58,8 +70,7 @@
             <!-- Quand la checkbox est cochee : <i class="far fa-check-square"></i> -->
             <%= link_to surgery_path(surgery) do %>
               <div class="surgery-patient">
-                <% current_flag = (surgery.date < Date.today ? surgery.post_flag : surgery.pre_flag) %>
-                <p class="strong <%= current_flag %>-font"><%= surgery.patient.first_name %> <%= surgery.patient.last_name %> - <%= surgery.surgeon.name %></p>
+                <p class="strong <%= surgery.status %>-font"><%= surgery.patient.first_name %> <%= surgery.patient.last_name %> - <%= surgery.surgeon.name %></p>
                 <p><%= surgery.surgery_type.description %></p>
               </div>
             <div class="surgery-form-type">
