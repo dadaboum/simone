@@ -1,0 +1,129 @@
+.right-side-wrapper {
+  padding: 5px;
+  background-color: white;
+}
+
+.right-side-box {
+  background-color: $light-gray;
+  margin-top: 20px;
+  margin: 20px;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.patient-box {
+  padding-top: 10px;
+  text-align: center;
+  color: black;
+}
+
+.surgery-box {
+  background-color: white;
+  padding-bottom: 20px;
+}
+
+.surgery-main-info {
+  padding: 30px;
+  padding-top : 40px;
+  color: black;
+  text-align: center;
+}
+
+.surgery-history-box {
+  height: 500px;
+  border-radius: 3px;
+  margin: 30px;
+  margin-top: 0px;
+}
+
+.history-box {
+  display: flex;
+  align-items: center;
+}
+
+.history-sep-box {
+  display: flex;
+  align-items: center;
+}
+
+.history-left {
+  flex: 0 0 10px;
+}
+
+.history-right {
+  flex: 1 1 auto;
+  padding-left: 30px;
+  font-size: 15px;
+  margin-bottom: 0px;
+}
+
+.green-separator {
+  background-color:#1bf797;
+  margin: 0 auto;
+  margin-top: 10px;
+  height: 5px;
+  border-radius: 5px;
+  width: 80%;
+}
+
+.history-separator-big {
+  height: 35px;
+  margin-left: 4px;
+  flex: 0 0 10px;
+  border-left: 1px solid rgba(0, 0, 0, 0.6);
+}
+
+.history-separator-small {
+  height: 15px;
+  margin-left: 4px;
+  flex: 0 0 10px;
+  border-left: 1px solid rgba(0, 0, 0, 0.6);
+}
+
+.history-box:first-of-type .history-separator-big:first-of-type {
+  display: none;
+}
+
+.history-box:first-of-type {
+  align-items: start;
+}
+
+.history-box:last-of-type {
+  border: 1px solid red;
+}
+
+.history-sep-box:last-of-type {
+  display:none;
+}
+
+.bullet {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.green {
+  background-color : $green;
+}
+
+.orange {
+  background-color: $orange;
+}
+
+.red {
+  background-color: $red;
+}
+
+.secondary-info {
+  font-size: 15px;
+  color: rgba(0,0,0,0.6);
+}
+
+.no-margin {
+  margin: 0px;
+}
