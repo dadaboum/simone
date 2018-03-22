@@ -20,9 +20,10 @@ simone.save
 
 puts "Created Nurse Simone"
 
-guilhem = Surgeon.create(name:"Guilhem", email:"guilhem@gmail.com")
+guilhem = Surgeon.create(name:"Dr Guilhem", email:"guilhem@gmail.com")
+paul = Surgeon.create(name:"Dr Paul", email:"paul@gmail.com")
 
-puts "Created Dr Guilhem"
+puts "Created Dr Guilhem and Dr Paul"
 
 david = Patient.new(first_name: "David", last_name: "Benamran", phone_number: "0672303881")
 david.hospital = clinique_du_sport
@@ -38,9 +39,29 @@ paul.save
 
 puts "Created patients David and Jonathan"
 
-knee = SurgeryType.create(description: "Ligamentoplastie du genou")
+marie = Patient.new(first_name: "Marie", last_name: "Robert", phone_number: "0677509667")
+marie.hospital = clinique_du_sport
+marie.save
 
-puts "Created surgery type Ligamentoplastie"
+jean = Patient.new(first_name: "Jean", last_name: "Laplace", phone_number: "0677509667")
+jean.hospital = clinique_du_sport
+jean.save
+
+herve = Patient.new(first_name: "Herve", last_name: "Courland", phone_number: "0677509667")
+herve.hospital = clinique_du_sport
+herve.save
+
+paula = Patient.new(first_name: "Paula", last_name: "Vande", phone_number: "0677509667")
+paula.hospital = clinique_du_sport
+paula.save
+
+puts "Created patients David, Jonathan, Marie, Jean, Herve and Paula"
+
+knee = SurgeryType.create(description: "Ligamentoplastie du genou")
+ivf = SurgeryType.create(description: "FIV")
+arthro = SurgeryType.create(description: "Arthroscopie")
+
+puts "Created surgery type Ligamentoplastie, fiv and Arthroscopie"
 
 pre_form_knee = Form.new(
   pre_or_post: "pre",
@@ -102,18 +123,20 @@ pre_form_knee.hospital = clinique_du_sport
 pre_form_knee.typeform_id = "Dcyfaj"
 pre_form_knee.save
 
+puts "Created J-1 form for the knee surgery"
+
 post_form_knee = Form.new(pre_or_post: "post")
 post_form_knee.surgery_type = knee
 post_form_knee.hospital = clinique_du_sport
 post_form_knee.save
 
-david_operation = Surgery.new(is_done: true, date: Date.yesterday)
+david_operation = Surgery.new(is_done: false, date: Date.tomorrow)
 david_operation.patient = david
 david_operation.surgery_type = knee
 david_operation.surgeon = guilhem
 david_operation.pre_form = pre_form_knee
 david_operation.pre_form_answered = true
-david_operation.post_form_answered = true
+david_operation.post_form_answered = false
 david_operation.post_form = post_form_knee
 david_operation.save
 
@@ -121,11 +144,11 @@ david_event = Event.new(description: "message pre op sent", flag: "green")
 david_event.surgery = david_operation
 david_event.save!
 
-david_event2 = Event.new(description: "message post op sent")
+david_event2 = Event.new(description: "form completed")
 david_event2.surgery = david_operation
 david_event2.save!
 
-jonathan_operation = Surgery.new(is_done: false, date: Date.tomorrow)
+jonathan_operation = Surgery.new(is_done: true, date: Date.yesterday)
 jonathan_operation.patient = jonathan
 jonathan_operation.surgery_type = knee
 jonathan_operation.surgeon = guilhem
@@ -133,6 +156,7 @@ jonathan_operation.pre_form_answered = true
 jonathan_operation.pre_form = pre_form_knee
 jonathan_operation.post_form = post_form_knee
 jonathan_operation.save!
+
 
 jonathan_event = Event.new(description: "message pre op sent", flag: "green")
 jonathan_event.surgery = jonathan_operation
@@ -148,6 +172,84 @@ paul_operation.post_form = post_form_knee
 paul_operation.save!
 
 puts "Created a patients entries"
+
+jonathan_event = Event.new(description: "message post op sent")
+jonathan_event.surgery = jonathan_operation
+jonathan_event.save!
+
+marie_operation = Surgery.new(is_done: false, date: Date.tomorrow)
+marie_operation.patient = marie
+marie_operation.surgery_type = ivf
+marie_operation.surgeon = guilhem
+marie_operation.pre_form = pre_form_knee
+marie_operation.pre_form_answered = true
+marie_operation.post_form_answered = false
+marie_operation.post_form = post_form_knee
+marie_operation.save!
+
+marie_event = Event.new(description: "message pre op sent")
+marie_event.surgery = marie_operation
+marie_event.save!
+
+marie_event2 = Event.new(description: "Still no answer")
+marie_event2.surgery = marie_operation
+marie_event2.save!
+
+paula_operation = Surgery.new(is_done: false, date: Date.tomorrow)
+paula_operation.patient = paula
+paula_operation.surgery_type = ivf
+paula_operation.surgeon = guilhem
+paula_operation.pre_form = pre_form_knee
+paula_operation.pre_form_answered = true
+paula_operation.post_form_answered = false
+paula_operation.post_form = post_form_knee
+paula_operation.save!
+
+paula_event = Event.new(description: "message pre op sent")
+paula_event.surgery = paula_operation
+paula_event.save!
+
+paula_event2 = Event.new(description: "Still no answer")
+paula_event2.surgery = paula_operation
+paula_event2.save!
+
+jean_operation = Surgery.new(is_done: false, date: Date.tomorrow)
+jean_operation.patient = jean
+jean_operation.surgery_type = arthro
+jean_operation.surgeon = guilhem
+jean_operation.pre_form = pre_form_knee
+jean_operation.pre_form_answered = true
+jean_operation.post_form_answered = false
+jean_operation.post_form = post_form_knee
+jean_operation.save!
+
+jean_event = Event.new(description: "message pre op sent")
+jean_event.surgery = jean_operation
+jean_event.save!
+
+jean_event2 = Event.new(description: "Still no answer")
+jean_event2.surgery = jean_operation
+jean_event2.save!
+
+herve_operation = Surgery.new(is_done: false, date: Date.tomorrow)
+herve_operation.patient = herve
+herve_operation.surgery_type = arthro
+herve_operation.surgeon = guilhem
+herve_operation.pre_form = pre_form_knee
+herve_operation.pre_form_answered = true
+herve_operation.post_form_answered = false
+herve_operation.post_form = post_form_knee
+herve_operation.save!
+
+herve_event = Event.new(description: "message pre op sent")
+herve_event.surgery = herve_operation
+herve_event.save!
+
+herve_event2 = Event.new(description: "Still no answer")
+herve_event2.surgery = herve_operation
+herve_event2.save!
+
+puts "Created patients entries"
 
 #Fill David's form answer
 david_answer = FormAnswer.new(
@@ -165,6 +267,7 @@ david_answer = FormAnswer.new(
 )
 david_answer.form = pre_form_knee
 david_answer.surgery = david_operation
+david_answer.save!
 
 puts "David has answered!"
 
