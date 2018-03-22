@@ -31,3 +31,5 @@ end
 
 
 # surgery_path(surgery, flag: "red")
+
+# (surgery.date < Date.today ? POST : PRE)

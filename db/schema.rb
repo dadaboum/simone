@@ -10,7 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20180322115248) do
   
   # These are extensions that must be enabled in order to support this database
@@ -84,8 +83,7 @@ ActiveRecord::Schema.define(version: 20180322115248) do
     t.integer "post_form_id"
     t.text "pre_comments"
     t.text "post_comments"
-    t.string "pre_flag"
-    t.string "post_flag"
+    t.string "status"
     t.index ["patient_id"], name: "index_surgeries_on_patient_id"
     t.index ["surgeon_id"], name: "index_surgeries_on_surgeon_id"
     t.index ["surgery_type_id"], name: "index_surgeries_on_surgery_type_id"
