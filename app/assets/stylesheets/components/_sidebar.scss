@@ -1,0 +1,41 @@
+a {
+  text-decoration: none;
+  color: white;
+  &:hover {
+    text-decoration: none;
+    color: white;
+  }
+}
+
+.sidebar {
+  background-color: $grayer;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  width: 180px;
+  text-align: center;
+  display: block;
+
+  ul {
+    list-style: none;
+    padding-left: 0px;
+  }
+  li {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+.logo {
+  color: white;
+}
+
+#selected {
+  background-color: $black;
+  color: white;
+}
+
+.small-font {
+  font-size: 14px;
+}

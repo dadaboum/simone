@@ -1,0 +1,25 @@
+<div class="sidebar">
+  <ul>
+    <li>
+      <%= link_to root_path, class:"logo" do %>
+        <i class="fas fa-user-circle logo"></i>
+        Dashboard
+      <% end %>
+    </li>
+
+    <% if user_signed_in? %>
+
+      <li id="selected" class="small-font">Patients<%#= link_to "Patients", surgery_path(@surgery) %></li>
+      <li class="small-font"><%= link_to "Questionnaires", forms_path %></li>
+      <li class="small-font">
+        <%= link_to destroy_user_session_path, method: :delete do %>
+          <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
+        <% end %>
+      </li>
+
+    <% else %>
+      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "small-font" %>
+    <% end %>
+
+  </ul>
+</div>
