@@ -39,8 +39,6 @@ paul = Patient.new(first_name: "Paul", last_name: "Ehrhardt", phone_number: "067
 paul.hospital = clinique_du_sport
 paul.save
 
-puts "Created patients David and Jonathan"
-
 marie = Patient.new(first_name: "Marie", last_name: "Robert", phone_number: "0677509667")
 marie.hospital = clinique_du_sport
 marie.save
@@ -138,6 +136,7 @@ david_operation.surgery_type = knee
 david_operation.surgeon = guilhem
 david_operation.pre_form = pre_form_knee
 david_operation.pre_form_answered = true
+david_operation.pre_flag = "red"
 david_operation.post_form_answered = false
 david_operation.post_form = post_form_knee
 david_operation.save!
@@ -155,6 +154,7 @@ jonathan_operation.patient = jonathan
 jonathan_operation.surgery_type = knee
 jonathan_operation.surgeon = guilhem
 jonathan_operation.pre_form_answered = true
+jonathan_operation.pre_flag = "orange"
 jonathan_operation.pre_form = pre_form_knee
 jonathan_operation.post_form = post_form_knee
 jonathan_operation.save!
@@ -164,20 +164,19 @@ jonathan_event = Event.new(description: "message pre op sent", flag: "green")
 jonathan_event.surgery = jonathan_operation
 jonathan_event.save!
 
+jonathan_event = Event.new(description: "message post op sent")
+jonathan_event.surgery = jonathan_operation
+jonathan_event.save!
 
 paul_operation = Surgery.new(is_done: false, date: Date.tomorrow)
 paul_operation.patient = paul
 paul_operation.surgery_type = knee
 paul_operation.surgeon = guilhem
 paul_operation.pre_form = pre_form_knee
+paul_operation.pre_flag = "yellow"
 paul_operation.post_form = post_form_knee
 paul_operation.save!
 
-puts "Created a patients entries"
-
-jonathan_event = Event.new(description: "message post op sent")
-jonathan_event.surgery = jonathan_operation
-jonathan_event.save!
 
 marie_operation = Surgery.new(is_done: false, date: Date.tomorrow)
 marie_operation.patient = marie
@@ -185,6 +184,7 @@ marie_operation.surgery_type = ivf
 marie_operation.surgeon = guilhem
 marie_operation.pre_form = pre_form_knee
 marie_operation.pre_form_answered = true
+marie_operation.pre_flag = "green"
 marie_operation.post_form_answered = false
 marie_operation.post_form = post_form_knee
 marie_operation.save!
@@ -203,6 +203,7 @@ paula_operation.surgery_type = ivf
 paula_operation.surgeon = guilhem
 paula_operation.pre_form = pre_form_knee
 paula_operation.pre_form_answered = true
+paula_operation.pre_flag = "green"
 paula_operation.post_form_answered = false
 paula_operation.post_form = post_form_knee
 paula_operation.save!
@@ -221,6 +222,7 @@ jean_operation.surgery_type = arthro
 jean_operation.surgeon = guilhem
 jean_operation.pre_form = pre_form_knee
 jean_operation.pre_form_answered = true
+jean_operation.pre_flag = "green"
 jean_operation.post_form_answered = false
 jean_operation.post_form = post_form_knee
 jean_operation.save!
@@ -239,6 +241,7 @@ herve_operation.surgery_type = arthro
 herve_operation.surgeon = guilhem
 herve_operation.pre_form = pre_form_knee
 herve_operation.pre_form_answered = true
+herve_operation.pre_flag = "green"
 herve_operation.post_form_answered = false
 herve_operation.post_form = post_form_knee
 herve_operation.save!

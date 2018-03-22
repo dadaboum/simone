@@ -1,4 +1,5 @@
 <div class="content-container">
+
   <% if params[:feature] == "form" %>
     <div class="core-left-surgery">
       <% if @pre_form_answer %>
@@ -31,20 +32,44 @@
       </div>
     </div>
   <% else %>
-
     <div class="core-left">
+      <div class="filters">
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Filter by priority
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
+            <li><a href="#">Red</a></li>
+            <li><a href="#">Orange</a></li>
+            <li><a href="#">Yellow</a></li>
+            <li><a href="#">Green</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">All</a></li>
+          </ul>
+        </div>
+      </div>
       <div class="surgery-cards-wrapper">
         <% @surgeries.each do |surgery| %>
           <div class="surgery-card small-font">
-            <div class="surgery-patient">
-              <p class="strong"><%= surgery.patient.first_name %> <%= surgery.patient.last_name %> - <%= surgery.surgeon.name %></p>
-              <p><%= surgery.surgery_type.description %></p>
+            <div class="checkbox">
+              <i class="far fa-square"></i>
             </div>
+            <!-- Quand la checkbox est cochee : <i class="far fa-check-square"></i> -->
+            <%= link_to surgery_path(surgery) do %>
+              <div class="surgery-patient">
+                <% current_flag = (surgery.date < Date.today ? surgery.post_flag : surgery.pre_flag) %>
+                <p class="strong <%= current_flag %>-font"><%= surgery.patient.first_name %> <%= surgery.patient.last_name %> - <%= surgery.surgeon.name %></p>
+                <p><%= surgery.surgery_type.description %></p>
+              </div>
             <div class="surgery-form-type">
-              J-1
+              <% if surgery.date < Date.today %>
+                <p>J+1</p>
+              <% else %>
+                <p>J-1</p>
+              <% end %>
             </div>
-<!--             <div class="surgery">
-            </div> -->
+            <% end %>
           </div>
         <% end %>
       </div>
