@@ -3,7 +3,7 @@ class MessagePreOpJob < ApplicationJob
 
   def perform
       #   # Ensemble des patients qui ont une opération en cours et qui n'ont pas eu le texto pre-op
-    req_pre_op1 = "SELECT last_name, first_name, phone_number, sg.id as id_s From Patients INNER JOIN Surgeries sg on Patients.id=sg.patient_id and is_done='false'"
+    req_pre_op1 = "SELECT last_name, first_name, phone_number, sg.id as id_s From Patients INNER JOIN Surgeries sg on Patients.id=sg.patient_id and and sg.date='#{Date.tomorrow}'"
     req_pre_op2 = "SELECT last_name, first_name, phone_number, description, id_s FROM (" + req_pre_op1 + ")T1 LEFT JOIN Events ev ON id_s=ev.surgery_id and description='message pre op sent'"
     results = ActiveRecord::Base.connection.exec_query(req_pre_op2)
 

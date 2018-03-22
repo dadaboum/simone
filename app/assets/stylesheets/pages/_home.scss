@@ -13,7 +13,15 @@
   border-radius: 10px;
   background-color: white;
   box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  margin-bottom: 50px;
+}
+
+.all-flags {
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.6);
   margin-bottom: 20px;
+  padding: 20px;
 }
 
 .post-op {
@@ -33,50 +41,26 @@
   }
 }
 
-.red-flag {
-  background-color: white;
-  border-bottom: solid;
-  border-width: 5px;
-  border-color: red;
-  border-radius: 5px;
-  border-width: 4px;
-  height: 120px;
-  margin-top: 30px;
-  p {
-    margin-top: 15px;
-  }
+.red-alert-on {
+  border-color: red !important;
+  border-radius: 5px !important;
 }
 
-.flag {
-  height: 100px;
-  width: 100px;
+.red-alert-on-heading {
+  background-color: red !important;
+  color: white !important;
+  border-color: red !important;
+}
+
+.css-body {
   color: black;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
-
-  font-size: 40px;
-  border-radius: 50%;
-  border: solid;
+  font-size: 30px;
 }
 
+.red-alert {
+  margin-top: 40px;
+}
 .flags {
-  margin-top: 50px;
-}
-
-.orange-flag {
-  border-color: orange;
-  p {
-    margin-top: 15px;
-  }
-}
-.yellow-flag {
-  border-color: yellow;
-  p {
-    margin-top: 15px;
-  }
-}
-.green-flag {
-  border-color: green;
-  p {
-    margin-top: 15px;
-  }
+  margin-top: 40px;
+  color: black;
 }
