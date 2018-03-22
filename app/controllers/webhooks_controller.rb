@@ -17,7 +17,8 @@ class WebhooksController < ApplicationController
     form_answer = FormAnswer.new
     form_answer.form = form
     form_answer.surgery = surgery
-    form_answer.answer_hash = data
+    form_answer.webhook_answer = data
+    form_answer.answer_array = data['webhook']['form_response']['answers']
     form_answer.save!
 
     #updating 'answered' status of preform / postform in surgery

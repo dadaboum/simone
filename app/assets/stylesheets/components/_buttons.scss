@@ -1,0 +1,11 @@
+.discrete-button {
+  padding: 5px 10px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 15px;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.6);
+  &:hover {
+    color: rgba(0,0,0,0.8);
+    border: 1px solid rgba(0,0,0,0.8);
+  }
+}

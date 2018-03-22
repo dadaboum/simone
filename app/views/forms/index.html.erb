@@ -1,8 +1,12 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
+    <div class="col-sm-12 text-center">
       <% @forms.each do |form| %>
-        <p>Hospital id: <%= form.hospital_id %> - Typeform id: <%= form.typeform_id %> - <a target="_blank" href="https://davidbenamran.typeform.com/to/<%=form.typeform_id %>">Typeform link</a>
+        <p>Hospital id: <%= form.hospital_id %> -
+          Surgery Type id: <%= form.surgery_type_id %> -
+          Typeform id: <%= form.typeform_id %>
+          <%= link_to "Update", form_path(form), method: :patch, class: "btn btn-sm btn-success" %>
+          <a target="_blank" href="https://davidbenamran.typeform.com/to/<%=form.typeform_id %>" class='btn btn-sm btn-success'>View Typeform</a>
       <% end %>
     </div>
   </div>
