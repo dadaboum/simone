@@ -1,0 +1,68 @@
+<div class="content-container">
+  <div class="core-left">
+    <div class="actions">
+      <div class="btn-group btn-group-xs" role="group" aria-label="...">
+        <button type="button" class="btn btn-default small-font">Valider</button>
+        <button type="button" class="btn btn-default">Notifier le chirurgien</button>
+        <button type="button" class="btn btn-default">Relancer par SMS</button>
+        <button type="button" class="btn btn-default">Changer la priorite</button>
+      </div>
+    </div>
+    <div class="filters">
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          Filter by priority
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
+          <!-- link_to surgery_path(surgery)flag?red -->
+          <li><%#= link_to surgery_path(@surgery), {token: "red"} %></li>
+
+          <li>
+            <%= link_to "Orange", surgery_path(@surgeries.last, status: "orange", surgery_id: params[:surgery_id]) %></li>
+          <li><a href="#">Yellow</a></li>
+          <li><a href="#">Green</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#">All</a></li>
+        </ul>
+      </div>
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          J+/-1
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
+          <!-- link_to surgery_path(surgery)flag?red -->
+          <li><a href="#">J-1</a></li>
+          <li><a href="#">J+1</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="surgery-cards-wrapper">
+      <% @surgeries.each do |surgery| %>
+        <div class="surgery-card small-font">
+          <div class="checkbox">
+            <i class="far fa-square"></i>
+          </div>
+          <!-- Quand la checkbox est cochee : <i class="far fa-check-square"></i> -->
+          <%= link_to surgery_path(surgery, status: params[:status], surgery_id: surgery.id) do %>
+            <div class="surgery-patient">
+              <p class="strong <%= surgery.status %>-font"><%= surgery.patient.first_name %> <%= surgery.patient.last_name %> - <%= surgery.surgeon.name %></p>
+              <p><%= surgery.surgery_type.description %></p>
+            </div>
+          <div class="surgery-form-type">
+            <% if surgery.date < Date.today %>
+              <p>J+1</p>
+            <% else %>
+              <p>J-1</p>
+            <% end %>
+          </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="core-right">
+    <%= render "right_side" %>
+  </div>
+</div>

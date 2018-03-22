@@ -1,9 +1,20 @@
 class SurgeriesController < ApplicationController
 before_action :set_surgery, only: [:show, :update]
 
-  def show
-    @surgery = Surgery.find(params[:id])
+  def index
     @surgeries = current_user.hospital.surgeries
+    if params[:status].present?
+      @surgeries = @surgeries.where(status: params[:status])
+    end
+  end
+
+  def show
+    @surgery = Surgery.find(params[:surgery_id])
+    @surgeries = current_user.hospital.surgeries
+    if params[:status].present?
+      @surgeries = @surgeries.where(status: params[:status])
+      # redirect_to surgery_path(@surgeries.first)
+    end
     # Return array of forms
     answers = FormAnswer.where(surgery_id: @surgery.id)
     answers.each do |answer|
