@@ -79,7 +79,7 @@ post_form_knee.save
 
 puts "Created J+1 form for the knee surgery"
 
-david_operation = Surgery.new(is_done: false, date: Date.tomorrow)
+david_operation = Surgery.new(is_done: false, date: Date.yesterday)
 david_operation.patient = david
 david_operation.surgery_type = knee
 david_operation.surgeon = guilhem
@@ -256,6 +256,7 @@ david_answer.save!
 
 puts "David has answered!"
 
+puts "WARNING: you have to click on update for both forms on /forms"
 # Formulaire pre operatoire - Ambulatoire Main
 # Avez vous eu la consultation avec l'anesthesiste ? OUI(ok)/NON
 # Avez vous eu un probleme de sante depuis la derniere consultation avec l'anesthesiste OUI/NON(ok) FIEVRE (>=38°C) VOMISSEMENT DIARHEE AUTRES

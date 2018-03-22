@@ -1,0 +1,38 @@
+<div class="form-answered pre-scrollable">
+  <ol>
+    <% i = 0 %>
+    <% form_answer.form.question_array.each do |question| %>
+      <% question_shorten_id = question["id"].split("_")[1] %>
+      <% answer_el = form_answer.answer_array.find {|h| h["field"]["id"] == question_shorten_id } %>
+      <% if answer_el %>
+        <% if !question['id'].include? 'list_'  %>
+          <li>
+            <%= question['question'].split("<br>").last %>
+            <% if answer_el["type"] == "boolean" %>
+              <% if answer_el["boolean"] %>
+                <strong>Oui</strong>
+              <% else %>
+                <strong>Non</strong>
+              <% end %>
+            <% elsif answer_el["type"] == "number" %>
+              <strong><%= answer_el["number"] %></strong>
+            <% elsif answer_el["type"] == "text" %>
+              <strong><%= answer_el["text"] %></strong>
+            <% end %>
+          </li>
+        <% elsif i == 0 %>
+          <li>
+            <%= question['question'].split("<br>").last %>
+            <strong>
+              <% answer_el["choices"]["labels"].each do |label| %>
+                <%= label %>
+              <% end %>
+              <%= answer_el["choices"]["other"] %>
+            </strong>
+           <% i += 1 %>
+          </li>
+        <% end %>
+      <% end %>
+    <% end %>
+  </ol>
+</div>
