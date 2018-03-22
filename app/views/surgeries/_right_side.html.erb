@@ -1,0 +1,76 @@
+<div class="right-side-wrapper">
+  <div class="right-side-box">
+    <div class="patient-box">
+      <p> <%= @surgery.patient.first_name %> <%= @surgery.patient.last_name %> </p>
+      <p> <i class="fas fa-phone"></i> <%= @surgery.patient.phone_number %></p>
+    </div>
+    <div class="surgery-box">
+      <div class="surgery-main-info">
+            <p> <%=  @surgery.surgery_type.description %></p>
+        <ul class="list-inline no-margin">
+          <li>
+            <p class="secondary-info"> Dr. <%= @surgery.surgeon.name %></p>
+          </li>
+          <li>
+            <button class="discrete-button"> <i class="fab fa-telegram-plane"></i> Send email</button>
+          </li>
+        </ul>
+        <ul class="list-inline">
+          <li><p class="secondary-info"> Opération le <%= @surgery.date %> </p> </li>
+          <li>
+            <% if Date.today > @surgery.date %>
+              <% if @surgery.post_form_answered %>
+              <p class="secondary-info">
+                <i class="fas fa-check"></i>
+                Questionnaire post-opération rempli
+              </p>
+              <% else %>
+                <li>
+                  <p class="secondary-info"> Questionnaire post-opération non rempli </p>
+                </li>
+                <li>
+                  <button class="discrete-button"> <i class="far fa-comment"></i></i> Send message</button>
+                </li>
+              <% end %>
+            <% end %>
+          </li>
+
+
+
+        </ul>
+      <div class="green-separator"></div>
+      </div>
+      <div class="surgery-history-box">
+        <p>Historique</p>
+          <% @surgery.events.each do |event| %>
+            <div class="history-box">
+              <div class="history-left">
+                <div class="history-separator-big"></div>
+                <div class=" <%= 'red' if event.flag == 'red' %>
+                             <%= 'green' if event.flag == 'green' %>
+                             <%= 'orange' if event.flag == 'orange' %>
+                 bullet"></div>
+                <div class="history-separator-big"></div>
+              </div>
+              <div class="history-right">
+                <%= event.description %>
+              </div>
+            </div>
+            <div class="history-sep-box">
+              <div class="history-separator-small"></div>
+              <div class="history-right"></div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
