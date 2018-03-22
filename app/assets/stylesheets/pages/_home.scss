@@ -1,43 +1,33 @@
-// Specific CSS for your home-page
-
-.content-container {
-  display: flex;
-  margin-top: 20px;
-}
-
-
 .pre-op {
   border-radius: 10px;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 20px);
   width: 50%;
-  margin-right: 10px;
+  margin: 10px;
+  margin-bottom: 0px;
   justify-content: space-between;
   background-color: white;
+  padding: 20px;
+}
+
+.title-sms {
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  margin-bottom: 20px;
 }
 
 .post-op {
   border-radius: 10px;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 20px);
   width: 50%;
   background-color: white;
-  margin-left: 10px;
-}
-
-.flag-cards {
-  padding: 10px;
-  margin-top: 70px;
-  border: 1px solid black;
-  height: 40%;
-  .flag-alert {
-    margin-top: 20px;
-    border: 1px solid black;
-  }
+  margin: 10px;
+  margin-bottom: 0px;
+  padding: 20px;
 }
 
 .row-container {
-  height: calc(100vh / 12);
   text-align: center;
-  margin-top: 15px;
   p {
     margin-top: 15px;
   }
@@ -51,32 +41,42 @@
   border-radius: 5px;
   border-width: 4px;
   height: 120px;
-  margin-top: 60px;
+  margin-top: 30px;
+  p {
+    margin-top: 15px;
+  }
 }
 
-
 .flag {
-  color: black;
   height: 100px;
-  width: 25%;
-
-  margin-top: 30px;
-  margin-right: 20px;
-
-  border-bottom: solid;
-  border-width: 3px;
+  width: 100px;
+  color: black;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
 
   font-size: 40px;
-  text-align: center;
-  padding: 20px;
+  border-radius: 50%;
+  border: solid;
+}
+
+.flags {
+  margin-top: 50px;
 }
 
 .orange-flag {
   border-color: orange;
+  p {
+    margin-top: 15px;
+  }
 }
 .yellow-flag {
   border-color: yellow;
+  p {
+    margin-top: 15px;
+  }
 }
 .green-flag {
   border-color: green;
+  p {
+    margin-top: 15px;
+  }
 }
