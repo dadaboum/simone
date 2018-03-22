@@ -31,24 +31,25 @@
       </div>
     </div>
   <% else %>
+
     <div class="core-left">
       <div class="surgery-cards-wrapper">
         <% @surgeries.each do |surgery| %>
           <div class="surgery-card small-font">
-            <div class="surgery-form-type">J-1
-            </div>
             <div class="surgery-patient">
-              <%= surgery.patient.first_name %>
-              <%= surgery.patient.last_name %>
-            </div>
-            <div class="surgery">
+              <p class="strong"><%= surgery.patient.first_name %> <%= surgery.patient.last_name %> - <%= surgery.surgeon.name %></p>
               <p><%= surgery.surgery_type.description %></p>
-              <p><%= surgery.surgeon.name %></p>
             </div>
+            <div class="surgery-form-type">
+              J-1
+            </div>
+<!--             <div class="surgery">
+            </div> -->
           </div>
         <% end %>
       </div>
     </div>
+
   <% end %>
 
   <div class="core-right">

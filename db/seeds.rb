@@ -8,6 +8,8 @@ Surgeon.destroy_all
 User.destroy_all
 Hospital.destroy_all
 
+surgeries_flags = ["red", "orange", "yellow", "green"]
+
 puts "Destroyed all DB"
 
 clinique_du_sport = Hospital.create(name:"Clinique du Sport")
@@ -138,7 +140,7 @@ david_operation.pre_form = pre_form_knee
 david_operation.pre_form_answered = true
 david_operation.post_form_answered = false
 david_operation.post_form = post_form_knee
-david_operation.save
+david_operation.save!
 
 david_event = Event.new(description: "message pre op sent", flag: "green")
 david_event.surgery = david_operation

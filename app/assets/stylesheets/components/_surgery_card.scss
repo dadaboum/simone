@@ -8,9 +8,9 @@
   display: flex;
   background-color: #FFFFFF;
   width: 100%;
-  margin-top: 20px;
-  justify-content: space-between;
-  height: 80px;
+  margin-top: 6px;
+  // justify-content: space-between;
+  height: 42px;
   font-size: 12px;
 }
 
@@ -22,8 +22,32 @@
 
 .surgery-patient {
   background-color: #F2F2F2;
+  width: 80%;
+  p {
+    margin: 0 0 3.5px;
+  }
 }
 
 .surgery {
   background-color: #F2F2F2;
+}
+
+.strong {
+  font-weight: bold;
+}
+
+.green {
+  color: $green;
+}
+
+.yellow {
+  color: $yellow;
+}
+
+.orange {
+  color: $orange;
+}
+
+.red {
+  color: $red;
 }
