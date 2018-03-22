@@ -13,7 +13,7 @@ module PagesHelper
   end
 
   def nb_pre_op_red_flag
-    3
+    0
   end
 
   def nb_post_op_orange_flag
@@ -25,7 +25,8 @@ module PagesHelper
   end
 
   def nb_post_op_green_flag
-    Surgery.where("is_done=false and post_form_answered=true").count
+    sprintf("%.2f", Surgery.where("is_done=true and post_form_answered=false").count).to_f
+    # Surgery.where("is_done=true and post_form_answered=false").count
   end
 
   def nb_post_op_red_flag

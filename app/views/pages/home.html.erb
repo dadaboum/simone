@@ -4,7 +4,7 @@
     <div class="title-sms">
       <div class="row">
         <div class="col-xs-12 row-container">
-          <h4>Analyses des actions Pré-opératoire</h4>
+          <h4 style="color: black">Analyses des actions Pré-opératoires</h4>
         </div>
       </div>
       <div class="row">
@@ -20,13 +20,14 @@
       <div class="red-alert">
         <div class="row">
           <div class="col-xs-12 col-sm-4 col-sm-offset-4" style="text-align: center">
+            <%= link_to surgery_path(Surgery.all.last) do %>
             <div class="panel panel-danger <%= "red-alert-on" if nb_pre_op_red_flag > 0 %>">
-              <div class="panel-heading <%= "red-alert-on-heading" if nb_pre_op_red_flag > 0 %>">Urgence
-              </div>
+              <div class="panel-heading <%= "red-alert-on-heading" if nb_pre_op_red_flag > 0 %>">Urgence</div>
               <div class="panel-body css-body">
                 <p><%= nb_pre_op_red_flag %></p>
               </div>
             </div>
+            <% end %>
           </div>
         </div>
       </div>
@@ -64,7 +65,7 @@
     <div class="title-sms">
       <div class="row">
         <div class="col-xs-12 row-container">
-          <h4>Analyses des actions Post-opératoire</h4>
+          <h4 style="color: black">Analyses des actions Post-opératoires</h4>
         </div>
       </div>
       <div class="row">
@@ -122,4 +123,3 @@
     </div>
   </div>
 </div>
-

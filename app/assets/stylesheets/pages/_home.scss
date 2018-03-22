@@ -1,37 +1,40 @@
 .pre-op {
   border-radius: 10px;
-  height: calc(100vh - 20px);
+  // height: calc(100vh - 20px);
   width: 50%;
   margin: 10px;
   margin-bottom: 0px;
   justify-content: space-between;
   background-color: white;
   padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.6);
 }
 
 .title-sms {
   border-radius: 10px;
   background-color: white;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  // box-shadow: 0 1px 3px rgba(0,0,0,0.6);
   margin-bottom: 50px;
+  margin-top: 20px;
 }
 
 .all-flags {
   border-radius: 10px;
   background-color: white;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  // box-shadow: 0 1px 3px rgba(0,0,0,0.6);
   margin-bottom: 20px;
   padding: 20px;
 }
 
 .post-op {
   border-radius: 10px;
-  height: calc(100vh - 20px);
+  // height: calc(100vh - 20px);
   width: 50%;
   background-color: white;
   margin: 10px;
   margin-bottom: 0px;
   padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.6);
 }
 
 .row-container {
@@ -58,7 +61,7 @@
 }
 
 .red-alert {
-  margin-top: 40px;
+  // margin-top: 40px;
 }
 .flags {
   margin-top: 40px;
