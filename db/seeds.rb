@@ -33,6 +33,12 @@ jonathan = Patient.new(first_name: "Jonathan", last_name: "Joubert", phone_numbe
 jonathan.hospital = clinique_du_sport
 jonathan.save
 
+paul = Patient.new(first_name: "Paul", last_name: "Ehrhardt", phone_number: "0677509667")
+paul.hospital = clinique_du_sport
+paul.save
+
+puts "Created patients David and Jonathan"
+
 marie = Patient.new(first_name: "Marie", last_name: "Robert", phone_number: "0677509667")
 marie.hospital = clinique_du_sport
 marie.save
@@ -134,7 +140,7 @@ david_operation.post_form_answered = false
 david_operation.post_form = post_form_knee
 david_operation.save
 
-david_event = Event.new(description: "message pre op sent")
+david_event = Event.new(description: "message pre op sent", flag: "green")
 david_event.surgery = david_operation
 david_event.save!
 
@@ -150,6 +156,22 @@ jonathan_operation.pre_form_answered = true
 jonathan_operation.pre_form = pre_form_knee
 jonathan_operation.post_form = post_form_knee
 jonathan_operation.save!
+
+
+jonathan_event = Event.new(description: "message pre op sent", flag: "green")
+jonathan_event.surgery = jonathan_operation
+jonathan_event.save!
+
+
+paul_operation = Surgery.new(is_done: false, date: Date.tomorrow)
+paul_operation.patient = paul
+paul_operation.surgery_type = knee
+paul_operation.surgeon = guilhem
+paul_operation.pre_form = pre_form_knee
+paul_operation.post_form = post_form_knee
+paul_operation.save!
+
+puts "Created a patients entries"
 
 jonathan_event = Event.new(description: "message post op sent")
 jonathan_event.surgery = jonathan_operation

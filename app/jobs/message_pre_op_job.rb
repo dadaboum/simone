@@ -13,7 +13,7 @@ class MessagePreOpJob < ApplicationJob
       if result[3].nil?
         message = "Bonjour, #{result[1]} #{result[0]}, lien du questionnaire pré-opération : https://davidbenamran.typeform.com/to/Dcyfaj"
         TwilioTextMessenger.new(result[2], message).call
-        event = Event.new(description: "message pre op sent")
+        event = Event.new(description: "message pre op sent", flag: "green")
         event.surgery = Surgery.find(result[4])
         event.save
       end

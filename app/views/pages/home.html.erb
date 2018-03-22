@@ -1,2 +1,65 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container">
+  <div class="content-container">
+    <div class="pre-op">
+      <div class="row">
+        <div class="col-xs-12 row-container">
+          <h4>Analyses des actions Pré-opératoire</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 row-container">
+          <p>
+            SMS envoyé : 97% envoyés
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4 col-xs-offset-4 red-flag">
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3 col-xs-offset-1 flag orange-flag">
+
+        </div>
+        <div class="col-xs-3 flag yellow-flag">
+          <%= nb_pre_op_yellow_flag %>
+        </div>
+        <div class="col-xs-3 flag green-flag">
+          <%= nb_pre_op_green_flag %>
+        </div>
+      </div>
+      <div class="row row-container">
+
+      </div>
+    </div>
+    <div class="post-op">
+      <div class="row">
+        <div class="col-xs-12 row-container">
+          <h4>Analyses des actions Post-opératoire</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 row-container">
+          <p>
+            SMS envoyé : 92% envoyés
+          </p>
+        </div>
+      </div>
+      <div class="flag-cards">
+        <div class="flag-alert red-flag">
+          <p>nombre d'alerte rouge, potentielle urgence :</p>
+        </div>
+        <div class="flag-alert orange-flag">
+          <p>nombre d'alerte orange :</p>
+        </div>
+        <div class="flag-alert yellow-flag">
+          <p>nombre d'alerte jaune, potentielle urgence :</p>
+        </div>
+        <div class="flag-alert green-flag">
+          <p>nombre d'alerte verte, potentielle urgence :</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
