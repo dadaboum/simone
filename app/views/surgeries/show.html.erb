@@ -1,22 +1,24 @@
 <div class="content-container">
+
   <% if params[:feature] == "form" %>
     <div class="core-left-surgery">
+      <h4 class='text-center'>Formulaire pré-admission</h4>
       <% if @pre_form_answer %>
-        <p class='text-center'>Formulaire pré-admission</p>
         <div class="form-answered pre-scrollable">
           <ol>
             <% @pre_form_answer.form.question_array.each do |question| %>
-              <li>
-                <%= question['question'] %>:
-                <% answer = @pre_form_answer.answer_hash[question["id"]] %>
-                <% if answer == '0' %>
-                  Oui
-                <% elsif answer == '1' %>
-                  Non
-                <% else %>
-                  <%= answer %>
-                <% end %>
-              </li>
+              <% question_shorten_id = question["id"].partition("_").last %>
+              <% answer_el = @pre_form_answer.answer_array.find {|h| h["field"]["id"] == question_shorten_id } %>
+              <% if answer_el %>
+                <li>
+                  <%= question['question'] %>:
+                  <% if answer_el["type"] == "boolean" %>
+                    <%= answer_el["boolean"] %>
+                  <% else %>
+                    <%= answer_el["text"] %>
+                  <% end %>
+                </li>
+              <% end %>
             <% end %>
           </ol>
         </div>
@@ -32,23 +34,48 @@
     </div>
   <% else %>
     <div class="core-left">
+      <div class="filters">
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Filter by priority
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
+            <li><a href="#">Red</a></li>
+            <li><a href="#">Orange</a></li>
+            <li><a href="#">Yellow</a></li>
+            <li><a href="#">Green</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">All</a></li>
+          </ul>
+        </div>
+      </div>
       <div class="surgery-cards-wrapper">
         <% @surgeries.each do |surgery| %>
           <div class="surgery-card small-font">
-            <div class="surgery-form-type">J-1
+            <div class="checkbox">
+              <i class="far fa-square"></i>
             </div>
-            <div class="surgery-patient">
-              <%= surgery.patient.first_name %>
-              <%= surgery.patient.last_name %>
+            <!-- Quand la checkbox est cochee : <i class="far fa-check-square"></i> -->
+            <%= link_to surgery_path(surgery) do %>
+              <div class="surgery-patient">
+                <% current_flag = (surgery.date < Date.today ? surgery.post_flag : surgery.pre_flag) %>
+                <p class="strong <%= current_flag %>-font"><%= surgery.patient.first_name %> <%= surgery.patient.last_name %> - <%= surgery.surgeon.name %></p>
+                <p><%= surgery.surgery_type.description %></p>
+              </div>
+            <div class="surgery-form-type">
+              <% if surgery.date < Date.today %>
+                <p>J+1</p>
+              <% else %>
+                <p>J-1</p>
+              <% end %>
             </div>
-            <div class="surgery">
-              <p><%= surgery.surgery_type.description %></p>
-              <p><%= surgery.surgeon.name %></p>
-            </div>
+            <% end %>
           </div>
         <% end %>
       </div>
     </div>
+
   <% end %>
 
   <div class="core-right">

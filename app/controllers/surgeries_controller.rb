@@ -5,7 +5,7 @@ before_action :set_surgery, only: [:show, :update]
     @surgery = Surgery.find(params[:id])
     @surgeries = current_user.hospital.surgeries
     # Return array of forms
-    answers = FormAnswer.where("surgery_id" == @surgery.id)
+    answers = FormAnswer.where(surgery_id: @surgery.id)
     answers.each do |answer|
       @pre_form_answer = answer if answer.form.pre_or_post == "pre"
       @post_form_answer = answer if answer.form.pre_or_post == "post"
@@ -28,3 +28,6 @@ before_action :set_surgery, only: [:show, :update]
     params.require(:surgery).permit(:pre_comments)
   end
 end
+
+
+# surgery_path(surgery, flag: "red")
