@@ -28,3 +28,6 @@ before_action :set_surgery, only: [:show, :update]
     params.require(:surgery).permit(:pre_comments)
   end
 end
+
+
+# surgery_path(surgery, flag: "red")
