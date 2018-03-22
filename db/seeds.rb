@@ -218,7 +218,7 @@ jean_operation.patient = jean
 jean_operation.surgery_type = arthro
 jean_operation.surgeon = guilhem
 jean_operation.pre_form = pre_form_knee
-jean_operation.pre_form_answered = true
+jean_operation.pre_form_answered = false
 jean_operation.post_form_answered = false
 jean_operation.post_form = post_form_knee
 jean_operation.save!
@@ -236,7 +236,7 @@ herve_operation.patient = herve
 herve_operation.surgery_type = arthro
 herve_operation.surgeon = guilhem
 herve_operation.pre_form = pre_form_knee
-herve_operation.pre_form_answered = true
+herve_operation.pre_form_answered = false
 herve_operation.post_form_answered = false
 herve_operation.post_form = post_form_knee
 herve_operation.save!
@@ -253,18 +253,39 @@ puts "Created patients entries"
 
 #Fill David's form answer
 david_answer = FormAnswer.new(
-  answer_hash: {
-    textfield_BwkrCAIZf9zq: "David",
-    textfield_Uo8nUKpsBX5q: "Benamran",
-    yesno_ojzWDYIPq11H: "1",
-    yesno_hbYvshy1Y5s6: "1",
-    textfield_OTOFL68Qk05p: "Genou",
-    yesno_DX2VOxlsaWkH: "1",
-    yesno_rsQYJ9O2HGTl: "1",
-    yesno_OwPttXRme0l4: "0",
-    yesno_C3MW1kwGj4z7: "0"
-    }
+  answer_hash:
+    [{"text"=>"Paul",
+      "type"=>"text",
+      "field"=>{"id"=>"BwkrCAIZf9zq", "type"=>"short_text"}},
+     {"type"=>"boolean",
+      "field"=>{"id"=>"rsQYJ9O2HGTl", "type"=>"yes_no"},
+      "boolean"=>false},
+     {"type"=>"boolean",
+      "field"=>{"id"=>"OwPttXRme0l4", "type"=>"yes_no"},
+      "boolean"=>false},
+     {"text"=>"Je teste le weebook",
+      "type"=>"text",
+      "field"=>{"id"=>"ao3VeIldYuW0", "type"=>"long_text"}},
+     {"type"=>"boolean",
+      "field"=>{"id"=>"ojzWDYIPq11H", "type"=>"yes_no"},
+      "boolean"=>true},
+     {"type"=>"boolean",
+      "field"=>{"id"=>"hbYvshy1Y5s6", "type"=>"yes_no"},
+      "boolean"=>true},
+     {"text"=>"Webhooktesting",
+      "type"=>"text",
+      "field"=>{"id"=>"OTOFL68Qk05p", "type"=>"short_text"}},
+     {"type"=>"boolean",
+      "field"=>{"id"=>"DX2VOxlsaWkH", "type"=>"yes_no"},
+      "boolean"=>true},
+     {"type"=>"boolean",
+      "field"=>{"id"=>"C3MW1kwGj4z7", "type"=>"yes_no"},
+      "boolean"=>false},
+     {"text"=>"Eh",
+      "type"=>"text",
+      "field"=>{"id"=>"Uo8nUKpsBX5q", "type"=>"short_text"}}]
 )
+
 david_answer.form = pre_form_knee
 david_answer.surgery = david_operation
 david_answer.save!

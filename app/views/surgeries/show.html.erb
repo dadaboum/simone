@@ -1,22 +1,23 @@
 <div class="content-container">
   <% if params[:feature] == "form" %>
     <div class="core-left-surgery">
+      <h4 class='text-center'>Formulaire pré-admission</h4>
       <% if @pre_form_answer %>
-        <p class='text-center'>Formulaire pré-admission</p>
         <div class="form-answered pre-scrollable">
           <ol>
             <% @pre_form_answer.form.question_array.each do |question| %>
-              <li>
-                <%= question['question'] %>:
-                <% answer = @pre_form_answer.answer_hash[question["id"]] %>
-                <% if answer == '0' %>
-                  Oui
-                <% elsif answer == '1' %>
-                  Non
-                <% else %>
-                  <%= answer %>
-                <% end %>
-              </li>
+              <% question_shorten_id = question["id"].partition("_").last %>
+              <% answer_el = @pre_form_answer.answer_array.find {|h| h["field"]["id"] == question_shorten_id } %>
+              <% if answer_el %>
+                <li>
+                  <%= question['question'] %>:
+                  <% if answer_el["type"] == "boolean" %>
+                    <%= answer_el["boolean"] %>
+                  <% else %>
+                    <%= answer_el["text"] %>
+                  <% end %>
+                </li>
+              <% end %>
             <% end %>
           </ol>
         </div>
