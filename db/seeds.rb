@@ -63,61 +63,7 @@ arthro = SurgeryType.create(description: "Arthroscopie")
 
 puts "Created surgery type Ligamentoplastie, fiv and Arthroscopie"
 
-pre_form_knee = Form.new(
-  pre_or_post: "pre",
-  question_array: [
-    {
-    id: "textfield_BwkrCAIZf9zq",
-    question: "Prénom",
-    field_id: 77285180
-    },
-    {
-    id: "textfield_Uo8nUKpsBX5q",
-    question: "Bonjour {{answer_77285180}}, bienvenue à la clinique du sport. <br>Quel est votre nom de famille?",
-    field_id: 77285181
-    },
-    {
-    id: "yesno_ojzWDYIPq11H",
-    question: "Avez-vous eu la consultation avec l'anesthésiste? ",
-    field_id: 77286396
-    },
-    {
-    id: "yesno_hbYvshy1Y5s6",
-    question: "Avez-vous eu un problème de santé depuis la dernière consultation avec l'anesthésiste?",
-    field_id: 77286397
-    },
-    {
-    id: "textfield_OTOFL68Qk05p",
-    question: "Pouvez-vous me confirmer l'intitulé de votre intervention?",
-    field_id: 77286395
-    },
-    {
-    id: "yesno_DX2VOxlsaWkH",
-    question: "Avez-vous prévu un accompagnant pour votre retour à domicile?",
-    field_id: 77286398
-    },
-    {
-    id: "yesno_rsQYJ9O2HGTl",
-    question: "Avez-vous prévu de ne pas rester seul la nuit suivant votre intervention?",
-    field_id: 77286399
-    },
-    {
-    id: "yesno_OwPttXRme0l4",
-    question: "Avez-vous besoin d'un arrêt de travail?",
-    field_id: 77286400
-    },
-    {
-    id: "yesno_C3MW1kwGj4z7",
-    question: "Avez-vous besoin d'un bon de transport?",
-    field_id: 77286401
-    },
-    {
-    id: "statement_YoQYVTNdmXUd",
-    question: "Rappel:<br># Une douche et un shampoing avec vos produits habituels doivent etre pris la veille au soir ou le matin de votre intervention, une douche a la betadine sera prise a la clinique<br># Depilez la zone a operer si besoin avec une tondeuse ou de la creme depilatoire<br># Le vernis a ongles et le maquillage doivent etre retires la veille de l'intervention<br># Il est deconseille de garder avec vous bijoux et objets de valeurs le jour de votre intervention<br># Un jeune strict (interdiction de manger, de boire et de fumer) doit etre respecte 6h avant l'heure de convocation a la clinique<br># Les derniers examens radiologiques et ou biologiques demandes par l'anesthesiste doivent etre apportes le jour de l'intervention<br># Votre traitement habituel et l'ordonnance associee doivent etre apportes le jour de l'intervention<br># Porter des vetements amples car le pansement peut etre volumineux",
-    field_id: 77286394
-    }
-  ]
-)
+pre_form_knee = Form.new(pre_or_post: "pre")
 pre_form_knee.surgery_type = knee
 pre_form_knee.hospital = clinique_du_sport
 pre_form_knee.typeform_id = "Dcyfaj"
@@ -128,7 +74,10 @@ puts "Created J-1 form for the knee surgery"
 post_form_knee = Form.new(pre_or_post: "post")
 post_form_knee.surgery_type = knee
 post_form_knee.hospital = clinique_du_sport
+post_form_knee.typeform_id = "yccqO5"
 post_form_knee.save
+
+puts "Created J+1 form for the knee surgery"
 
 david_operation = Surgery.new(is_done: false, date: Date.tomorrow)
 david_operation.patient = david
@@ -253,7 +202,7 @@ puts "Created patients entries"
 
 #Fill David's form answer
 david_answer = FormAnswer.new(
-  answer_hash:
+  answer_array:
     [{"text"=>"Paul",
       "type"=>"text",
       "field"=>{"id"=>"BwkrCAIZf9zq", "type"=>"short_text"}},
@@ -285,7 +234,6 @@ david_answer = FormAnswer.new(
       "type"=>"text",
       "field"=>{"id"=>"Uo8nUKpsBX5q", "type"=>"short_text"}}]
 )
-
 david_answer.form = pre_form_knee
 david_answer.surgery = david_operation
 david_answer.save!
