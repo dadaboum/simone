@@ -103,6 +103,9 @@ jonathan_operation.patient = jonathan
 jonathan_operation.surgery_type = knee
 jonathan_operation.surgeon = guilhem
 jonathan_operation.pre_form_answered = true
+jonathan_operation.post_form_answered = true
+jonathan_operation.is_done = true
+jonathan_operation.pre_flag = "green"
 jonathan_operation.status = "orange"
 jonathan_operation.pre_form = pre_form_knee
 jonathan_operation.post_form = post_form_knee
@@ -113,7 +116,15 @@ jonathan_event = Event.new(description: "message pre op sent", flag: "green")
 jonathan_event.surgery = jonathan_operation
 jonathan_event.save!
 
-jonathan_event = Event.new(description: "message post op sent")
+jonathan_event = Event.new(description: "formulaire pre op bien rempli", flag: "green")
+jonathan_event.surgery = jonathan_operation
+jonathan_event.save!
+
+jonathan_event = Event.new(description: "message post op sent", flag: "green")
+jonathan_event.surgery = jonathan_operation
+jonathan_event.save!
+
+jonathan_event = Event.new(description: "formulaire post op bien rempli", flag: "green")
 jonathan_event.surgery = jonathan_operation
 jonathan_event.save!
 
