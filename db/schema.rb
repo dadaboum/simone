@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180322120050) do
 
+ActiveRecord::Schema.define(version: 20180322115248) do
+  
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,7 +28,8 @@ ActiveRecord::Schema.define(version: 20180322120050) do
   create_table "form_answers", force: :cascade do |t|
     t.bigint "form_id"
     t.bigint "surgery_id"
-    t.jsonb "answer_hash"
+    t.jsonb "answer_array"
+    t.jsonb "webhook_answer"
     t.index ["form_id"], name: "index_form_answers_on_form_id"
     t.index ["surgery_id"], name: "index_form_answers_on_surgery_id"
   end
