@@ -1,28 +1,20 @@
 <div class="content-container">
   <% if params[:feature] == "form" %>
     <div class="core-left-surgery">
-      <h4 class='text-center'>Formulaire pré-admission</h4>
-      <% if @pre_form_answer %>
-        <div class="form-answered pre-scrollable">
-          <ol>
-            <% @pre_form_answer.form.question_array.each do |question| %>
-              <% question_shorten_id = question["id"].partition("_").last %>
-              <% answer_el = @pre_form_answer.answer_array.find {|h| h["field"]["id"] == question_shorten_id } %>
-              <% if answer_el %>
-                <li>
-                  <%= question['question'] %>:
-                  <% if answer_el["type"] == "boolean" %>
-                    <%= answer_el["boolean"] %>
-                  <% else %>
-                    <%= answer_el["text"] %>
-                  <% end %>
-                </li>
-              <% end %>
-            <% end %>
-          </ol>
-        </div>
+      <% if @surgery.date > Date.today %>
+        <h4 class='text-center'>Formulaire pré-admission</h4>
+        <% if @pre_form_answer %>
+          <%= render 'form_answer_display', form_answer: @pre_form_answer %>
+        <% else %>
+          <div id="typeform-embed" data-surgeryid="<%= @surgery.id %>" data-typeformid="<%= @surgery.pre_form.typeform_id %>"></div>
+        <% end %>
       <% else %>
-        <div id="pre-form-embed" data-surgeryid="<%= @surgery.id %>" data-typeformid="<%= @surgery.pre_form.typeform_id %>"></div>
+        <h4 class='text-center'>Formulaire post-opératoire</h4>
+        <% if @post_form_answer %>
+          <%= render 'form_answer_display', form_answer: @post_form_answer %>
+        <% else %>
+          <div id="typeform-embed" data-surgeryid="<%= @surgery.id %>" data-typeformid="<%= @surgery.post_form.typeform_id %>"></div>
+        <% end %>
       <% end %>
       <div class="comment-box text-center">
         <%= simple_form_for(@surgery) do |f| %>
