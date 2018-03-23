@@ -18,6 +18,30 @@
   }
 }
 
+.validate-btn {
+  padding: 6px 12px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 2px;
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.6);
+  &:hover {
+    color: $green;
+    border: 1px solid $green;
+  }
+}
+
+.validated-btn {
+  padding: 6px 12px;
+  border: 1px solid $green;
+  border-radius: 2px;
+  font-size: 15px;
+  color: $green;
+  &:hover {
+    color: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(0,0,0,0.2);
+  }
+}
+
 
 .discrete-tag {
   padding: 2px 10px;

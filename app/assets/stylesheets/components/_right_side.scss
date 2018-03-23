@@ -170,7 +170,18 @@
   margin: 0px;
 }
 
+.add-event {
+  text-decoration: underline;
+  &:hover {
+    color: black;
+  }
+}
 
+.transparent-hover {
+  &:hover {
+    background-color: transparent;
+  }
+}
 
 .font-15 {
   font-size: 15px;
