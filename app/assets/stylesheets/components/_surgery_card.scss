@@ -1,3 +1,10 @@
+.core-left {
+  flex: 0 0 50%;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+
 .surgery-cards-wrapper {
   height: calc(100vh-70px);
   // border: 1px solid black;
@@ -5,6 +12,10 @@
 }
 
 .filters {
+  display: flex;
+}
+
+.actions {
   display: flex;
 }
 
@@ -67,6 +78,10 @@
 
 .red-font {
   color: $red;
+}
+
+.small-font {
+  font-size: 12px;
 }
 
 // .green {
