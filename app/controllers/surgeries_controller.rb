@@ -38,7 +38,7 @@ before_action :set_surgery, only: [:show, :update]
   def update
     @surgery = Surgery.find(params[:id])
     @surgery.update(surgery_params)
-    redirect_to "#{surgery_path(@surgery)}?feature=form"
+    redirect_to surgery_path(@surgery)
   end
 
   private
@@ -48,6 +48,6 @@ before_action :set_surgery, only: [:show, :update]
   end
 
   def surgery_params
-    params.require(:surgery).permit(:pre_comments)
+    params.require(:surgery).permit(:pre_comments, :post_comments)
   end
 end

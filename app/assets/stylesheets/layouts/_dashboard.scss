@@ -6,13 +6,14 @@
   height: calc(100vh - 20px);
   margin-top: 20px;
 }
-
 .core-left {
   flex: 0 0 50%;
 }
-
 .core-right {
   flex: 0 0 50%;
 }
 
+.devise {
+  display: block !important;
+}
 
