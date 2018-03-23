@@ -15,17 +15,29 @@
   margin-right: 20px;
   margin-bottom: 20px;
   border-radius: 5px;
-  // height: calc(100vh - 20px);
   width: 50%;
   background-color: white;
   padding: 20px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.6);
 }
 
+.pre-op a {
+  text-decoration: none;
+  :hover {
+    text-decoration: none;
+  }
+}
+
+.post-op a {
+  text-decoration: none;
+  :hover {
+    text-decoration: none;
+  }
+}
+
 .title-sms {
   border-radius: 5px;
   background-color: white;
-  // box-shadow: 0 1px 3px rgba(0,0,0,0.6);
   margin-bottom: 50px;
   margin-top: 20px;
 }
@@ -42,7 +54,6 @@
 .all-flags {
   border-radius: 10px;
   background-color: white;
-  // box-shadow: 0 1px 3px rgba(0,0,0,0.6);
   margin-bottom: 20px;
   padding: 20px;
 }
@@ -64,6 +75,17 @@
   background-color: red !important;
   color: white !important;
   border-color: red !important;
+}
+
+.orange-alert-on {
+  border-color: orange !important;
+  border-radius: 5px !important;
+}
+
+.orange-alert-on-heading {
+  background-color: orange !important;
+  color: white !important;
+  border-color: orange !important;
 }
 
 .css-body {
