@@ -37,6 +37,11 @@ before_action :set_surgery, only: [:show, :update]
 
   def update
     @surgery = Surgery.find(params[:id])
+    event = Event.new
+    event.description = "Commentaire pré-opératoire : " + surgery_params[:pre_comments] if surgery_params[:pre_comments]
+    event.description = "Commentaire post-opératoire : " + surgery_params[:post_comments] if surgery_params[:post_comments]
+    event.surgery = @surgery
+    event.save
     @surgery.update(surgery_params)
     redirect_to surgery_path(@surgery)
   end

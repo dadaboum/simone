@@ -5,13 +5,24 @@
         <button type="button" class="btn btn-default small-font">Valider</button>
         <button type="button" class="btn btn-default small-font">Notifier le chirurgien</button>
         <button type="button" class="btn btn-default small-font">Relancer par SMS</button>
-        <button type="button" class="btn btn-default small-font">Changer la priorite</button>
       </div>
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Changer la priorité
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
+            <li><%= link_to "Red", surgeries_path(status: "red", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]) %></li>
+            <li><%= link_to "Orange", surgeries_path(status: "orange", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]) %></li>
+            <li><%= link_to "Yellow", surgeries_path(status: "yellow", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]) %></li>
+            <li><%= link_to "Green", surgeries_path(status: "green", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]) %></li>
+          </ul>
+        </div>
     </div>
     <div class="filters">
       <div class="dropdown">
         <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          <%= params[:status].present? ? params[:status] : "Filtrer par priorité" %>
+          <%= params[:status].present? ? params[:status].capitalize : "Filtrer par priorité" %>
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
@@ -26,7 +37,7 @@
       </div>
       <div class="dropdown">
         <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          <%= params[:pre_or_post].present? ? params[:pre_or_post] : "J+/-1" %>
+          <%= params[:pre_or_post].present? ? (params[:pre_or_post] == "pre" ? "J-1" : "J+1") : "J+/-1" %>
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">

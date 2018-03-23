@@ -23,7 +23,7 @@
           </li>
             <li>
               <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <button class="btn btn-default transparent-hover font-15 dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                   <span <% if @surgery.status == "red" %>
                     style="color: #EE5F5B;"> Urgent
                   <% elsif @surgery.status == "orange" %>
@@ -36,7 +36,7 @@
                   </span>
                   <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
+                <ul class="dropdown-menu font-15 small-font" aria-labelledby="dropdownMenu1">
                   <!-- link_to surgery_path(surgery)flag?red -->
                   <li><a href="#">Urgent</a></li>
                   <li><a href="#">Important</a></li>
@@ -46,7 +46,12 @@
               </div>
           </li>
           <li>
-            <button class="btn btn-default small-font" type="button" style="color:#32B796;">Valider</button>
+            <% if @surgery.validated %>
+              <button class = "validated-btn"> <i class="far fa-check-square"></i> Validé </button>
+            <% else %>
+            <button class = "validate-btn"> <i class="far fa-square"></i> Valider </button>
+            <% end %>
+<!--             <button class="btn btn-default small-font" type="button" style="color:#32B796;">Valider</button> -->
           </li>
         </ul>
       </div>
@@ -94,7 +99,7 @@
 
               <ul class= "list-inline">
                 <li> <p class = "discrete-tag">J-1</p> </li>
-              <% if @surgery.post_form_answered %>
+              <% if @surgery.pre_form_answered %>
                   <li><p class="secondary-info">
                     <i class="fas fa-check"></i>
                     Formulaire pré-opération <u> rempli </u>
@@ -123,7 +128,7 @@
       <div class="surgery-history-box">
         <p>Historique</p>
           <% @surgery.events.each do |event| %>
-            <div class="history-box">
+            <div class="history-box secondary-info">
               <div class="history-left">
                 <div class="history-separator-big"></div>
                 <div class=" <%= 'grey' if event.flag == nil %>
@@ -143,6 +148,7 @@
               <div class="history-right"></div>
             </div>
           <% end %>
+          <a href="#" class="secondary-info add-event"> + Ajouter un événement</a>
         </div>
       </div>
     </div>
