@@ -62,9 +62,9 @@
         </div>
       </div>
      <!--         FIN DE LA DIV DES FLAGS ORANGE JAUNES ET VERTES       -->
-    </div>
-    <div class="surgeries-count">
-      Total des opérations programmées le <%= (Date.tomorrow).strftime("%d/%m/%Y") %> : <%= Surgery.where("date='#{Date.tomorrow}'").count %>
+      <div class="surgeries-count">
+       Total des opérations programmées le <%= (Date.tomorrow).strftime("%d/%m/%Y") %> : <%= Surgery.where("date='#{Date.tomorrow}'").count %>
+      </div>
     </div>
   </div>
   <div class="post-op">
@@ -130,9 +130,9 @@
           <% end %>
         </div>
       </div>
-    </div>
-    <div class="surgeries-count">
+      <div class="surgeries-count">
       Total des opérations effectuées le <%= (Date.yesterday).strftime("%d/%m/%Y") %> : <%= Surgery.where("date='#{Date.yesterday}'").count %>
+      </div>
     </div>
   </div>
 </div>
