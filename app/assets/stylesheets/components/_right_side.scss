@@ -1,12 +1,13 @@
 .right-side-wrapper {
+  flex : 0 0 50%;
   padding: 5px;
-  background-color: white;
+  padding-top: 0px;
 }
 
 .right-side-box {
-  background-color: $light-gray;
-  margin-top: 20px;
+  background-color: white;
   margin: 20px;
+  margin-top: 0px;
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
   box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
@@ -15,9 +16,13 @@
 }
 
 .patient-box {
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
   padding-top: 10px;
   text-align: center;
-  color: black;
+  color: white;
+  opacity: 0.8;
+  padding-bottom: 5px;
 }
 
 .surgery-box {
@@ -29,14 +34,7 @@
   margin-left: 30px;
   padding-top : 40px;
   color: black;
-  // text-align: center;
 }
-
-// .surgery-name {
-//   padding: 10px 10px;
-//   border-left: 3px solid rgba(243, 93, 94, 0.6);
-//   background-color: rgba(243, 93, 94, 0.1)
-// }
 
 .custom-dropdown {
   font-size : 15px;
@@ -50,9 +48,14 @@
 
 
 .surgery-main-info {
-  margin: 0px 30px;
-  margin-bottom: 20px;
+  margin: 30px 30px;
+  margin-top: 10px;
+  margin-bottom:40px;
   // text-align: center;
+}
+
+.doctor-box {
+  margin: 30px 30px;
 }
 
 .surgery-forms-box {
@@ -64,10 +67,9 @@
 }
 
 .surgery-history-box {
-  height: 500px;
   border-radius: 3px;
   margin: 30px;
-  margin-top: 0px;
+  margin-top: 40px;
 }
 
 .history-box {
@@ -155,6 +157,10 @@
   background-color: $red;
 }
 
+.grey {
+  background-color : rgba(0,0,0,0.2);
+}
+
 .secondary-info {
   font-size: 15px;
   color: rgba(0,0,0,0.6);
@@ -164,15 +170,8 @@
   margin: 0px;
 }
 
-.dropdown-toggle::after {
-  display: inline-block;
-  width: 0;
-  height: 0;
-  margin-left: .255em;
-  vertical-align: .255em;
-  content: "";
-  border-top: .3em solid;
-  border-right: .3em solid transparent;
-  border-bottom: 0;
-  border-left: .3em solid transparent;
+
+
+.font-15 {
+  font-size: 15px;
 }

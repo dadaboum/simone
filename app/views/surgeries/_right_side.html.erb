@@ -1,87 +1,133 @@
 <div class="right-side-wrapper">
   <div class="right-side-box">
-    <div class="patient-box">
+    <div class="patient-box"
+      <% if @surgery.status == "red" %>
+        style="background-color: #EE5F5B;"
+      <% elsif @surgery.status == "orange" %>
+        style="background-color: #E67E22;"
+      <% elsif @surgery.status == "yellow" %>
+        style="background-color: #FDB631;"
+      <% elsif @surgery.status == "green" %>
+        style="background-color: #32B796;"
+      <% end %>
+
+    >
       <p> <%= @surgery.patient.first_name %> <%= @surgery.patient.last_name %> </p>
-      <p class= "secondary-info"> <i class="fas fa-phone"></i> <%= @surgery.patient.phone_number %></p>
+      <p> <i class="fas fa-phone"></i> <%= @surgery.patient.phone_number %></p>
     </div>
     <div class="surgery-box">
       <div class="surgery-title">
-        <div class="surgery-name">
-          <p class= "no-margin"> <%=  @surgery.surgery_type.description %></p>
-        </div>
-        <ul class="list-inline">
-          <li>
-            Priorité : Urgent
+        <ul class="list-inline no-margin">
+          <li style="padding-left: 0px;">
+              <p class= "no-margin"> <%=  @surgery.surgery_type.description %></p>
           </li>
             <li>
               <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Changer
+                <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  <span <% if @surgery.status == "red" %>
+                    style="color: #EE5F5B;"> Urgent
+                  <% elsif @surgery.status == "orange" %>
+                    style="color: #E67E22;"> Important
+                  <% elsif @surgery.status == "yellow" %>
+                    style="color: #FDB631;"> En cours
+                  <% elsif @surgery.status == "green" %>
+                    style="color: #32B796;"> Okay
+                  <% end %>
+                  </span>
+                  <span class="caret"></span>
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">Urgent</a>
-                  <a class="dropdown-item" href="#">Important</a>
-                  <a class="dropdown-item" href="#">Okay</a>
-                </div>
+                <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
+                  <!-- link_to surgery_path(surgery)flag?red -->
+                  <li><a href="#">Urgent</a></li>
+                  <li><a href="#">Important</a></li>
+                  <li><a href="#">En cours</a></li>
+                  <li><a href="#">Okay</a></li>
+                </ul>
               </div>
+          </li>
+          <li>
+            <button class="btn btn-default small-font" type="button" style="color:#32B796;">Valider</button>
           </li>
         </ul>
       </div>
       <div class="surgery-main-info">
-        <ul class="list-inline no-margin">
+        <% if Date.today > @surgery.date %>
+          <p class="secondary-info">Opération réalisée le <u>  <%= @surgery.date %> </u></p>
+        <%  else %>
+          <p class="secondary-info">Opération prévue le <u>  <%= @surgery.date %> </u></p>
+        <% end %>
+      </div>
+        <ul class="list-inline doctor-box">
           <li>
-            <p class="secondary-info"> Médecin <%= @surgery.surgeon.name %></p>
+            <p class="secondary-info"> <strong> Médecin :</strong> <%= @surgery.surgeon.name %></p>
           </li>
           <li>
             <button class="discrete-button"> <i class="fab fa-telegram-plane"></i> Send email</button>
           </li>
         </ul>
-        <% if Date.today > @surgery.date %>
-            <ul class="list-inline no-margin">
-              <li> <p class = "discrete-tag">J+1</p> </li>
-              <li><p class="secondary-info">opération réalisée le <u>  <%= @surgery.date %> </u> </p> </li>
-            </ul>
-        <%  else %>
-            <ul class="list-inline no-margin">
-              <li> <p class = "discrete-tag">J-1</p> </li>
-              <li><p class="secondary-info">opération prévue le <u>  <%= @surgery.date %> </u> </p> </li>
-            </ul>
-        <% end %>
-      </div>
       <div class="surgery-forms-box">
-            <% if Date.today > @surgery.date %>
 
-              <% unless @surgery.post_form_answered %>
-              <p class="secondary-info">
-                <i class="fas fa-check"></i>
-                Formulaire post-opération <u> rempli </u>
-              </p>
-              <button class="discrete-button"> <i class="fas fa-eye"></i></i><%= link_to 'Voir les réponses', surgery_path(@surgery) %></button>
+            <% if Date.today > @surgery.date %>
+              <ul class= "list-inline">
+                <li> <p class = "discrete-tag">J+1</p> </li>
+              <% if @surgery.post_form_answered %>
+                  <li><p class="secondary-info">
+                    <i class="fas fa-check"></i>
+                    Formulaire post-opération <u> rempli </u>
+                  </p></li>
+                </ul>
+                <button class="discrete-button"> <i class="fas fa-eye"></i></i><%= link_to 'Voir les réponses', surgery_path(@surgery) %></button>
               <% else %>
-                  <p class="secondary-info"> Formulaire post-opération <u>non rempli</u> </p>
+                  <li><p class="secondary-info"> Formulaire post-opération <u>non rempli</u> </p></li>
+                </ul>
                   <ul class="list-inline">
                     <li>
                       <button class="discrete-button"> <i class="far fa-comment"></i> Renvoyer au patient</button>
                     </li>
                     <li>
-                      <button class="discrete-button"> <i class="fas fa-edit"></i> Remplir</button>
+                      <button class="discrete-button"> <i class="fas fa-edit"></i><%= link_to 'Remplir', surgery_path(@surgery) %></button>
                     </li>
                   </ul>
               <% end %>
+
+            <% else %>
+
+              <ul class= "list-inline">
+                <li> <p class = "discrete-tag">J-1</p> </li>
+              <% if @surgery.post_form_answered %>
+                  <li><p class="secondary-info">
+                    <i class="fas fa-check"></i>
+                    Formulaire pré-opération <u> rempli </u>
+                  </p></li>
+                </ul>
+                <button class="discrete-button"> <i class="fas fa-eye"></i></i><%= link_to 'Voir les réponses', surgery_path(@surgery) %></button>
+              <% else %>
+                  <li><p class="secondary-info"> Formulaire pré-opération <u>non rempli</u> </p></li>
+                </ul>
+                  <ul class="list-inline">
+                    <li>
+                      <button class="discrete-button"> <i class="far fa-comment"></i> Renvoyer au patient</button>
+                    </li>
+                    <li>
+                      <button class="discrete-button"> <i class="fas fa-edit"></i><%= link_to 'Remplir', surgery_path(@surgery) %></button>
+                    </li>
+                  </ul>
+              <% end %>
+
             <% end %>
 
 
 
         </ul>
       </div>
-      <div class="green-separator"></div>
       <div class="surgery-history-box">
         <p>Historique</p>
           <% @surgery.events.each do |event| %>
             <div class="history-box">
               <div class="history-left">
                 <div class="history-separator-big"></div>
-                <div class=" <%= 'red' if event.flag == 'red' %>
+                <div class=" <%= 'grey' if event.flag == nil %>
+                             <%= 'red' if event.flag == 'red' %>
                              <%= 'green' if event.flag == 'green' %>
                              <%= 'orange' if event.flag == 'orange' %>
                  bullet"></div>
