@@ -88,7 +88,9 @@ david_operation.pre_form_answered = true
 david_operation.status = "red"
 david_operation.post_form_answered = false
 david_operation.post_form = post_form_knee
+david_operation.validated = false
 david_operation.save!
+
 
 david_event = Event.new(description: "Le questionnaire pré-opération a bien été envoyé", flag: "green")
 
@@ -113,6 +115,7 @@ jonathan_operation.is_done = true
 jonathan_operation.status = "orange"
 jonathan_operation.pre_form = pre_form_knee
 jonathan_operation.post_form = post_form_knee
+jonathan_operation.validated = false
 jonathan_operation.save!
 
 
@@ -139,6 +142,7 @@ paul_operation.surgeon = guilhem
 paul_operation.pre_form = pre_form_knee
 paul_operation.status = "yellow"
 paul_operation.post_form = post_form_knee
+paul_operation.validated = true
 paul_operation.save!
 
 
@@ -151,6 +155,7 @@ marie_operation.pre_form_answered = true
 marie_operation.status = "green"
 marie_operation.post_form_answered = false
 marie_operation.post_form = post_form_knee
+marie_operation.validated = true
 marie_operation.save!
 
 marie_event = Event.new(description: "message pré-opération envoyé")
@@ -170,6 +175,7 @@ paula_operation.pre_form_answered = true
 paula_operation.status = "green"
 paula_operation.post_form_answered = false
 paula_operation.post_form = post_form_knee
+paula_operation.validated = true
 paula_operation.save!
 
 paula_event = Event.new(description: "message pré-opération envoyé")
@@ -189,6 +195,7 @@ jean_operation.pre_form_answered = true
 jean_operation.status = "green"
 jean_operation.post_form_answered = false
 jean_operation.post_form = post_form_knee
+jean_operation.validated = true
 jean_operation.save!
 
 jean_event = Event.new(description: "message pré-opération envoyé")
@@ -208,6 +215,7 @@ herve_operation.pre_form_answered = true
 herve_operation.status = "green"
 herve_operation.post_form_answered = false
 herve_operation.post_form = post_form_knee
+herve_operation.validated = true
 herve_operation.save!
 
 herve_event = Event.new(description: "message pré-opération envoyé")
