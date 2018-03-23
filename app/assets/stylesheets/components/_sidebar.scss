@@ -1,13 +1,5 @@
-.sidebar a {
-  text-decoration: none;
-  color: white;
-  &:hover {
-    text-decoration: none;
-    color: white;
-  }
-}
-
 .sidebar {
+  color: white;
   background-color: $grayer;
   position: fixed;
   left: 0px;
@@ -15,27 +7,30 @@
   bottom: 0px;
   width: 180px;
   text-align: center;
-  display: block;
-
-  ul {
-    list-style: none;
-    padding-left: 0px;
-  }
-  li {
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 100;
 }
-
-.logo {
+.main-title{
+  padding: 20px 0px;
+}
+.sidebar a {
+  text-decoration: none;
   color: white;
-}
-
-#selected {
-  background-color: $black;
-  color: white;
-}
-
-.small-font {
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
   font-size: 14px;
+  &:hover {
+    text-decoration: none;
+    color: white;
+  }
+}
+.bottom-sidebar{
+  margin-bottom: 20px;
+}
+#selected {
+  background-color: #4C9689;
 }
