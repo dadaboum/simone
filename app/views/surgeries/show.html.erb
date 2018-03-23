@@ -1,102 +1,27 @@
 <div class="content-container">
-
-  <% if params[:feature] == "form" %>
-    <div class="core-left-surgery">
-      <% if @surgery.date > Date.today %>
-        <h4 class='text-center'>Formulaire pré-admission</h4>
-        <% if @pre_form_answer %>
-          <%= render 'form_answer_display', form_answer: @pre_form_answer %>
-        <% else %>
-          <div id="typeform-embed" data-surgeryid="<%= @surgery.id %>" data-typeformid="<%= @surgery.pre_form.typeform_id %>"></div>
-        <% end %>
+  <div class="core-left-surgery">
+    <% if @surgery.date > Date.today %>
+      <h4 class='text-center'>Formulaire pré-admission</h4>
+      <% if @pre_form_answer %>
+        <%= render 'form_answer_display', form_answer: @pre_form_answer %>
       <% else %>
-        <h4 class='text-center'>Formulaire post-opératoire</h4>
-        <% if @post_form_answer %>
-          <%= render 'form_answer_display', form_answer: @post_form_answer %>
-        <% else %>
-          <div id="typeform-embed" data-surgeryid="<%= @surgery.id %>" data-typeformid="<%= @surgery.post_form.typeform_id %>"></div>
-        <% end %>
+        <div id="typeform-embed" data-surgeryid="<%= @surgery.id %>" data-typeformid="<%= @surgery.pre_form.typeform_id %>"></div>
       <% end %>
-      <div class="comment-box text-center">
-        <%= simple_form_for(@surgery) do |f| %>
-          <%= f.text_area :pre_comments, placeholder: "Ecrivez votre commentaire...", class: 'comment-field' %>
-          <%= f.submit 'Ajouter un commentaire', class: 'btn btn-sm btn-primary' %>
-        <% end %>
-      </div>
+    <% else %>
+      <h4 class='text-center'>Formulaire post-opératoire</h4>
+      <% if @post_form_answer %>
+        <%= render 'form_answer_display', form_answer: @post_form_answer %>
+      <% else %>
+        <div id="typeform-embed" data-surgeryid="<%= @surgery.id %>" data-typeformid="<%= @surgery.post_form.typeform_id %>"></div>
+      <% end %>
+    <% end %>
+    <div class="comment-box text-center">
+      <%= simple_form_for(@surgery) do |f| %>
+        <%= f.text_area :pre_comments, placeholder: "Ecrivez votre commentaire...", class: 'comment-field' %>
+        <%= f.submit 'Ajouter un commentaire', class: 'btn btn-sm btn-primary' %>
+      <% end %>
     </div>
-  <% else %>
-    <div class="core-left">
-      <div class="actions">
-        <div class="btn-group btn-group-xs" role="group" aria-label="...">
-          <button type="button" class="btn btn-default small-font">Valider</button>
-          <button type="button" class="btn btn-default">Notifier le chirurgien</button>
-          <button type="button" class="btn btn-default">Relancer par SMS</button>
-          <button type="button" class="btn btn-default">Changer la priorite</button>
-        </div>
-      </div>
-      <div class="filters">
-        <%= form_tag surgery_path(@surgery), method: :get do %>
-          <%= text_field_tag :status,
-            params[:status],
-            class: "form-control",
-            placeholder: "filter"
-          %>
-        <% end %>
-        <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Filter by priority
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
-            <!-- link_to surgery_path(surgery)flag?red -->
-            <li><%#= link_to surgery_path(@surgery), {token: "red"} %></li>
-
-            <li>
-              <%= link_to "Orange", surgery_path(@surgery, status: "orange", surgery_id: params[:surgery_id]) %></li>
-            <li><a href="#">Yellow</a></li>
-            <li><a href="#">Green</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">All</a></li>
-          </ul>
-        </div>
-        <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            J+/-1
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
-            <!-- link_to surgery_path(surgery)flag?red -->
-            <li><a href="#">J-1</a></li>
-            <li><a href="#">J+1</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="surgery-cards-wrapper">
-        <% @surgeries.each do |surgery| %>
-          <div class="surgery-card small-font">
-            <div class="checkbox">
-              <i class="far fa-square"></i>
-            </div>
-            <!-- Quand la checkbox est cochee : <i class="far fa-check-square"></i> -->
-            <%= link_to surgery_path(surgery, status: params[:status], surgery_id: surgery.id) do %>
-              <div class="surgery-patient">
-                <p class="strong <%= surgery.status %>-font"><%= surgery.patient.first_name %> <%= surgery.patient.last_name %> - <%= surgery.surgeon.name %></p>
-                <p><%= surgery.surgery_type.description %></p>
-              </div>
-            <div class="surgery-form-type">
-              <% if surgery.date < Date.today %>
-                <p>J+1</p>
-              <% else %>
-                <p>J-1</p>
-              <% end %>
-            </div>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-
-  <% end %>
+  </div>
 
   <div class="core-right">
     <%= render "right_side" %>
