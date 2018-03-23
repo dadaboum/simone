@@ -1,5 +1,5 @@
 module PagesHelper
-
+                                  # HELPER POUR LE DASHBOARD COTE PRE OPERATION
   def nb_pre_op_orange_flag
     a = 0
     # a = sprintf("%.2f", Surgery.where("date='#{Date.tomorrow}' and is_done=false").count).to_f
@@ -22,7 +22,7 @@ module PagesHelper
   def nb_pre_op_red_flag
     0
   end
-
+                              # HELPER POUR LE DASHBOARD COTE POST OPERATION
   def nb_post_op_orange_flag
     a = sprintf("%.2f", Surgery.where("date='#{Date.yesterday}' and is_done=false").count).to_f
     b = sprintf("%.2f", Surgery.where("date='#{Date.yesterday}'").count).to_f
