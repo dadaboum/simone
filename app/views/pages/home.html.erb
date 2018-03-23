@@ -4,7 +4,7 @@
     <div class="title-sms">
       <div class="row">
         <div class="col-xs-12 row-container">
-          <h4 style="color: black">Analyses des actions Pré-opératoires</h4>
+          <h3 style="color: black;">Analyses des actions Pré-opératoires</h3>
         </div>
       </div>
       <div class="row">
@@ -19,53 +19,56 @@
     <div class="all-flags">
       <div class="red-alert">
         <div class="row">
-          <div class="col-xs-12 col-sm-4 col-sm-offset-4" style="text-align: center">
+          <div class="col-xs-12 col-md-4 col-md-offset-4" style="text-align: center">
             <%= link_to surgery_path(Surgery.all.last) do %>
-            <div class="panel panel-danger <%= "red-alert-on" if nb_pre_op_red_flag > 0 %>">
-              <div class="panel-heading <%= "red-alert-on-heading" if nb_pre_op_red_flag > 0 %>">Urgence</div>
-              <div class="panel-body css-body">
-                <p><%= nb_pre_op_red_flag %></p>
+              <div class="panel panel-danger <%= "red-alert-on" if nb_pre_op_red_flag > 0 %>">
+                <div class="panel-heading <%= "red-alert-on-heading" if nb_pre_op_red_flag > 0 %>">Urgence</div>
+                <div class="panel-body css-body">
+                  <p><%= nb_pre_op_red_flag %><%= "%" %></p>
+                </div>
               </div>
-            </div>
             <% end %>
           </div>
         </div>
       </div>
+      <!--           DIV DES FLAGS ORANGE JAUNES ET VERTES            -->
       <div class="flags">
-        <div class="row">
-          <div class="col-xs-12 col-sm-4" style="text-align: center">
-            <div class="panel panel-warning">
-              <div class="panel-heading">A contrôler</div>
-              <div class="panel-body css-body">
-                <p><%= nb_pre_op_orange_flag %></p>
-              </div>
+        <div class="alert-flags">
+          <div class="panel panel-warning resize-container">
+            <div class="panel-heading" style="font-size: 15px;">A contrôler</div>
+            <div class="panel-body css-body">
+              <p><%= nb_pre_op_orange_flag %><%= "%" %></p>
             </div>
           </div>
-          <div class="col-xs-12 col-sm-4" style="text-align: center"">
-            <div class="panel panel-info">
-              <div class="panel-heading">Non répondu</div>
-              <div class="panel-body css-body">
-                <p><%= nb_pre_op_yellow_flag %></p>
-              </div>
+
+
+          <div class="panel panel-info resize-container">
+            <div class="panel-heading" style="font-size: 15px;">Non répondu</div>
+            <div class="panel-body css-body">
+              <p><%= nb_pre_op_yellow_flag %><%= "%" %></p>
             </div>
           </div>
-          <div class="col-xs-12 col-sm-4" style="text-align: center"">
-            <div class="panel panel-success">
-              <div class="panel-heading">Validé</div>
-              <div class="panel-body css-body">
-                <p><%= nb_pre_op_green_flag * 2 %></p>
-              </div>
+
+
+          <div class="panel panel-success resize-container">
+            <div class="panel-heading" style="font-size: 15px;">Validé</div>
+            <div class="panel-body css-body">
+              <p><%= nb_pre_op_green_flag %><%= "%" %></p>
             </div>
           </div>
         </div>
       </div>
+     <!--         FIN DE LA DIV DES FLAGS ORANGE JAUNES ET VERTES       -->
+    </div>
+    <div class="surgeries-count">
+      Total des opérations programmées le <%= Date.tomorrow %> : <%= Surgery.where("date='#{Date.tomorrow}'").count %>
     </div>
   </div>
   <div class="post-op">
     <div class="title-sms">
       <div class="row">
         <div class="col-xs-12 row-container">
-          <h4 style="color: black">Analyses des actions Post-opératoires</h4>
+          <h3 style="color: black">Analyses des actions Post-opératoires</h3>
         </div>
       </div>
       <div class="row">
@@ -80,7 +83,7 @@
     <div class="all-flags">
       <div class="red-alert">
         <div class="row">
-          <div class="col-xs-12 col-sm-4 col-sm-offset-4" style="text-align: center">
+          <div class="col-xs-12 col-md-4 col-md-offset-4" style="text-align: center">
             <div class="panel panel-danger <%= "red-alert-on" if nb_post_op_red_flag > 0 %>">
               <div class="panel-heading <%= "red-alert-on-heading" if nb_post_op_red_flag > 0 %>">Urgence
               </div>
@@ -93,33 +96,34 @@
       </div>
 
       <div class="flags">
-        <div class="row">
-          <div class="col-xs-12 col-sm-4" style="text-align: center">
-            <div class="panel panel-warning">
-              <div class="panel-heading">A contrôler</div>
-              <div class="panel-body css-body">
-                <p><%= nb_post_op_orange_flag %></p>
-              </div>
+        <div class="alert-flags">
+          <div class="panel panel-warning resize-container">
+            <div class="panel-heading" style="font-size: 15px;">A contrôler</div>
+            <div class="panel-body css-body">
+              <p><%= nb_post_op_orange_flag %><%= "%" %></p>
             </div>
           </div>
-          <div class="col-xs-12 col-sm-4" style="text-align: center"">
-            <div class="panel panel-info">
-              <div class="panel-heading">Non répondu</div>
-              <div class="panel-body css-body">
-                <p><%= nb_post_op_yellow_flag %></p>
-              </div>
+
+
+          <div class="panel panel-info resize-container">
+            <div class="panel-heading" style="font-size: 15px;">Non répondu</div>
+            <div class="panel-body css-body">
+              <p><%= nb_post_op_yellow_flag %><%= "%" %></p>
             </div>
           </div>
-          <div class="col-xs-12 col-sm-4" style="text-align: center"">
-            <div class="panel panel-success">
-              <div class="panel-heading">Validé</div>
-              <div class="panel-body css-body">
-                <p><%= nb_post_op_green_flag * 2 %></p>
-              </div>
+
+
+          <div class="panel panel-success resize-container">
+            <div class="panel-heading" style="font-size: 15px;">Validé</div>
+            <div class="panel-body css-body">
+              <p><%= nb_post_op_green_flag %><%= "%" %></p>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="surgeries-count">
+      Total des opérations effectuées le <%= Date.yesterday %> : <%= Surgery.where("date='#{Date.yesterday}'").count %>
     </div>
   </div>
 </div>
