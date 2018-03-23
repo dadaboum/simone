@@ -25,14 +25,24 @@
   width: 100%;
   margin-top: 6px;
   // justify-content: space-between;
-  height: 42px;
+  height: 60px;
   font-size: 12px;
   border-radius: 2px;
   box-shadow: 1px 2px 2px #d5d6d8;
+  align-items: center;
   a {
     width: 100%;
     color: black;
     display: flex;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+  .fa-check-square {
+    color: $green;
+    align-self: center;
+    padding-right: 10px;
+    margin-left: -25px;
   }
 }
 
@@ -41,12 +51,9 @@
 }
 
 .surgery-form-type {
-  // margin-left: 5px;
-  // font-size: 15px;
-  // font-weight: bolder;
   text-align: center;
   vertical-align: middle;
-  line-height: 38px;
+  margin: auto 0;
 }
 
 .surgery-patient {
@@ -67,7 +74,7 @@
 }
 
 .green-card {
-  color: $green;
+  color: $gray;
   right-border: 1px solid $green;
 }
 

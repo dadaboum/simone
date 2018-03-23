@@ -63,11 +63,14 @@
             </div>
             <div class="surgery-form-type discrete-tag">
               <% if surgery.date < Date.today %>
-                <p>J+1</p>
+                J+1
               <% else %>
-                <p>J-1</p>
+                J-1
               <% end %>
             </div>
+          <% end %>
+          <% if surgery.validated %>
+            <i class="far fa-check-square"></i>
           <% end %>
         </div>
       <% end %>
