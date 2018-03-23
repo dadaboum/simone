@@ -10,6 +10,7 @@ gem 'rails', '5.1.5'
 gem 'redis'
 
 gem 'autoprefixer-rails'
+gem 'popper_js', '~> 1.12.9'
 gem 'bootstrap-sass', '~> 3.3'
 gem 'font-awesome-sass'
 gem 'sass-rails'
