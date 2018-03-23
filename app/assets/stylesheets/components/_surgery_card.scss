@@ -27,6 +27,8 @@
   // justify-content: space-between;
   height: 42px;
   font-size: 12px;
+  border-radius: 2px;
+  box-shadow: 1px 2px 2px #d5d6d8;
   a {
     width: 100%;
     color: black;
@@ -64,38 +66,26 @@
   font-weight: bolder;
 }
 
-.green-font {
+.green-card {
   color: $green;
+  right-border: 1px solid $green;
 }
 
-.yellow-font {
+.yellow-card {
   color: $yellow;
+  right-border: 1px solid $yellow;
 }
 
-.orange-font {
+.orange-card {
   color: $orange;
+  right-border: 1px solid $orange;
 }
 
-.red-font {
+.red-card {
   color: $red;
+  right-border: 1px solid $red;
 }
 
 .small-font {
   font-size: 12px;
 }
-
-// .green {
-//   color-background: $green;
-// }
-
-// .yellow {
-//   color-background: $yellow;
-// }
-
-// .orange {
-//   color-background: $orange;
-// }
-
-// .red {
-//   color-background: $red;
-// }

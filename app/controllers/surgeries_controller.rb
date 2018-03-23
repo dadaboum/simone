@@ -43,7 +43,7 @@ before_action :set_surgery, only: [:show, :update]
     event.surgery = @surgery
     event.save
     @surgery.update(surgery_params)
-    redirect_to "#{surgery_path(@surgery)}?feature=form"
+    redirect_to surgery_path(@surgery)
   end
 
   private

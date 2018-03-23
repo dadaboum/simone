@@ -25,12 +25,15 @@
   font-size: 14px;
   &:hover {
     text-decoration: none;
-    color: white;
+    color: $light-green;
   }
 }
 .bottom-sidebar{
   margin-bottom: 20px;
 }
 #selected {
-  background-color: #4C9689;
+  background-color: $light-green;
+  &:hover {
+    color: white;
+  }
 }
