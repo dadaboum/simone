@@ -13,7 +13,10 @@ class MessagePostOpJob < ApplicationJob
         message = "Bonjour, #{result[1]} #{result[0]}, lien du questionnaire post-opération :"
         TwilioTextMessenger.new(result[2], message).call
         event = Event.new(description: "message post-opération envoyé", flag: "green")
-        event.surgery = Surgery.find(result[4])
+        surgery_patient = Surgery.find(result[4])
+        surgery_patient.post_flag = "yellow"
+        surgery_patient.save
+        event.surgery = surgery_patient
         event.save
       end
     end
