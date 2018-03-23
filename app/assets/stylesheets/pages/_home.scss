@@ -1,82 +1,80 @@
-// Specific CSS for your home-page
-
-.content-container {
-  display: flex;
-  margin-top: 20px;
-}
-
-
 .pre-op {
-  border-radius: 10px;
-  height: calc(100vh - 70px);
-  width: 50%;
+  border-radius: 5px;
+  margin-left: 20px;
   margin-right: 10px;
+  margin-bottom: 20px;
+  width: 50%;
   justify-content: space-between;
   background-color: white;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.6);
 }
 
 .post-op {
-  border-radius: 10px;
-  height: calc(100vh - 70px);
+  margin-left: 10px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  // height: calc(100vh - 20px);
   width: 50%;
   background-color: white;
-  margin-left: 10px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.6);
 }
 
-.flag-cards {
-  padding: 10px;
-  margin-top: 70px;
-  border: 1px solid black;
-  height: 40%;
-  .flag-alert {
-    margin-top: 20px;
-    border: 1px solid black;
+.title-sms {
+  border-radius: 5px;
+  background-color: white;
+  // box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  margin-bottom: 50px;
+  margin-top: 20px;
+}
+
+.alert-flags {
+  display: flex;
+  justify-content: space-between;
+  .resize-container {
+    height: 120px;
+    width: 150px;
+    text-align: center;
   }
 }
+.all-flags {
+  border-radius: 10px;
+  background-color: white;
+  // box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
 
 .row-container {
-  height: calc(100vh / 12);
   text-align: center;
-  margin-top: 15px;
   p {
     margin-top: 15px;
   }
 }
 
-.red-flag {
-  background-color: white;
-  border-bottom: solid;
-  border-width: 5px;
-  border-color: red;
-  border-radius: 5px;
-  border-width: 4px;
-  height: 120px;
-  margin-top: 60px;
+.red-alert-on {
+  border-color: red !important;
+  border-radius: 5px !important;
 }
 
+.red-alert-on-heading {
+  background-color: red !important;
+  color: white !important;
+  border-color: red !important;
+}
 
-.flag {
+.css-body {
   color: black;
-  height: 100px;
-  width: 25%;
-
-  margin-top: 30px;
-  margin-right: 20px;
-
-  border-bottom: solid;
-  border-width: 3px;
-
-  font-size: 40px;
-  text-align: center;
-  padding: 20px;
+  font-size: 30px;
 }
 
-.orange-flag {
-  border-color: orange;
+.red-alert {
+  // margin-top: 40px;
 }
-.yellow-flag {
-  border-color: yellow;
-}
-.green-flag {
-  border-color: green;
+.flags {
+  margin-top: 40px;
+  color: black;
 }

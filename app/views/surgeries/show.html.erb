@@ -1,27 +1,21 @@
 <div class="content-container">
+
   <% if params[:feature] == "form" %>
     <div class="core-left-surgery">
-      <% if @pre_form_answer %>
-        <p class='text-center'>Formulaire pré-admission</p>
-        <div class="form-answered pre-scrollable">
-          <ol>
-            <% @pre_form_answer.form.question_array.each do |question| %>
-              <li>
-                <%= question['question'] %>:
-                <% answer = @pre_form_answer.answer_hash[question["id"]] %>
-                <% if answer == '0' %>
-                  Oui
-                <% elsif answer == '1' %>
-                  Non
-                <% else %>
-                  <%= answer %>
-                <% end %>
-              </li>
-            <% end %>
-          </ol>
-        </div>
+      <% if @surgery.date > Date.today %>
+        <h4 class='text-center'>Formulaire pré-admission</h4>
+        <% if @pre_form_answer %>
+          <%= render 'form_answer_display', form_answer: @pre_form_answer %>
+        <% else %>
+          <div id="typeform-embed" data-surgeryid="<%= @surgery.id %>" data-typeformid="<%= @surgery.pre_form.typeform_id %>"></div>
+        <% end %>
       <% else %>
-        <div id="pre-form-embed" data-surgeryid="<%= @surgery.id %>" data-typeformid="<%= @surgery.pre_form.typeform_id %>"></div>
+        <h4 class='text-center'>Formulaire post-opératoire</h4>
+        <% if @post_form_answer %>
+          <%= render 'form_answer_display', form_answer: @post_form_answer %>
+        <% else %>
+          <div id="typeform-embed" data-surgeryid="<%= @surgery.id %>" data-typeformid="<%= @surgery.post_form.typeform_id %>"></div>
+        <% end %>
       <% end %>
       <div class="comment-box text-center">
         <%= simple_form_for(@surgery) do |f| %>
@@ -32,23 +26,59 @@
     </div>
   <% else %>
     <div class="core-left">
+      <div class="filters">
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Filter by priority
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
+            <!-- link_to surgery_path(surgery)flag?red -->
+            <li><a href="#">Red</a></li>
+            <li><a href="#">Orange</a></li>
+            <li><a href="#">Yellow</a></li>
+            <li><a href="#">Green</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">All</a></li>
+          </ul>
+        </div>
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            J+/-1
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
+            <!-- link_to surgery_path(surgery)flag?red -->
+            <li><a href="#">J-1</a></li>
+            <li><a href="#">J+1</a></li>
+          </ul>
+        </div>
+      </div>
       <div class="surgery-cards-wrapper">
         <% @surgeries.each do |surgery| %>
           <div class="surgery-card small-font">
-            <div class="surgery-form-type">J-1
+            <div class="checkbox">
+              <i class="far fa-square"></i>
             </div>
-            <div class="surgery-patient">
-              <%= surgery.patient.first_name %>
-              <%= surgery.patient.last_name %>
+            <!-- Quand la checkbox est cochee : <i class="far fa-check-square"></i> -->
+            <%= link_to surgery_path(surgery) do %>
+              <div class="surgery-patient">
+                <p class="strong <%= surgery.status %>-font"><%= surgery.patient.first_name %> <%= surgery.patient.last_name %> - <%= surgery.surgeon.name %></p>
+                <p><%= surgery.surgery_type.description %></p>
+              </div>
+            <div class="surgery-form-type">
+              <% if surgery.date < Date.today %>
+                <p>J+1</p>
+              <% else %>
+                <p>J-1</p>
+              <% end %>
             </div>
-            <div class="surgery">
-              <p><%= surgery.surgery_type.description %></p>
-              <p><%= surgery.surgeon.name %></p>
-            </div>
+            <% end %>
           </div>
         <% end %>
       </div>
     </div>
+
   <% end %>
 
   <div class="core-right">

@@ -1,29 +1,87 @@
 .surgery-cards-wrapper {
   height: calc(100vh-70px);
-  border: 1px solid black;
-  background-color: #FFFAF0;
+  // border: 1px solid black;
+  // background-color: #FFFAF0;
+}
+
+.filters {
+  display: flex;
 }
 
 .surgery-card {
   display: flex;
-  background-color: #FFFFFF;
+  background-color: white;
   width: 100%;
-  margin-top: 20px;
-  justify-content: space-between;
-  height: 80px;
+  margin-top: 6px;
+  // justify-content: space-between;
+  height: 42px;
   font-size: 12px;
+  a {
+    width: 100%;
+    color: black;
+    display: flex;
+  }
+}
+
+.checkbox {
+  padding: 5px 10px;
 }
 
 .surgery-form-type {
-  background-color: #F2F2F2;
+  // background-color: #F2F2F2;
   margin-left: 5px;
-  text-orientation: sideways;
+  font-size: 15px;
+  font-weight: bolder;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 42px;
 }
 
 .surgery-patient {
-  background-color: #F2F2F2;
+  // background-color: #F2F2F2;
+  width: 80%;
+  padding-left: 10px;
+  p {
+    margin: 0 0 3.5px;
+  }
 }
 
 .surgery {
-  background-color: #F2F2F2;
+  // background-color: #F2F2F2;
 }
+
+.strong {
+  font-weight: bolder;
+}
+
+.green-font {
+  color: $green;
+}
+
+.yellow-font {
+  color: $yellow;
+}
+
+.orange-font {
+  color: $orange;
+}
+
+.red-font {
+  color: $red;
+}
+
+// .green {
+//   color-background: $green;
+// }
+
+// .yellow {
+//   color-background: $yellow;
+// }
+
+// .orange {
+//   color-background: $orange;
+// }
+
+// .red {
+//   color-background: $red;
+// }
