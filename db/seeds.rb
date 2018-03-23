@@ -90,7 +90,7 @@ david_operation.post_form_answered = false
 david_operation.post_form = post_form_knee
 david_operation.save!
 
-david_event = Event.new(description: "message pre op sent", flag: "green")
+david_event = Event.new(description: "message pré-opération envoyé", flag: "green")
 david_event.surgery = david_operation
 david_event.save!
 
@@ -111,7 +111,7 @@ jonathan_operation.post_form = post_form_knee
 jonathan_operation.save!
 
 
-jonathan_event = Event.new(description: "message pre op sent", flag: "green")
+jonathan_event = Event.new(description: "message pré-opération envoyé", flag: "green")
 jonathan_event.surgery = jonathan_operation
 jonathan_event.save!
 
@@ -119,7 +119,7 @@ jonathan_event = Event.new(description: "formulaire pre op bien rempli", flag: "
 jonathan_event.surgery = jonathan_operation
 jonathan_event.save!
 
-jonathan_event = Event.new(description: "message post op sent", flag: "green")
+jonathan_event = Event.new(description: "message post-opération envoyé", flag: "green")
 jonathan_event.surgery = jonathan_operation
 jonathan_event.save!
 
@@ -148,7 +148,7 @@ marie_operation.post_form_answered = false
 marie_operation.post_form = post_form_knee
 marie_operation.save!
 
-marie_event = Event.new(description: "message pre op sent")
+marie_event = Event.new(description: "message pré-opération envoyé")
 marie_event.surgery = marie_operation
 marie_event.save!
 
@@ -167,7 +167,7 @@ paula_operation.post_form_answered = false
 paula_operation.post_form = post_form_knee
 paula_operation.save!
 
-paula_event = Event.new(description: "message pre op sent")
+paula_event = Event.new(description: "message pré-opération envoyé")
 paula_event.surgery = paula_operation
 paula_event.save!
 
@@ -185,7 +185,7 @@ jean_operation.post_form_answered = false
 jean_operation.post_form = post_form_knee
 jean_operation.save!
 
-jean_event = Event.new(description: "message pre op sent")
+jean_event = Event.new(description: "message pré-opération envoyé")
 jean_event.surgery = jean_operation
 jean_event.save!
 
@@ -204,7 +204,7 @@ herve_operation.post_form_answered = false
 herve_operation.post_form = post_form_knee
 herve_operation.save!
 
-herve_event = Event.new(description: "message pre op sent")
+herve_event = Event.new(description: "message pré-opération envoyé")
 herve_event.surgery = herve_operation
 herve_event.save!
 
