@@ -88,14 +88,21 @@
   border-color: orange !important;
 }
 
+.yellow-alert-on {
+  border-color: blue !important;
+  border-radius: 5px !important;
+}
+
+.yellow-alert-on-heading {
+  background-color: blue !important;
+  color: white !important;
+  border-color: blue !important;
+}
 .css-body {
   color: black;
   font-size: 30px;
 }
 
-.red-alert {
-  // margin-top: 40px;
-}
 .flags {
   margin-top: 40px;
   color: black;

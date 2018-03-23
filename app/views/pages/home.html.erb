@@ -43,8 +43,8 @@
           <% end %>
 
           <%= link_to surgeries_path(status: "yellow", pre_or_post_flag: "pre") do %>
-            <div class="panel panel-info resize-container">
-              <div class="panel-heading" style="font-size: 15px;">Non répondu</div>
+            <div class="panel panel-info <%= "yellow-alert-on" if (nb_pre_op_yellow_flag > 0 and Time.now.hour > 15) %> resize-container">
+              <div class="panel-heading <%= "yellow-alert-on-heading" if (nb_pre_op_yellow_flag > 0 and Time.now.hour > 15) %>" style="font-size: 15px;">Non répondu</div>
               <div class="panel-body css-body">
                 <p><%= nb_pre_op_yellow_flag %><%= "%" %></p>
               </div>
@@ -64,7 +64,7 @@
      <!--         FIN DE LA DIV DES FLAGS ORANGE JAUNES ET VERTES       -->
     </div>
     <div class="surgeries-count">
-      Total des opérations programmées le <%= Date.tomorrow %> : <%= Surgery.where("date='#{Date.tomorrow}'").count %>
+      Total des opérations programmées le <%= (Date.tomorrow).strftime("%d/%m/%Y") %> : <%= Surgery.where("date='#{Date.tomorrow}'").count %>
     </div>
   </div>
   <div class="post-op">
@@ -112,8 +112,8 @@
           <% end %>
 
           <%= link_to surgeries_path(status: "yellow", pre_or_post_flag: "post") do %>
-            <div class="panel panel-info resize-container">
-              <div class="panel-heading" style="font-size: 15px;">Non répondu</div>
+            <div class="panel panel-info <%= "yellow-alert-on" if (nb_post_op_yellow_flag > 0 and Time.now.hour > 15) %> resize-container">
+              <div class="panel-heading <%= "yellow-alert-on-heading" if (nb_post_op_yellow_flag > 0 and Time.now.hour > 15) %>" style="font-size: 15px;">Non répondu</div>
               <div class="panel-body css-body">
                 <p><%= nb_post_op_yellow_flag %><%= "%" %></p>
               </div>
@@ -132,7 +132,7 @@
       </div>
     </div>
     <div class="surgeries-count">
-      Total des opérations effectuées le <%= Date.yesterday %> : <%= Surgery.where("date='#{Date.yesterday}'").count %>
+      Total des opérations effectuées le <%= (Date.yesterday).strftime("%d/%m/%Y") %> : <%= Surgery.where("date='#{Date.yesterday}'").count %>
     </div>
   </div>
 </div>
