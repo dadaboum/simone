@@ -43,8 +43,8 @@
           <% end %>
 
           <%= link_to surgeries_path(status: "yellow", pre_or_post: "pre") do %>
-            <div class="panel panel-info <%= "yellow-alert-on" if (nb_pre_op_yellow_flag > 0 and Time.now.hour > 15) %> resize-container">
-              <div class="panel-heading <%= "yellow-alert-on-heading" if (nb_pre_op_yellow_flag > 0 and Time.now.hour > 15) %>" style="font-size: 15px;">Non répondu</div>
+            <div class="panel panel-default <%= "yellow-alert-on" if (nb_pre_op_yellow_flag > 0) %> resize-container">
+              <div class="panel-heading <%= "yellow-alert-on-heading" if (nb_pre_op_yellow_flag > 0) %>" style="font-size: 15px;">Non répondu</div>
               <div class="panel-body css-body">
                 <p><%= nb_pre_op_yellow_flag %><%= "%" %></p>
               </div>
@@ -112,8 +112,8 @@
           <% end %>
 
           <%= link_to surgeries_path(status: "yellow", pre_or_post: "post") do %>
-            <div class="panel panel-info <%= "yellow-alert-on" if (nb_post_op_yellow_flag > 0 and Time.now.hour > 15) %> resize-container">
-              <div class="panel-heading <%= "yellow-alert-on-heading" if (nb_post_op_yellow_flag > 0 and Time.now.hour > 15) %>" style="font-size: 15px;">Non répondu</div>
+            <div class="panel panel-default <%= "yellow-alert-on" if (nb_post_op_yellow_flag > 0) %> resize-container">
+              <div class="panel-heading <%= "yellow-alert-on-heading" if (nb_post_op_yellow_flag > 0) %>" style="font-size: 15px;">Non répondu</div>
               <div class="panel-body css-body">
                 <p><%= nb_post_op_yellow_flag %><%= "%" %></p>
               </div>
