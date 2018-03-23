@@ -11,30 +11,29 @@
     <div class="filters">
       <div class="dropdown">
         <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          Filter by priority
+          <%= params[:status].present? ? params[:status] : "Filtrer par priorité" %>
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
-          <!-- link_to surgery_path(surgery)flag?red -->
-          <li><%#= link_to surgery_path(@surgery), {token: "red"} %></li>
 
-          <li>
-            <%= link_to "Orange", surgeries_path(status: "orange", surgery_id: params[:surgery_id]) %></li>
-          <li><a href="#">Yellow</a></li>
-          <li><a href="#">Green</a></li>
+          <li><%= link_to "Red", surgeries_path(status: "red", surgery_id: params[:surgery_id]) %></li>
+          <li><%= link_to "Orange", surgeries_path(status: "orange", surgery_id: params[:surgery_id]) %></li>
+          <li><%= link_to "Yellow", surgeries_path(status: "yellow", surgery_id: params[:surgery_id]) %></li>
+          <li><%= link_to "Green", surgeries_path(status: "green", surgery_id: params[:surgery_id]) %></li>
           <li role="separator" class="divider"></li>
-          <li><a href="#">All</a></li>
+          <li><%= link_to "All", surgeries_path(surgery_id: params[:surgery_id]) %></li>
         </ul>
       </div>
       <div class="dropdown">
         <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          J+/-1
+          <%= params[:pre_or_post].present? ? params[:pre_or_post] : "J+/-1" %>
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
-          <!-- link_to surgery_path(surgery)flag?red -->
-          <li><a href="#">J-1</a></li>
-          <li><a href="#">J+1</a></li>
+          <li><%= link_to "J-1", surgeries_path(pre_or_post: "pre", surgery_id: params[:surgery_id], status: params[:status]) %></li>
+          <li><%= link_to "J+1", surgeries_path(pre_or_post: "post", surgery_id: params[:surgery_id], status: params[:status]) %></li>
+          <li role="separator" class="divider"></li>
+          <li><%= link_to "All", surgeries_path(surgery_id: params[:surgery_id], status: params[:status]) %></li>
         </ul>
       </div>
     </div>
@@ -50,7 +49,7 @@
               <p class="strong <%= surgery.status %>-font"><%= surgery.patient.first_name %> <%= surgery.patient.last_name %> - <%= surgery.surgeon.name %></p>
               <p><%= surgery.surgery_type.description %></p>
             </div>
-          <div class="surgery-form-type">
+          <div class="surgery-form-type discrete-tag">
             <% if surgery.date < Date.today %>
               <p>J+1</p>
             <% else %>

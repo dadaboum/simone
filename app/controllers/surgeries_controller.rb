@@ -10,6 +10,14 @@ before_action :set_surgery, only: [:show, :update]
     if params[:status].present?
       @surgeries = @surgeries.where(status: params[:status])
     end
+
+    if params[:pre_or_post].present?
+      if params[:pre_or_post] == "pre"
+        @surgeries = @surgeries.where("date > ?", Date.today)
+      elsif params[:pre_or_post] == "post"
+        @surgeries = @surgeries.where("date < ?", Date.today)
+      end
+    end
   end
 
   def show
@@ -43,8 +51,3 @@ before_action :set_surgery, only: [:show, :update]
     params.require(:surgery).permit(:pre_comments)
   end
 end
-
-
-# surgery_path(surgery, flag: "red")
-
-# (surgery.date < Date.today ? POST : PRE)
