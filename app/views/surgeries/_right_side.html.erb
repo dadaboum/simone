@@ -2,44 +2,79 @@
   <div class="right-side-box">
     <div class="patient-box">
       <p> <%= @surgery.patient.first_name %> <%= @surgery.patient.last_name %> </p>
-      <p> <i class="fas fa-phone"></i> <%= @surgery.patient.phone_number %></p>
+      <p class= "secondary-info"> <i class="fas fa-phone"></i> <%= @surgery.patient.phone_number %></p>
     </div>
     <div class="surgery-box">
+      <div class="surgery-title">
+        <div class="surgery-name">
+          <p class= "no-margin"> <%=  @surgery.surgery_type.description %></p>
+        </div>
+        <ul class="list-inline">
+          <li>
+            Priorité : Urgent
+          </li>
+            <li>
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Changer
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">Urgent</a>
+                  <a class="dropdown-item" href="#">Important</a>
+                  <a class="dropdown-item" href="#">Okay</a>
+                </div>
+              </div>
+          </li>
+        </ul>
+      </div>
       <div class="surgery-main-info">
-            <p> <%=  @surgery.surgery_type.description %></p>
         <ul class="list-inline no-margin">
           <li>
-            <p class="secondary-info"> Dr. <%= @surgery.surgeon.name %></p>
+            <p class="secondary-info"> Médecin <%= @surgery.surgeon.name %></p>
           </li>
           <li>
             <button class="discrete-button"> <i class="fab fa-telegram-plane"></i> Send email</button>
           </li>
         </ul>
-        <ul class="list-inline">
-          <li><p class="secondary-info"> Opération le <%= @surgery.date %> </p> </li>
-          <li>
+        <% if Date.today > @surgery.date %>
+            <ul class="list-inline no-margin">
+              <li> <p class = "discrete-tag">J+1</p> </li>
+              <li><p class="secondary-info">opération réalisée le <u>  <%= @surgery.date %> </u> </p> </li>
+            </ul>
+        <%  else %>
+            <ul class="list-inline no-margin">
+              <li> <p class = "discrete-tag">J-1</p> </li>
+              <li><p class="secondary-info">opération prévue le <u>  <%= @surgery.date %> </u> </p> </li>
+            </ul>
+        <% end %>
+      </div>
+      <div class="surgery-forms-box">
             <% if Date.today > @surgery.date %>
-              <% if @surgery.post_form_answered %>
+
+              <% unless @surgery.post_form_answered %>
               <p class="secondary-info">
                 <i class="fas fa-check"></i>
-                Questionnaire post-opération rempli
+                Formulaire post-opération <u> rempli </u>
               </p>
+              <button class="discrete-button"> <i class="fas fa-eye"></i></i> Voir les réponses</button>
               <% else %>
-                <li>
-                  <p class="secondary-info"> Questionnaire post-opération non rempli </p>
-                </li>
-                <li>
-                  <button class="discrete-button"> <i class="far fa-comment"></i></i> Send message</button>
-                </li>
+                  <p class="secondary-info"> Formulaire post-opération <u>non rempli</u> </p>
+                  <ul class="list-inline">
+                    <li>
+                      <button class="discrete-button"> <i class="far fa-comment"></i> Renvoyer au patient</button>
+                    </li>
+                    <li>
+                      <button class="discrete-button"> <i class="fas fa-edit"></i> Remplir</button>
+                    </li>
+                  </ul>
               <% end %>
             <% end %>
-          </li>
 
 
 
         </ul>
-      <div class="green-separator"></div>
       </div>
+      <div class="green-separator"></div>
       <div class="surgery-history-box">
         <p>Historique</p>
           <% @surgery.events.each do |event| %>
@@ -50,7 +85,8 @@
                              <%= 'green' if event.flag == 'green' %>
                              <%= 'orange' if event.flag == 'orange' %>
                  bullet"></div>
-                <div class="history-separator-big"></div>
+                <div class="history-separator-big"
+                <% if event == @surgery.events.last %> style = "border-color: white;" <% end %>></div>
               </div>
               <div class="history-right">
                 <%= event.description %>

@@ -140,11 +140,15 @@ david_operation.post_form_answered = false
 david_operation.post_form = post_form_knee
 david_operation.save
 
-david_event = Event.new(description: "message pre op sent", flag: "green")
+david_event = Event.new(description: "Le questionnaire pré-opération a bien été envoyé", flag: "green")
 david_event.surgery = david_operation
 david_event.save!
 
-david_event2 = Event.new(description: "form completed")
+david_event2 = Event.new(description: "Le patient a répondu au questionnaire. Une action est requise", flag: "orange")
+david_event2.surgery = david_operation
+david_event2.save!
+
+david_event2 = Event.new(description: "Le patient a appelé directement le médecin, indiquant qu'il était pris de fièvre et ressentait des douleurs soudaines", flag: "red")
 david_event2.surgery = david_operation
 david_event2.save!
 
