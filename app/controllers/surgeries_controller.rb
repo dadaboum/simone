@@ -3,13 +3,17 @@ before_action :set_surgery, only: [:show, :update]
 
   def index
     @surgeries = current_user.hospital.surgeries
+    if params[:surgery_id].present?
+      @surgery = Surgery.find(params[:surgery_id])
+    end
+
     if params[:status].present?
       @surgeries = @surgeries.where(status: params[:status])
     end
   end
 
   def show
-    @surgery = Surgery.find(params[:surgery_id])
+    @surgery = Surgery.find(params[:id])
     @surgeries = current_user.hospital.surgeries
     if params[:status].present?
       @surgeries = @surgeries.where(status: params[:status])
