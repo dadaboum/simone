@@ -4,7 +4,7 @@
     <i class="far fa-square"></i>
   </div>
   <!-- Quand la checkbox est cochee : <i class="far fa-check-square"></i> -->
-  <%= link_to surgeries_path(surgery_id: surgery.id, status: params[:status], pre_or_post: params[:pre_or_post]) do %>
+  <%= link_to surgeries_path(surgery_id: surgery.id, status: params[:status], pre_or_post: params[:pre_or_post], validated: params[:validated]) do %>
     <div class="surgery-patient">
       <p class="strong <%= surgery.status %>-card"><%= surgery.patient.first_name %> <%= surgery.patient.last_name %> - <%= surgery.surgeon.name %></p>
       <p><%= surgery.surgery_type.description %></p>
@@ -16,13 +16,6 @@
         J-1
       <% end %>
     </div>
-  <% end %>
-  <% if surgery.form_answers.first %>
-    <% surgery.form_answers.each do |form_answer|  %>
-    <% if form_answer.form.pre_or_post == "pre" %>
-      <%= form_answer.submit_date %>
-    <% end %>
-    <% end %>
   <% end %>
   <% if surgery.validated %>
     <i class="far fa-check-square"></i>

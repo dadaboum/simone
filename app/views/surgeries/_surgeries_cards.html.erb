@@ -27,12 +27,12 @@
         </button>
         <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
 
-          <li><%= link_to "Red", surgeries_path(status: "red", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]) %></li>
-          <li><%= link_to "Orange", surgeries_path(status: "orange", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]) %></li>
-          <li><%= link_to "Yellow", surgeries_path(status: "yellow", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]) %></li>
-          <li><%= link_to "Green", surgeries_path(status: "green", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]) %></li>
+          <li><%= link_to "Red", surgeries_path(status: "red", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post], validated: params[:validated]) %></li>
+          <li><%= link_to "Orange", surgeries_path(status: "orange", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post], validated: params[:validated]) %></li>
+          <li><%= link_to "Yellow", surgeries_path(status: "yellow", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post], validated: params[:validated]) %></li>
+          <li><%= link_to "Green", surgeries_path(status: "green", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post], validated: params[:validated]) %></li>
           <li role="separator" class="divider"></li>
-          <li><%= link_to "All", surgeries_path(surgery_id: params[:surgery_id]) %></li>
+          <li><%= link_to "All", surgeries_path(surgery_id: params[:surgery_id], validated: params[:validated], pre_or_post: params[:pre_or_post]) %></li>
         </ul>
       </div>
       <div class="dropdown">
@@ -41,31 +41,27 @@
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
-          <li><%= link_to "J-1", surgeries_path(pre_or_post: "pre", surgery_id: params[:surgery_id], status: params[:status]) %></li>
-          <li><%= link_to "J+1", surgeries_path(pre_or_post: "post", surgery_id: params[:surgery_id], status: params[:status]) %></li>
+          <li><%= link_to "J-1", surgeries_path(pre_or_post: "pre", surgery_id: params[:surgery_id], status: params[:status], validated: params[:validated]) %></li>
+          <li><%= link_to "J+1", surgeries_path(pre_or_post: "post", surgery_id: params[:surgery_id], status: params[:status], validated: params[:validated]) %></li>
           <li role="separator" class="divider"></li>
-          <li><%= link_to "All", surgeries_path(surgery_id: params[:surgery_id], status: params[:status]) %></li>
+          <li><%= link_to "All", surgeries_path(surgery_id: params[:surgery_id], status: params[:status], validated: params[:validated]) %></li>
+        </ul>
+      </div>
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <%= params[:validated].present? ? (params[:validated] == "true" ? "Validé" : "En cours") : "Validé / En cours" %>
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
+          <li><%= link_to "Validé", surgeries_path(validated: "true", surgery_id: params[:surgery_id], status: params[:status], pre_or_post: params[:pre_or_post]) %></li>
+          <li><%= link_to "En cours", surgeries_path(validated: "false", surgery_id: params[:surgery_id], status: params[:status], pre_or_post: params[:pre_or_post]) %></li>
+          <li role="separator" class="divider"></li>
+          <li><%= link_to "Tout", surgeries_path(surgery_id: params[:surgery_id], status: params[:status]) %></li>
         </ul>
       </div>
     </div>
-    A traiter
     <div class="surgery-cards-wrapper">
-      <% @surgeries.where(status: "red", validated: false).each do |surgery| %>
-        <%= render "surgery_card", surgery: surgery %>
-      <% end %>
-      <% @surgeries.where(status: "orange", validated: false).each do |surgery| %>
-        <%= render "surgery_card", surgery: surgery %>
-      <% end %>
-      <% @surgeries.where(status: "yellow", validated: false).each do |surgery| %>
-        <%= render "surgery_card", surgery: surgery %>
-      <% end %>
-      <% @surgeries.where(status: "green", validated: false).each do |surgery| %>
-        <%= render "surgery_card", surgery: surgery %>
-      <% end %>
-    </div>
-    Patients traités
-    <div class="surgery-cards-validated-wrapper">
-      <% @surgeries.where(validated: true).each do |surgery| %>
+      <% @surgeries.each do |surgery| %>
         <%= render "surgery_card", surgery: surgery %>
       <% end %>
     </div>

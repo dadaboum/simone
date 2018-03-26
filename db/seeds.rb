@@ -324,29 +324,37 @@ puts "WARNING: you have to click on update for both forms on /forms"
 # Tout ces patients vont tres bien, je vous lance je vais donner un coup de main aux filles en pédiatrie
 # Reflector
 
-Gros sujets :
-actions de masse
-boutons : changer de statut, envoyer email au medecin, marquer comme validé. qui est prioritaire
-order l'index selon les prio
-Ajaxify
-Définir le pitch de demo
+# Gros sujets :
+# actions de masse
+# boutons : changer de statut, envoyer email au medecin, marquer comme validé. qui est prioritaire
+# order l'index selon les prio
+# Ajaxify
+# Définir le pitch de demo
 
-j'ai oublié d'expliquer que des sms sont envoyés aux patients leur demandant de remplir un questionnaire personnalisé
-Sur le dashboard chiffre a la place de pourcentage, PRE vs POST faut il tout fusionner ? comment le rendre plus visuel ?
-on a l impression que c est indicatif alors que ce sont des liens,
-Revoir le call to action de la show, et les boutons secondaires
-Le formulaire etait trop long c'est bien d appeller le patient et de remplir avec lui, et si je parlais en live avec lui ?
-ou bien on voit le telephone du patient, il recoit le texto de rappel, il rempli le formulaire et moi je fais autre chose pendant ce temps
-quand j'arrive sur operations c'est tout blanc à droite c'est bizarre il faut voir la premiere surgery
-il faut ordonner l index selon les priorités
-il faut séparer les surgery qui sont validés, on les mets dans une autre boite ou en bas, et on leur donne background different ou une border ou
-opacité sur les surgery validées
-Je suis infirmier
-la side bar diminue quand mobile
-On ne peut pas mettre que de la couleur car il y a des daltoniens : bootstrap a des labels
-attention taille écran de demo : 720p dans inspect de chrome
-Il faut reprendre le texte du formulaire, reorganiser les questions
+# j'ai oublié d'expliquer que des sms sont envoyés aux patients leur demandant de remplir un questionnaire personnalisé
+# Sur le dashboard chiffre a la place de pourcentage, PRE vs POST faut il tout fusionner ? comment le rendre plus visuel ?
+# on a l impression que c est indicatif alors que ce sont des liens,
+# Revoir le call to action de la show, et les boutons secondaires
+# Le formulaire etait trop long c'est bien d appeller le patient et de remplir avec lui, et si je parlais en live avec lui ?
+# ou bien on voit le telephone du patient, il recoit le texto de rappel, il rempli le formulaire et moi je fais autre chose pendant ce temps
+# quand j'arrive sur operations c'est tout blanc à droite c'est bizarre il faut voir la premiere surgery
+# il faut ordonner l index selon les priorités
+# il faut séparer les surgery qui sont validés, on les mets dans une autre boite ou en bas, et on leur donne background different ou une border ou
+# opacité sur les surgery validées
+# Je suis infirmier
+# la side bar diminue quand mobile
+# On ne peut pas mettre que de la couleur car il y a des daltoniens : bootstrap a des labels
+# attention taille écran de demo : 720p dans inspect de chrome
+# Il faut reprendre le texte du formulaire, reorganiser les questions
 
-Signe Warning Alerte (rouge)/ A vérifier Signe Point d interrogation (orange)/ Non répondu En attente Signe horloge (gris)/ Ok (RAS) (vert)
-Actions: Valider SMS Changer Prio
-Filter: par prio pre ou Post Search bar
+# Signe Warning Alerte (rouge)/ A vérifier Signe Point d interrogation (orange)/ Non répondu En attente Signe horloge (gris)/ Ok (RAS) (vert)
+# Actions: Valider SMS Changer Prio
+# Filter: par prio pre ou Post Search bar
+
+#   <% if surgery.form_answers.first %>
+#     <% surgery.form_answers.each do |form_answer|  %>
+#     <% if form_answer.form.pre_or_post == "pre" %>
+#       <%= l form_answer.submit_date %>
+#     <% end %>
+#     <% end %>
+#   <% end %>

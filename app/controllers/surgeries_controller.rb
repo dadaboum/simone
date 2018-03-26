@@ -2,11 +2,7 @@ class SurgeriesController < ApplicationController
 before_action :set_surgery, only: [:show, :update]
 
   def index
-    @surgeries = current_user.hospital.surgeries
-    if params[:surgery_id].present?
-      @surgery = Surgery.find(params[:surgery_id])
-    end
-
+    @surgeries = current_user.hospital.surgeries.order("lower(patients.last_name)")
     if params[:status].present?
       @surgeries = @surgeries.where(status: params[:status])
     end
@@ -18,6 +14,28 @@ before_action :set_surgery, only: [:show, :update]
         @surgeries = @surgeries.where("date < ?", Date.today)
       end
     end
+
+    if params[:validated].present?
+      @surgeries = @surgeries.where(validated: params[:validated])
+    end
+
+    nred = @surgeries.where(status: "red", validated: false)
+    nora = @surgeries.where(status: "orange", validated: false)
+    nyel = @surgeries.where(status: "yellow", validated: false)
+    ngre = @surgeries.where(status: "green", validated: false)
+    red = @surgeries.where(status: "red", validated: true)
+    ora = @surgeries.where(status: "orange", validated: true)
+    yel = @surgeries.where(status: "yellow", validated: true)
+    gre = @surgeries.where(status: "green", validated: true)
+    @surgeries = nred + nora + nyel + ngre + red + ora + yel + gre
+
+    if params[:surgery_id].present?
+      @surgery = Surgery.find(params[:surgery_id])
+    else
+      @surgery = @surgeries.first
+      params[:surgery_id] = @surgery.id
+    end
+
   end
 
   def show
