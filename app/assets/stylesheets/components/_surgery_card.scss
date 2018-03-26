@@ -62,22 +62,22 @@
   font-weight: bolder;
 }
 
-.green-card {
-  color: $gray;
+.ok-card {
+  color: $green;
   right-border: 1px solid $green;
 }
 
-.yellow-card {
-  color: $yellow;
-  right-border: 1px solid $yellow;
+.répondu-card {
+  color: $gray;
+  right-border: 1px solid $gray;
 }
 
-.orange-card {
+.vérifier-card {
   color: $orange;
   right-border: 1px solid $orange;
 }
 
-.red-card {
+.alerte-card {
   color: $red;
   right-border: 1px solid $red;
 }

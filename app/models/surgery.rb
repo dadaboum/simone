@@ -6,5 +6,5 @@ class Surgery < ApplicationRecord
   belongs_to :surgeon
   has_many :form_answers
   has_many :events
-  validates :status, inclusion: { in: ["urgent", "à traiter", "ok", "non répondu"] }
+  validates :status, inclusion: { in: ["alerte", "à vérifier", "ok", "non répondu"] }
 end

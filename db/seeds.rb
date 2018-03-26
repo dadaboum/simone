@@ -8,7 +8,7 @@ Surgeon.destroy_all
 User.destroy_all
 Hospital.destroy_all
 
-# FYI : surgeries_statuses = ["urgent", "à traiter", "ok", "non répondu"]
+# FYI : surgeries_statuses = ["alerte", "à vérifier", "ok", "non répondu"]
 
 puts "Destroyed all DB"
 
@@ -86,7 +86,7 @@ david_operation.surgery_type = knee
 david_operation.surgeon = guilhem
 david_operation.pre_form = pre_form_knee
 david_operation.pre_form_answered = true
-david_operation.status = "urgent"
+david_operation.status = "alerte"
 david_operation.post_form_answered = false
 david_operation.post_form = post_form_knee
 david_operation.validated = false
@@ -113,7 +113,7 @@ jonathan_operation.surgeon = jacques
 jonathan_operation.pre_form_answered = true
 jonathan_operation.post_form_answered = true
 jonathan_operation.is_done = true
-jonathan_operation.status = "à traiter"
+jonathan_operation.status = "à vérifier"
 jonathan_operation.pre_form = pre_form_knee
 jonathan_operation.post_form = post_form_knee
 jonathan_operation.validated = false
