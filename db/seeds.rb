@@ -8,7 +8,7 @@ Surgeon.destroy_all
 User.destroy_all
 Hospital.destroy_all
 
-# FYI : surgeries_statuses = ["red", "orange", "yellow", "green"]
+# FYI : surgeries_statuses = ["urgent", "à traiter", "ok", "non répondu"]
 
 puts "Destroyed all DB"
 
@@ -85,7 +85,7 @@ david_operation.surgery_type = knee
 david_operation.surgeon = guilhem
 david_operation.pre_form = pre_form_knee
 david_operation.pre_form_answered = true
-david_operation.status = "red"
+david_operation.status = "urgent"
 david_operation.post_form_answered = false
 david_operation.post_form = post_form_knee
 david_operation.validated = false
@@ -112,7 +112,7 @@ jonathan_operation.surgeon = guilhem
 jonathan_operation.pre_form_answered = true
 jonathan_operation.post_form_answered = true
 jonathan_operation.is_done = true
-jonathan_operation.status = "orange"
+jonathan_operation.status = "à traiter"
 jonathan_operation.pre_form = pre_form_knee
 jonathan_operation.post_form = post_form_knee
 jonathan_operation.validated = false
@@ -140,7 +140,7 @@ paul_operation.patient = paul
 paul_operation.surgery_type = knee
 paul_operation.surgeon = guilhem
 paul_operation.pre_form = pre_form_knee
-paul_operation.status = "yellow"
+paul_operation.status = "non répondu"
 paul_operation.post_form = post_form_knee
 paul_operation.validated = true
 paul_operation.save!
@@ -152,7 +152,7 @@ marie_operation.surgery_type = ivf
 marie_operation.surgeon = guilhem
 marie_operation.pre_form = pre_form_knee
 marie_operation.pre_form_answered = true
-marie_operation.status = "green"
+marie_operation.status = "ok"
 marie_operation.post_form_answered = false
 marie_operation.post_form = post_form_knee
 marie_operation.validated = true
@@ -172,7 +172,7 @@ paula_operation.surgery_type = ivf
 paula_operation.surgeon = guilhem
 paula_operation.pre_form = pre_form_knee
 paula_operation.pre_form_answered = true
-paula_operation.status = "green"
+paula_operation.status = "ok"
 paula_operation.post_form_answered = false
 paula_operation.post_form = post_form_knee
 paula_operation.validated = true
@@ -192,7 +192,7 @@ jean_operation.surgery_type = arthro
 jean_operation.surgeon = guilhem
 jean_operation.pre_form = pre_form_knee
 jean_operation.pre_form_answered = true
-jean_operation.status = "green"
+jean_operation.status = "ok"
 jean_operation.post_form_answered = false
 jean_operation.post_form = post_form_knee
 jean_operation.validated = true
@@ -212,7 +212,7 @@ herve_operation.surgery_type = arthro
 herve_operation.surgeon = guilhem
 herve_operation.pre_form = pre_form_knee
 herve_operation.pre_form_answered = true
-herve_operation.status = "green"
+herve_operation.status = "ok"
 herve_operation.post_form_answered = false
 herve_operation.post_form = post_form_knee
 herve_operation.validated = true

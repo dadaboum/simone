@@ -18,6 +18,7 @@ before_action :set_surgery, only: [:show, :update]
         @surgeries = @surgeries.where("date < ?", Date.today)
       end
     end
+    @status_array = ["urgent", "à traiter", "ok", "non répondu"]
   end
 
   def show
@@ -78,6 +79,6 @@ before_action :set_surgery, only: [:show, :update]
   end
 
   def surgery_params
-    params.require(:surgery).permit(:pre_comments, :post_comments)
+    params.require(:surgery).permit(:pre_comments, :post_comments, :validated)
   end
 end

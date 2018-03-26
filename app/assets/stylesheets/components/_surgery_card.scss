@@ -4,7 +4,6 @@
   margin-right: 5px;
 }
 
-
 .surgery-cards-wrapper {
   height: calc(100vh-70px);
   // border: 1px solid black;
@@ -38,16 +37,6 @@
   a:hover {
     text-decoration: none;
   }
-  .fa-check-square {
-    color: $green;
-    align-self: center;
-    padding-right: 10px;
-    margin-left: -25px;
-  }
-}
-
-.checkbox {
-  padding: 5px 10px;
 }
 
 .surgery-form-type {
@@ -96,3 +85,17 @@
 .small-font {
   font-size: 12px;
 }
+.active {
+  border-left: 3px solid #3897FC;
+}
+input[type="checkbox"] {
+  margin: 3px;
+}
+@media (pointer: coarse) {
+  input[type="checkbox"] {
+    height: 2em;
+    width: 2em;
+  }
+}
+
+
