@@ -2,8 +2,8 @@ Bonjour <%= @surgeon.name %>,
 
 Patient : <%= @patient.last_name %> <%= @patient.first_name %>
 
-Evenement survenu :
+Evenements :
 
 <% @events.each do |event| %>
-<%= event.description %>
+<%= event.created_at %>: <%= event.description %>
 <% end %>
