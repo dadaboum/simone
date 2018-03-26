@@ -14,20 +14,20 @@ before_action :set_surgery, only: [:show, :update]
         @surgeries = @surgeries.where("date < ?", Date.today)
       end
     end
-    
+
     if params[:validated].present?
       @surgeries = @surgeries.where(validated: params[:validated])
     end
 
-    nred = @surgeries.where(status: "red", validated: false)
-    nora = @surgeries.where(status: "orange", validated: false)
-    nyel = @surgeries.where(status: "yellow", validated: false)
-    ngre = @surgeries.where(status: "green", validated: false)
-    red = @surgeries.where(status: "red", validated: true)
-    ora = @surgeries.where(status: "orange", validated: true)
-    yel = @surgeries.where(status: "yellow", validated: true)
-    gre = @surgeries.where(status: "green", validated: true)
-    @surgeries = nred + nora + nyel + ngre + red + ora + yel + gre
+    a = @surgeries.where(status: "alerte", validated: false)
+    b = @surgeries.where(status: "à vérifier", validated: false)
+    c = @surgeries.where(status: "ok", validated: false)
+    d = @surgeries.where(status: "non répondu", validated: false)
+    e = @surgeries.where(status: "alerte", validated: true)
+    f = @surgeries.where(status: "à vérifier", validated: true)
+    g = @surgeries.where(status: "ok", validated: true)
+    h = @surgeries.where(status: "non répondu", validated: true)
+    @surgeries = a + b + c + d + e + f + g + h
 
     if params[:surgery_id].present?
       @surgery = Surgery.find(params[:surgery_id])
@@ -35,8 +35,8 @@ before_action :set_surgery, only: [:show, :update]
       @surgery = @surgeries.first
       params[:surgery_id] = @surgery.id
     end
-    
-    @status_array = ["urgent", "à traiter", "ok", "non répondu"]
+
+    @status_array = ["alerte", "à vérifier", "ok", "non répondu"]
     @event = Event.new
     @events = @surgery.events.order(created_at: :asc)
   end
@@ -75,8 +75,8 @@ before_action :set_surgery, only: [:show, :update]
 
     #when updating priority
     elsif params[:change_status].present?
-      @surgery.status = "urgent" if params[:change_status] == "Urgent"
-      @surgery.status = "à traiter" if params[:change_status] == "A traiter"
+      @surgery.status = "alerte" if params[:change_status] == "Alerte"
+      @surgery.status = "à vérifier" if params[:change_status] == "A vérifier"
       @surgery.status = "ok" if params[:change_status] == "Ok"
       @surgery.status = "non répondu" if params[:change_status] == "Non répondu"
       @surgery.save!

@@ -1,9 +1,9 @@
 <div class="right-side-wrapper">
   <div class="right-side-box">
     <div class="patient-box"
-      <% if @surgery.status == "urgent" %>
+      <% if @surgery.status == "alerte" %>
         style="background-color: #EE5F5B;"
-      <% elsif @surgery.status == "à traiter" %>
+      <% elsif @surgery.status == "à vérifier" %>
         style="background-color: #E67E22;"
       <% elsif @surgery.status == "ok" %>
         style="background-color: #32B796;"
@@ -24,10 +24,10 @@
             <li>
               <div class="dropdown">
                 <button class="btn btn-default transparent-hover font-15 dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  <span <% if @surgery.status == "urgent" %>
-                    style="color: #EE5F5B;"> Urgent
-                  <% elsif @surgery.status == "à traiter" %>
-                    style="color: #E67E22;"> A traiter
+                  <span <% if @surgery.status == "alerte" %>
+                    style="color: #EE5F5B;"> Alerte
+                  <% elsif @surgery.status == "à vérifier" %>
+                    style="color: #E67E22;"> A vérifier
                   <% elsif @surgery.status == "ok" %>
                     style="color: #32B796;"> Ok
                   <% elsif @surgery.status == "non répondu" %>
@@ -38,8 +38,8 @@
                 </button>
                 <ul class="dropdown-menu font-15 small-font" aria-labelledby="dropdownMenu1">
                   <%= form_for @surgery, url: surgery_path(@surgery), method: :patch do |f| %>
-                  <li> <input class="no-submit" type="submit" value="Urgent" name="change_status" ></li>
-                  <li> <input class="no-submit" type="submit" value="A traiter" name="change_status" ></li>
+                  <li> <input class="no-submit" type="submit" value="Alerte" name="change_status" ></li>
+                  <li> <input class="no-submit" type="submit" value="A vérifier" name="change_status" ></li>
                   <li> <input class="no-submit" type="submit" value="Ok" name="change_status" ></li>
                   <li><input class="no-submit" type="submit" value="Non répondu" name="change_status"></li>
                   <% end %>
