@@ -17,7 +17,7 @@ gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
-
+gem 'rails-i18n', '~> 5.1'
 gem 'twilio-ruby'
 gem 'postmark-rails'
 

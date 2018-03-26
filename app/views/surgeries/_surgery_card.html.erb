@@ -1,0 +1,23 @@
+<div class="surgery-card small-font">
+  <div class="checkbox">
+    <% link_to  %>
+    <i class="far fa-square"></i>
+  </div>
+  <!-- Quand la checkbox est cochee : <i class="far fa-check-square"></i> -->
+  <%= link_to surgeries_path(surgery_id: surgery.id, status: params[:status], pre_or_post: params[:pre_or_post], validated: params[:validated]) do %>
+    <div class="surgery-patient">
+      <p class="strong <%= surgery.status %>-card"><%= surgery.patient.first_name %> <%= surgery.patient.last_name %> - <%= surgery.surgeon.name %></p>
+      <p><%= surgery.surgery_type.description %></p>
+    </div>
+    <div class="surgery-form-type discrete-tag">
+      <% if surgery.date < Date.today %>
+        J+1
+      <% else %>
+        J-1
+      <% end %>
+    </div>
+  <% end %>
+  <% if surgery.validated %>
+    <i class="far fa-check-square"></i>
+  <% end %>
+</div>

@@ -11,10 +11,10 @@
         </button>
         <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
           <% @status_array.each do |status| %>
-            <li><%= link_to "#{status.capitalize}", surgeries_path(status: "#{status}", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]) %></li>
+            <li><%= link_to "#{status.capitalize}", surgeries_path(status: "#{status}", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post], validated: params[:validated]) %></li>
           <% end %>
           <li role="separator" class="divider"></li>
-          <li><%= link_to "Tous", surgeries_path(surgery_id: params[:surgery_id]) %></li>
+          <li><%= link_to "Tous", surgeries_path(surgery_id: params[:surgery_id], validated: params[:validated], pre_or_post: params[:pre_or_post]) %></li>
         </ul>
       </div>
       <div class="dropdown">
@@ -23,10 +23,22 @@
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
-          <li><%= link_to "Pre", surgeries_path(pre_or_post: "pre", surgery_id: params[:surgery_id], status: params[:status]) %></li>
-          <li><%= link_to "Post", surgeries_path(pre_or_post: "post", surgery_id: params[:surgery_id], status: params[:status]) %></li>
+          <li><%= link_to "Pre", surgeries_path(pre_or_post: "pre", surgery_id: params[:surgery_id], status: params[:status], validated: params[:validated]) %></li>
+          <li><%= link_to "Post", surgeries_path(pre_or_post: "post", surgery_id: params[:surgery_id], status: params[:status], validated: params[:validated]) %></li>
           <li role="separator" class="divider"></li>
-          <li><%= link_to "Tous", surgeries_path(surgery_id: params[:surgery_id], status: params[:status]) %></li>
+          <li><%= link_to "All", surgeries_path(surgery_id: params[:surgery_id], status: params[:status], validated: params[:validated]) %></li>
+        </ul>
+      </div>
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <%= params[:validated].present? ? (params[:validated] == "true" ? "Validé" : "En cours") : "Validé / En cours" %>
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
+          <li><%= link_to "Validé", surgeries_path(validated: "true", surgery_id: params[:surgery_id], status: params[:status], pre_or_post: params[:pre_or_post]) %></li>
+          <li><%= link_to "En cours", surgeries_path(validated: "false", surgery_id: params[:surgery_id], status: params[:status], pre_or_post: params[:pre_or_post]) %></li>
+          <li role="separator" class="divider"></li>
+          <li><%= link_to "Tout", surgeries_path(surgery_id: params[:surgery_id], status: params[:status]) %></li>
         </ul>
       </div>
     </div>
@@ -60,24 +72,7 @@
     <!-- Surgerie cards -->
     <div class="surgery-cards-wrapper">
       <% @surgeries.each do |surgery| %>
-        <div class="surgery-card small-font">
-          <input type="checkbox" data-surgeryid="<%= surgery.id %>"/>
-          <%= link_to surgeries_path(surgery_id: surgery.id, status: params[:status], pre_or_post: params[:pre_or_post]) do %>
-            <div class="surgery-patient">
-              <p class="strong <%= surgery.status %>-card"><%= surgery.patient.first_name %> <%= surgery.patient.last_name %> - <%= surgery.surgeon.name %></p>
-              <p><%= surgery.surgery_type.description %></p>
-            </div>
-            <div class="surgery-form-type discrete-tag">
-              <% if surgery.date < Date.today %>
-                J+1
-              <% else %>
-                J-1
-              <% end %>
-            </div>
-          <% end %>
-          <%= surgery.status %>
-          <%= surgery.validated %>
-        </div>
+        <%= render "surgery_card", surgery: surgery %>
       <% end %>
     </div>
   </div>
