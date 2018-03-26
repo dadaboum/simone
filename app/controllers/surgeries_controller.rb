@@ -37,6 +37,30 @@ before_action :set_surgery, only: [:show, :update]
 
   def update
     @surgery = Surgery.find(params[:id])
+
+    #when clicking on the validate button
+    if params[:todo].present?
+      if params[:todo] == "validate"
+        @surgery.validated = true
+      elsif params[:todo] == "unvalidate"
+        @surgery.validated = false
+      end
+      @surgery.save!
+      redirect_to surgeries_path(surgery_id: @surgery.id)
+
+    #when updating priority
+    elsif params[:change_status].present?
+      @surgery.status = "urgent" if params[:change_status] == "Urgent"
+      @surgery.status = "à traiter" if params[:change_status] == "A traiter"
+      @surgery.status = "ok" if params[:change_status] == "Ok"
+      @surgery.status = "non répondu" if params[:change_status] == "Non répondu"
+      @surgery.save!
+      redirect_to surgeries_path(surgery_id: @surgery.id)
+
+
+
+    #when adding a comment
+    else
     event = Event.new
     event.description = "Commentaire pré-opératoire : " + surgery_params[:pre_comments] if surgery_params[:pre_comments]
     event.description = "Commentaire post-opératoire : " + surgery_params[:post_comments] if surgery_params[:post_comments]
@@ -44,6 +68,7 @@ before_action :set_surgery, only: [:show, :update]
     event.save
     @surgery.update(surgery_params)
     redirect_to surgery_path(@surgery)
+    end
   end
 
   private
