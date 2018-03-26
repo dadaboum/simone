@@ -5,5 +5,5 @@ Patient : <%= @patient.last_name %> <%= @patient.first_name %>
 Evenements :
 
 <% @events.each do |event| %>
-<%= event.description %>
+<%= event.created_at %>: <%= event.description %>
 <% end %>

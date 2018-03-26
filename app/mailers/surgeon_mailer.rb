@@ -3,6 +3,6 @@ class SurgeonMailer < ApplicationMailer
     @events = events
     @patient = patient
     @surgeon = surgeon
-    mail(to: @surgeon.email, subject: "Evenements - Clinique du sport - #{@patient.first_name} #{@patient.last_name}")
+    mail(to: @surgeon.email, subject: "Relevé d'activités - Clinique du sport - #{@patient.last_name} #{@patient.first_name}")
   end
 end
