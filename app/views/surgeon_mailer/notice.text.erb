@@ -1,4 +1,9 @@
-Hi <%= @surgeon.name %>,
+Bonjour <%= @surgeon.name %>,
 
-Today we'll talk about SMTP and Postmark!
-See ya!
+Patient : <%= @patient.last_name %> <%= @patient.first_name %>
+
+Evenement survenu :
+
+<% @events.each do |event| %>
+<%= event.description %>
+<% end %>

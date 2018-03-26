@@ -1,5 +1,9 @@
-<p>Hi <%= @surgeon.name %>,</p>
+<p>Bonjour <%= @surgeon.name %>,</p>
 
-<p>Today we'll talk about SMTP and Postmark!</p>
+<p>Patient : <%= @patient.last_name %> <%= @patient.first_name %> </p>
 
-<p>See ya!</p>
+<p>Evenement survenu :</p>
+
+<% @events.each do |event| %>
+<%= event.description %>
+<% end %>

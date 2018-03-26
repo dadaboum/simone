@@ -1,6 +1,9 @@
 class SurgeonsController < ApplicationController
   def notice
-    @surgeon = Surgery.find(params[:surgery_id]).surgeon
-    SurgeonMailer.notice(@surgeon).deliver_now
+    @surgery = Surgery.find(params[:surgery_id])
+    @patient = @surgery.patient
+    @surgeon = @surgery.surgeon
+    @events = Event.where("surgery_id=?", @surgery.id)
+    SurgeonMailer.notice(@surgeon, @patient, @events).deliver_now
   end
 end
