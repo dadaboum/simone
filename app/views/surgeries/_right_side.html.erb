@@ -131,7 +131,7 @@
       </div>
       <div class="surgery-history-box">
         <p>Historique</p>
-          <% @surgery.events.each do |event| %>
+          <% @events.each do |event| %>
             <div class="history-box secondary-info">
               <div class="history-left">
                 <div class="history-separator-big"></div>
@@ -144,7 +144,7 @@
                 <% if event == @surgery.events.last %> style = "border-color: white;" <% end %>></div>
               </div>
               <div class="history-right">
-                <%= event.description %>
+                <%= event.created_at.strftime('%H : %M') + ' - ' + event.description %>
               </div>
             </div>
             <div class="history-sep-box">
@@ -152,7 +152,17 @@
               <div class="history-right"></div>
             </div>
           <% end %>
-          <a href="#" class="secondary-info add-event"> + Ajouter un événement</a>
+        </div>
+        <div class="new-event-box">
+          <%= form_for @event, url: surgery_path(@surgery), class: "form-inline", id: "new-event", method: :patch do |f|  %>
+            <p href="#" class="secondary-info add-event color-green ">Ajouter un commentaire</p>
+            <div class="new-event-inputs">
+            <%= f.select :flag, options_for_select([['Rouge', "red"], ['Orange','orange'], ['Vert', 'green'], ['Gris', 'grey']]), {}, class: 'form-control font-15 height-30 color-input' %>
+            <%= f.text_field :description, class: "form-control font-15 width-40 height-30 event-input"  %>
+              <button type="submit" class="add-event-btn height-30">+</button>
+            </div>
+          <% end %>
+        </div>
         </div>
       </div>
     </div>
