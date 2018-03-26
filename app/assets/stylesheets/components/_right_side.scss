@@ -70,6 +70,7 @@
   border-radius: 3px;
   margin: 30px;
   margin-top: 40px;
+  margin-bottom: 0px;
 }
 
 .history-box {
@@ -170,12 +171,7 @@
   margin: 0px;
 }
 
-.add-event {
-  text-decoration: underline;
-  &:hover {
-    color: black;
-  }
-}
+
 
 .transparent-hover {
   &:hover {
@@ -186,3 +182,53 @@
 .font-15 {
   font-size: 15px;
 }
+
+.no-submit {
+  background-color: white;
+  border: 0px;
+  font-size: 13px;
+}
+
+.bullet-in-dropdown {
+  height: 15px;
+  width: 15px;
+  border: 0px;
+  text-align: center;
+  margin: 0px 10px;
+}
+
+.width-40 {
+  width: 40px;
+  min-width: 40px;
+}
+
+.height-30 {
+  height: 30px;
+}
+
+.new-event-box {
+  margin: 0px 30px;
+  padding: 10px 10px;
+}
+
+.new-event-inputs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.color-input {
+  flex: 0 0 80px;
+}
+
+.color-green {
+  color: $green;
+}
+
+.event-input {
+  flex: 0 1 280px;
+}
+
+

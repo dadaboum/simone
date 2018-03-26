@@ -19,6 +19,7 @@ gem 'uglifier'
 gem 'webpacker'
 gem 'rails-i18n', '~> 5.1'
 gem 'twilio-ruby'
+gem 'postmark-rails'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

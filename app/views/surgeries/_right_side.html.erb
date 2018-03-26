@@ -1,13 +1,13 @@
 <div class="right-side-wrapper">
   <div class="right-side-box">
     <div class="patient-box"
-      <% if @surgery.status == "red" %>
+      <% if @surgery.status == "urgent" %>
         style="background-color: #EE5F5B;"
-      <% elsif @surgery.status == "orange" %>
+      <% elsif @surgery.status == "à traiter" %>
         style="background-color: #E67E22;"
-      <% elsif @surgery.status == "yellow" %>
-        style="background-color: #FDB631;"
-      <% elsif @surgery.status == "green" %>
+      <% elsif @surgery.status == "ok" %>
+        style="background-color: #32B796;"
+      <% elsif @surgery.status == "non répondu" %>
         style="background-color: #6C6D69;"
       <% end %>
 
@@ -24,34 +24,38 @@
             <li>
               <div class="dropdown">
                 <button class="btn btn-default transparent-hover font-15 dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  <span <% if @surgery.status == "red" %>
+                  <span <% if @surgery.status == "urgent" %>
                     style="color: #EE5F5B;"> Urgent
-                  <% elsif @surgery.status == "orange" %>
-                    style="color: #E67E22;"> Important
-                  <% elsif @surgery.status == "yellow" %>
-                    style="color: #FDB631;"> En cours
-                  <% elsif @surgery.status == "green" %>
-                    style="color: #6C6D69;"> Okay
+                  <% elsif @surgery.status == "à traiter" %>
+                    style="color: #E67E22;"> A traiter
+                  <% elsif @surgery.status == "ok" %>
+                    style="color: #32B796;"> Ok
+                  <% elsif @surgery.status == "non répondu" %>
+                    style="color: #6C6D69;"> Non répondu
                   <% end %>
                   </span>
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu font-15 small-font" aria-labelledby="dropdownMenu1">
-                  <!-- link_to surgery_path(surgery)flag?red -->
-                  <li><a href="#">Urgent</a></li>
-                  <li><a href="#">Important</a></li>
-                  <li><a href="#">En cours</a></li>
-                  <li><a href="#">Okay</a></li>
+                  <%= form_for @surgery, url: surgery_path(@surgery), method: :patch do |f| %>
+                  <li> <input class="no-submit" type="submit" value="Urgent" name="change_status" ></li>
+                  <li> <input class="no-submit" type="submit" value="A traiter" name="change_status" ></li>
+                  <li> <input class="no-submit" type="submit" value="Ok" name="change_status" ></li>
+                  <li><input class="no-submit" type="submit" value="Non répondu" name="change_status"></li>
+                  <% end %>
                 </ul>
               </div>
           </li>
           <li>
-            <% if @surgery.validated %>
-              <button class = "validated-btn"> <i class="far fa-check-square"></i> Validé </button>
-            <% else %>
-            <button class = "validate-btn"> <i class="far fa-square"></i> Valider </button>
+            <%= form_for @surgery, url: surgery_path(@surgery), method: :patch do |f| %>
+              <% if @surgery.validated %>
+                <input type="hidden" value="unvalidate" name="todo">
+                <button type = "submit" class = "validated-btn"> <i class="far fa-check-square"></i> Validé </button>
+              <% else %>
+                <input type="hidden" value="validate" name="todo">
+                <button type ="submit" class = "validate-btn"> <i class="far fa-square"></i> Valider </button>
+              <% end %>
             <% end %>
-<!--             <button class="btn btn-default small-font" type="button" style="color:#32B796;">Valider</button> -->
           </li>
         </ul>
       </div>
@@ -67,7 +71,9 @@
             <p class="secondary-info"> <strong> Médecin :</strong> <%= @surgery.surgeon.name %></p>
           </li>
           <li>
-            <button class="discrete-button"> <i class="fab fa-telegram-plane"></i> Send email</button>
+            <%= link_to notice_path(status: params[:status], surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]), method: "post" do %>
+              <button class="discrete-button"> <i class="fab fa-telegram-plane"></i> Send email</button>
+            <% end %>
           </li>
         </ul>
       <div class="surgery-forms-box">
@@ -87,7 +93,9 @@
                 </ul>
                   <ul class="list-inline">
                     <li>
-                      <button class="discrete-button"> <i class="far fa-comment"></i> Renvoyer au patient</button>
+                      <%= link_to relanceSMS_path(status: params[:status], surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]), method: "post" do %>
+                        <button class="discrete-button"> <i class="far fa-comment"></i> Renvoyer au patient</button>
+                      <% end %>
                     </li>
                     <li>
                       <button class="discrete-button"> <i class="fas fa-edit"></i><%= link_to 'Remplir', surgery_path(@surgery) %></button>
@@ -111,7 +119,9 @@
                 </ul>
                   <ul class="list-inline">
                     <li>
-                      <button class="discrete-button"> <i class="far fa-comment"></i> Renvoyer au patient</button>
+                      <%= link_to relanceSMS_path(status: params[:status], surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]), method: "post" do %>
+                        <button class="discrete-button"> <i class="far fa-comment"></i> Renvoyer au patient</button>
+                      <% end %>
                     </li>
                     <li>
                       <button class="discrete-button"> <i class="fas fa-edit"></i><%= link_to 'Remplir', surgery_path(@surgery) %></button>
@@ -127,7 +137,7 @@
       </div>
       <div class="surgery-history-box">
         <p>Historique</p>
-          <% @surgery.events.each do |event| %>
+          <% @events.each do |event| %>
             <div class="history-box secondary-info">
               <div class="history-left">
                 <div class="history-separator-big"></div>
@@ -140,7 +150,7 @@
                 <% if event == @surgery.events.last %> style = "border-color: white;" <% end %>></div>
               </div>
               <div class="history-right">
-                <%= event.description %>
+                <%= event.created_at.strftime('%H : %M') + ' - ' + event.description %>
               </div>
             </div>
             <div class="history-sep-box">
@@ -148,7 +158,17 @@
               <div class="history-right"></div>
             </div>
           <% end %>
-          <a href="#" class="secondary-info add-event"> + Ajouter un événement</a>
+        </div>
+        <div class="new-event-box">
+          <%= form_for @event, url: surgery_path(@surgery), class: "form-inline", id: "new-event", method: :patch do |f|  %>
+            <p href="#" class="secondary-info add-event color-green ">Ajouter un commentaire</p>
+            <div class="new-event-inputs">
+            <%= f.select :flag, options_for_select([['Rouge', "red"], ['Orange','orange'], ['Vert', 'green'], ['Gris', 'grey']]), {}, class: 'form-control font-15 height-30 color-input' %>
+            <%= f.text_field :description, class: "form-control font-15 width-40 height-30 event-input"  %>
+              <button type="submit" class="add-event-btn height-30">+</button>
+            </div>
+          <% end %>
+        </div>
         </div>
       </div>
     </div>

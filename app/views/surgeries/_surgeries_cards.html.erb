@@ -1,48 +1,30 @@
 
   <div class="core-left">
-    <div class="actions">
-      <div class="btn-group" role="group" aria-label="...">
-        <button type="button" class="btn btn-default small-font">Valider</button>
-        <button type="button" class="btn btn-default small-font">Notifier le chirurgien</button>
-        <button type="button" class="btn btn-default small-font">Relancer par SMS</button>
-      </div>
-        <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Changer la priorité
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
-            <li><%= link_to "Red", surgeries_path(status: "red", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]) %></li>
-            <li><%= link_to "Orange", surgeries_path(status: "orange", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]) %></li>
-            <li><%= link_to "Yellow", surgeries_path(status: "yellow", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]) %></li>
-            <li><%= link_to "Green", surgeries_path(status: "green", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]) %></li>
-          </ul>
-        </div>
-    </div>
+
+    <!-- Liste des filtres -->
     <div class="filters">
+      <p>Filtrer par:</p>
       <div class="dropdown">
         <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          <%= params[:status].present? ? params[:status].capitalize : "Filtrer par priorité" %>
+          <%= params[:status].present? ? params[:status].capitalize : "Statut" %>
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
-
-          <li><%= link_to "Red", surgeries_path(status: "red", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post], validated: params[:validated]) %></li>
-          <li><%= link_to "Orange", surgeries_path(status: "orange", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post], validated: params[:validated]) %></li>
-          <li><%= link_to "Yellow", surgeries_path(status: "yellow", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post], validated: params[:validated]) %></li>
-          <li><%= link_to "Green", surgeries_path(status: "green", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post], validated: params[:validated]) %></li>
+          <% @status_array.each do |status| %>
+            <li><%= link_to "#{status.capitalize}", surgeries_path(status: "#{status}", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post], validated: params[:validated]) %></li>
+          <% end %>
           <li role="separator" class="divider"></li>
-          <li><%= link_to "All", surgeries_path(surgery_id: params[:surgery_id], validated: params[:validated], pre_or_post: params[:pre_or_post]) %></li>
+          <li><%= link_to "Tous", surgeries_path(surgery_id: params[:surgery_id], validated: params[:validated], pre_or_post: params[:pre_or_post]) %></li>
         </ul>
       </div>
       <div class="dropdown">
         <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          <%= params[:pre_or_post].present? ? (params[:pre_or_post] == "pre" ? "J-1" : "J+1") : "J+/-1" %>
+          <%= params[:pre_or_post].present? ? (params[:pre_or_post] == "pre" ? "Pre" : "Post") : "Pre/Post" %>
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
-          <li><%= link_to "J-1", surgeries_path(pre_or_post: "pre", surgery_id: params[:surgery_id], status: params[:status], validated: params[:validated]) %></li>
-          <li><%= link_to "J+1", surgeries_path(pre_or_post: "post", surgery_id: params[:surgery_id], status: params[:status], validated: params[:validated]) %></li>
+          <li><%= link_to "Pre", surgeries_path(pre_or_post: "pre", surgery_id: params[:surgery_id], status: params[:status], validated: params[:validated]) %></li>
+          <li><%= link_to "Post", surgeries_path(pre_or_post: "post", surgery_id: params[:surgery_id], status: params[:status], validated: params[:validated]) %></li>
           <li role="separator" class="divider"></li>
           <li><%= link_to "All", surgeries_path(surgery_id: params[:surgery_id], status: params[:status], validated: params[:validated]) %></li>
         </ul>
@@ -60,6 +42,34 @@
         </ul>
       </div>
     </div>
+
+    <!-- Liste des actions -->
+    <div class="actions">
+      <div class="btn-group" role="group" aria-label="...">
+        <!-- Validate action on multiple instances -->
+        <%= form_tag validate_batch_path, method: :patch do %>
+          <%= hidden_field_tag :surgery_ids, nil, id: "validate_batch_input" %>
+          <%= submit_tag "Valider", class: "btn btn-default small-font" %>
+        <% end %>
+
+
+        <button type="button" class="btn btn-default small-font">Relancer par SMS</button>
+      </div>
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Changer la priorité
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
+            <li><%= link_to "Red", surgeries_path(status: "red", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]) %></li>
+            <li><%= link_to "Orange", surgeries_path(status: "orange", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]) %></li>
+            <li><%= link_to "Yellow", surgeries_path(status: "yellow", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]) %></li>
+            <li><%= link_to "Green", surgeries_path(status: "green", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]) %></li>
+          </ul>
+        </div>
+    </div>
+
+    <!-- Surgerie cards -->
     <div class="surgery-cards-wrapper">
       <% @surgeries.each do |surgery| %>
         <%= render "surgery_card", surgery: surgery %>

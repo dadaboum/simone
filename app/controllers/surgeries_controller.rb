@@ -14,7 +14,7 @@ before_action :set_surgery, only: [:show, :update]
         @surgeries = @surgeries.where("date < ?", Date.today)
       end
     end
-
+    
     if params[:validated].present?
       @surgeries = @surgeries.where(validated: params[:validated])
     end
@@ -35,11 +35,16 @@ before_action :set_surgery, only: [:show, :update]
       @surgery = @surgeries.first
       params[:surgery_id] = @surgery.id
     end
-
+    
+    @status_array = ["urgent", "à traiter", "ok", "non répondu"]
+    @event = Event.new
+    @events = @surgery.events.order(created_at: :asc)
   end
 
   def show
     @surgery = Surgery.find(params[:id])
+    @events = @surgery.events.order(created_at: :asc)
+
     @surgeries = current_user.hospital.surgeries
     if params[:status].present?
       @surgeries = @surgeries.where(status: params[:status])
@@ -51,17 +56,58 @@ before_action :set_surgery, only: [:show, :update]
       @pre_form_answer = answer if answer.form.pre_or_post == "pre"
       @post_form_answer = answer if answer.form.pre_or_post == "post"
     end
+    @event = Event.new
   end
 
   def update
     @surgery = Surgery.find(params[:id])
     event = Event.new
+
+    #when clicking on the validate button
+    if params[:todo].present?
+      if params[:todo] == "validate"
+        @surgery.validated = true
+      elsif params[:todo] == "unvalidate"
+        @surgery.validated = false
+      end
+      @surgery.save!
+      redirect_to surgeries_path(surgery_id: @surgery.id)
+
+    #when updating priority
+    elsif params[:change_status].present?
+      @surgery.status = "urgent" if params[:change_status] == "Urgent"
+      @surgery.status = "à traiter" if params[:change_status] == "A traiter"
+      @surgery.status = "ok" if params[:change_status] == "Ok"
+      @surgery.status = "non répondu" if params[:change_status] == "Non répondu"
+      @surgery.save!
+      redirect_to surgeries_path(surgery_id: @surgery.id)
+
+    #when adding an event
+    elsif event_params
+      event.update(event_params)
+      event.surgery = @surgery
+      event.save!
+      redirect_to surgeries_path(surgery_id: @surgery.id)
+
+    #when adding a comment
+    else
     event.description = "Commentaire pré-opératoire : " + surgery_params[:pre_comments] if surgery_params[:pre_comments]
     event.description = "Commentaire post-opératoire : " + surgery_params[:post_comments] if surgery_params[:post_comments]
     event.surgery = @surgery
     event.save
     @surgery.update(surgery_params)
     redirect_to surgery_path(@surgery)
+    end
+  end
+
+  def validate_batch
+    ids = params[:surgery_ids]
+    ids.split(",").each do |id|
+      surgery = Surgery.find(id)
+      surgery.validated = true
+      surgery.save
+    end
+    redirect_to surgeries_path
   end
 
   private
@@ -71,6 +117,10 @@ before_action :set_surgery, only: [:show, :update]
   end
 
   def surgery_params
-    params.require(:surgery).permit(:pre_comments, :post_comments)
+    params.require(:surgery).permit(:pre_comments, :post_comments, :validated)
+  end
+
+  def event_params
+    params.require(:event).permit(:flag, :description)
   end
 end

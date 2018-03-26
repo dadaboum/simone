@@ -55,3 +55,16 @@
   height: 28px;
   width: 40px;
 }
+
+.add-event-btn {
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 2px;
+  width: 40px;
+  font-size: 20px;
+  color: $green;
+  border: 1px solid $green;
+  &:hover {
+    color: white;
+    background-color: $green;
+  }
+}
