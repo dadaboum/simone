@@ -24,6 +24,7 @@ puts "Created Nurse Simone"
 
 guilhem = Surgeon.create(name:"Dr Guilhem", email:"guilhem@gmail.com")
 paul = Surgeon.create(name:"Dr Paul", email:"paul@gmail.com")
+jacques = Surgeon.create(name:"Dr Jacques", email:"jjoubert86@gmail.com")
 
 puts "Created Dr Guilhem and Dr Paul"
 
@@ -108,7 +109,7 @@ david_event2.save!
 jonathan_operation = Surgery.new(is_done: true, date: Date.yesterday)
 jonathan_operation.patient = jonathan
 jonathan_operation.surgery_type = knee
-jonathan_operation.surgeon = guilhem
+jonathan_operation.surgeon = jacques
 jonathan_operation.pre_form_answered = true
 jonathan_operation.post_form_answered = true
 jonathan_operation.is_done = true

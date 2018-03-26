@@ -71,7 +71,9 @@
             <p class="secondary-info"> <strong> Médecin :</strong> <%= @surgery.surgeon.name %></p>
           </li>
           <li>
-            <button class="discrete-button"> <i class="fab fa-telegram-plane"></i> Send email</button>
+            <%= link_to notice_path(status: params[:status], surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]), method: "post" do %>
+              <button class="discrete-button"> <i class="fab fa-telegram-plane"></i> Send email</button>
+            <% end %>
           </li>
         </ul>
       <div class="surgery-forms-box">
@@ -91,7 +93,9 @@
                 </ul>
                   <ul class="list-inline">
                     <li>
-                      <button class="discrete-button"> <i class="far fa-comment"></i> Renvoyer au patient</button>
+                      <%= link_to relanceSMS_path(status: params[:status], surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]), method: "post" do %>
+                        <button class="discrete-button"> <i class="far fa-comment"></i> Renvoyer au patient</button>
+                      <% end %>
                     </li>
                     <li>
                       <button class="discrete-button"> <i class="fas fa-edit"></i><%= link_to 'Remplir', surgery_path(@surgery) %></button>
@@ -115,7 +119,9 @@
                 </ul>
                   <ul class="list-inline">
                     <li>
-                      <button class="discrete-button"> <i class="far fa-comment"></i> Renvoyer au patient</button>
+                      <%= link_to relanceSMS_path(status: params[:status], surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]), method: "post" do %>
+                        <button class="discrete-button"> <i class="far fa-comment"></i> Renvoyer au patient</button>
+                      <% end %>
                     </li>
                     <li>
                       <button class="discrete-button"> <i class="fas fa-edit"></i><%= link_to 'Remplir', surgery_path(@surgery) %></button>
