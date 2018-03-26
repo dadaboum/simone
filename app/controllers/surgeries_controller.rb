@@ -19,10 +19,14 @@ before_action :set_surgery, only: [:show, :update]
       end
     end
     @status_array = ["urgent", "à traiter", "ok", "non répondu"]
+    @event = Event.new
+    @events = @surgery.events.order(created_at: :asc)
   end
 
   def show
     @surgery = Surgery.find(params[:id])
+    @events = @surgery.events.order(created_at: :asc)
+
     @surgeries = current_user.hospital.surgeries
     if params[:status].present?
       @surgeries = @surgeries.where(status: params[:status])
@@ -34,10 +38,12 @@ before_action :set_surgery, only: [:show, :update]
       @pre_form_answer = answer if answer.form.pre_or_post == "pre"
       @post_form_answer = answer if answer.form.pre_or_post == "post"
     end
+    @event = Event.new
   end
 
   def update
     @surgery = Surgery.find(params[:id])
+    event = Event.new
 
     #when clicking on the validate button
     if params[:todo].present?
@@ -58,11 +64,15 @@ before_action :set_surgery, only: [:show, :update]
       @surgery.save!
       redirect_to surgeries_path(surgery_id: @surgery.id)
 
-
+    #when adding an event
+    elsif event_params
+      event.update(event_params)
+      event.surgery = @surgery
+      event.save!
+      redirect_to surgeries_path(surgery_id: @surgery.id)
 
     #when adding a comment
     else
-    event = Event.new
     event.description = "Commentaire pré-opératoire : " + surgery_params[:pre_comments] if surgery_params[:pre_comments]
     event.description = "Commentaire post-opératoire : " + surgery_params[:post_comments] if surgery_params[:post_comments]
     event.surgery = @surgery
@@ -90,5 +100,9 @@ before_action :set_surgery, only: [:show, :update]
 
   def surgery_params
     params.require(:surgery).permit(:pre_comments, :post_comments, :validated)
+  end
+
+  def event_params
+    params.require(:event).permit(:flag, :description)
   end
 end
