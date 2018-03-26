@@ -35,7 +35,10 @@
     <div class="actions">
       <div class="btn-group" role="group" aria-label="...">
         <!-- Validate action on multiple instances -->
-        <button type="button" class="btn btn-default small-font">Valider</button>
+        <%= form_tag validate_batch_path, method: :patch do %>
+          <%= hidden_field_tag :surgery_ids, nil, id: "validate_batch_input" %>
+          <%= submit_tag "Valider", class: "btn btn-default small-font" %>
+        <% end %>
 
 
         <button type="button" class="btn btn-default small-font">Relancer par SMS</button>
@@ -58,7 +61,7 @@
     <div class="surgery-cards-wrapper">
       <% @surgeries.each do |surgery| %>
         <div class="surgery-card small-font">
-          <input type="checkbox" data-surgery="<%= surgery.id %>"/>
+          <input type="checkbox" data-surgeryid="<%= surgery.id %>"/>
           <%= link_to surgeries_path(surgery_id: surgery.id, status: params[:status], pre_or_post: params[:pre_or_post]) do %>
             <div class="surgery-patient">
               <p class="strong <%= surgery.status %>-card"><%= surgery.patient.first_name %> <%= surgery.patient.last_name %> - <%= surgery.surgeon.name %></p>
@@ -73,6 +76,7 @@
             </div>
           <% end %>
           <%= surgery.status %>
+          <%= surgery.validated %>
         </div>
       <% end %>
     </div>
