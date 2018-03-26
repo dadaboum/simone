@@ -312,3 +312,41 @@ puts "WARNING: you have to click on update for both forms on /forms"
 # Avez vous un autre probleme medical ? OUI/NON(ok)
 
 # Commentaires: par l'infirmiere
+
+# Bonjour, je suis infirmière à la clinique du Sport, au sein du service de chirurgie orthopédique.
+# Ce que j'aime dans mon métier, c'est le contact avec les patients, avec mon expérience, en un coup d'oeil je peux évaluer leur état
+# Mais le métier change, la médecine change. Plus d'un patient sur deux est aujourd'hui opéré chez nous en ambulatoire, arrivé le matin, opéré dans la journée, le patient dort chez lui le soir
+# et moi, votre infirmière, on me demande d'assurer la meme suivi, à distance pour mes 80 patients quotidiens
+# Heureusement nous utilisons le service de suivi CareOn
+# Le matin je me connecte sur mon compte et je retrouve mes patients. Un sms leur a été envoyé cet matin à 9h, leur demandant de remplir un rapide questionnaire
+# Rouge voici sa fiche, opéré hier il n'a pas répondu je l'appelle, rempli le questionnaire avec lui qu'il vienne aux urgence, je préviens le chirurgien et je le validate
+# je retourne sur mes opérations, un niveau d'urgence moindre mais à suivre Paul je l'appelle pas de fievre tout est ok, je le mets en vert et le validate
+# Tout ces patients vont tres bien, je vous lance je vais donner un coup de main aux filles en pédiatrie
+# Reflector
+
+Gros sujets :
+actions de masse
+boutons : changer de statut, envoyer email au medecin, marquer comme validé. qui est prioritaire
+order l'index selon les prio
+Ajaxify
+Définir le pitch de demo
+
+j'ai oublié d'expliquer que des sms sont envoyés aux patients leur demandant de remplir un questionnaire personnalisé
+Sur le dashboard chiffre a la place de pourcentage, PRE vs POST faut il tout fusionner ? comment le rendre plus visuel ?
+on a l impression que c est indicatif alors que ce sont des liens,
+Revoir le call to action de la show, et les boutons secondaires
+Le formulaire etait trop long c'est bien d appeller le patient et de remplir avec lui, et si je parlais en live avec lui ?
+ou bien on voit le telephone du patient, il recoit le texto de rappel, il rempli le formulaire et moi je fais autre chose pendant ce temps
+quand j'arrive sur operations c'est tout blanc à droite c'est bizarre il faut voir la premiere surgery
+il faut ordonner l index selon les priorités
+il faut séparer les surgery qui sont validés, on les mets dans une autre boite ou en bas, et on leur donne background different ou une border ou
+opacité sur les surgery validées
+Je suis infirmier
+la side bar diminue quand mobile
+On ne peut pas mettre que de la couleur car il y a des daltoniens : bootstrap a des labels
+attention taille écran de demo : 720p dans inspect de chrome
+Il faut reprendre le texte du formulaire, reorganiser les questions
+
+Signe Warning Alerte (rouge)/ A vérifier Signe Point d interrogation (orange)/ Non répondu En attente Signe horloge (gris)/ Ok (RAS) (vert)
+Actions: Valider SMS Changer Prio
+Filter: par prio pre ou Post Search bar

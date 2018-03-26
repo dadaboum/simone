@@ -48,31 +48,25 @@
         </ul>
       </div>
     </div>
+    A traiter
     <div class="surgery-cards-wrapper">
-      <% @surgeries.each do |surgery| %>
-        <div class="surgery-card small-font">
-          <div class="checkbox">
-            <% link_to  %>
-            <i class="far fa-square"></i>
-          </div>
-          <!-- Quand la checkbox est cochee : <i class="far fa-check-square"></i> -->
-          <%= link_to surgeries_path(surgery_id: surgery.id, status: params[:status], pre_or_post: params[:pre_or_post]) do %>
-            <div class="surgery-patient">
-              <p class="strong <%= surgery.status %>-card"><%= surgery.patient.first_name %> <%= surgery.patient.last_name %> - <%= surgery.surgeon.name %></p>
-              <p><%= surgery.surgery_type.description %></p>
-            </div>
-            <div class="surgery-form-type discrete-tag">
-              <% if surgery.date < Date.today %>
-                J+1
-              <% else %>
-                J-1
-              <% end %>
-            </div>
-          <% end %>
-          <% if surgery.validated %>
-            <i class="far fa-check-square"></i>
-          <% end %>
-        </div>
+      <% @surgeries.where(status: "red", validated: false).each do |surgery| %>
+        <%= render "surgery_card", surgery: surgery %>
+      <% end %>
+      <% @surgeries.where(status: "orange", validated: false).each do |surgery| %>
+        <%= render "surgery_card", surgery: surgery %>
+      <% end %>
+      <% @surgeries.where(status: "yellow", validated: false).each do |surgery| %>
+        <%= render "surgery_card", surgery: surgery %>
+      <% end %>
+      <% @surgeries.where(status: "green", validated: false).each do |surgery| %>
+        <%= render "surgery_card", surgery: surgery %>
+      <% end %>
+    </div>
+    Patients traités
+    <div class="surgery-cards-validated-wrapper">
+      <% @surgeries.where(validated: true).each do |surgery| %>
+        <%= render "surgery_card", surgery: surgery %>
       <% end %>
     </div>
   </div>
