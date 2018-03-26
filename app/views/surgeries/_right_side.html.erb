@@ -1,13 +1,13 @@
 <div class="right-side-wrapper">
   <div class="right-side-box">
     <div class="patient-box"
-      <% if @surgery.status == "red" %>
+      <% if @surgery.status == "urgent" %>
         style="background-color: #EE5F5B;"
-      <% elsif @surgery.status == "orange" %>
+      <% elsif @surgery.status == "à traiter" %>
         style="background-color: #E67E22;"
-      <% elsif @surgery.status == "yellow" %>
-        style="background-color: #FDB631;"
-      <% elsif @surgery.status == "green" %>
+      <% elsif @surgery.status == "ok" %>
+        style="background-color: #32B796;"
+      <% elsif @surgery.status == "non répondu" %>
         style="background-color: #6C6D69;"
       <% end %>
 
@@ -24,34 +24,38 @@
             <li>
               <div class="dropdown">
                 <button class="btn btn-default transparent-hover font-15 dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  <span <% if @surgery.status == "red" %>
+                  <span <% if @surgery.status == "urgent" %>
                     style="color: #EE5F5B;"> Urgent
-                  <% elsif @surgery.status == "orange" %>
-                    style="color: #E67E22;"> Important
-                  <% elsif @surgery.status == "yellow" %>
-                    style="color: #FDB631;"> En cours
-                  <% elsif @surgery.status == "green" %>
-                    style="color: #6C6D69;"> Okay
+                  <% elsif @surgery.status == "à traiter" %>
+                    style="color: #E67E22;"> A traiter
+                  <% elsif @surgery.status == "ok" %>
+                    style="color: #32B796;"> Ok
+                  <% elsif @surgery.status == "non répondu" %>
+                    style="color: #6C6D69;"> Non répondu
                   <% end %>
                   </span>
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu font-15 small-font" aria-labelledby="dropdownMenu1">
-                  <!-- link_to surgery_path(surgery)flag?red -->
-                  <li><a href="#">Urgent</a></li>
-                  <li><a href="#">Important</a></li>
-                  <li><a href="#">En cours</a></li>
-                  <li><a href="#">Okay</a></li>
+                  <%= form_for @surgery, url: surgery_path(@surgery), method: :patch do |f| %>
+                  <li> <input class="no-submit" type="submit" value="Urgent" name="change_status" ></li>
+                  <li> <input class="no-submit" type="submit" value="A traiter" name="change_status" ></li>
+                  <li> <input class="no-submit" type="submit" value="Ok" name="change_status" ></li>
+                  <li><input class="no-submit" type="submit" value="Non répondu" name="change_status"></li>
+                  <% end %>
                 </ul>
               </div>
           </li>
           <li>
-            <% if @surgery.validated %>
-              <button class = "validated-btn"> <i class="far fa-check-square"></i> Validé </button>
-            <% else %>
-            <button class = "validate-btn"> <i class="far fa-square"></i> Valider </button>
+            <%= form_for @surgery, url: surgery_path(@surgery), method: :patch do |f| %>
+              <% if @surgery.validated %>
+                <input type="hidden" value="unvalidate" name="todo">
+                <button type = "submit" class = "validated-btn"> <i class="far fa-check-square"></i> Validé </button>
+              <% else %>
+                <input type="hidden" value="validate" name="todo">
+                <button type ="submit" class = "validate-btn"> <i class="far fa-square"></i> Valider </button>
+              <% end %>
             <% end %>
-<!--             <button class="btn btn-default small-font" type="button" style="color:#32B796;">Valider</button> -->
           </li>
         </ul>
       </div>
