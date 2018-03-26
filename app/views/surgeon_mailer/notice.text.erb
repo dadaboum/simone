@@ -1,0 +1,9 @@
+Bonjour <%= @surgeon.name %>,
+
+Patient : <%= @patient.last_name %> <%= @patient.first_name %>
+
+Evenement survenu :
+
+<% @events.each do |event| %>
+<%= event.description %>
+<% end %>
