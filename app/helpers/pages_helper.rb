@@ -1,7 +1,7 @@
 module PagesHelper
                                   # HELPER POUR LE DASHBOARD COTE PRE OPERATION
   def nb_pre_op_orange_flag
-    a = sprintf("%.2f", Surgery.where("date='#{Date.tomorrow}' and (status is null or status='à vérifier'").count).to_f
+    a = sprintf("%.2f", Surgery.where("date='#{Date.tomorrow}' and (status is null or status='à vérifier')").count).to_f
     b = sprintf("%.2f", Surgery.where("date='#{Date.tomorrow}'").count).to_f
     sprintf("%.2f", a / b * 100).to_f
   end
