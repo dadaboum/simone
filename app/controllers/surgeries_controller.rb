@@ -72,6 +72,16 @@ before_action :set_surgery, only: [:show, :update]
     end
   end
 
+  def validate_batch
+    ids = params[:surgery_ids]
+    ids.split(",").each do |id|
+      surgery = Surgery.find(id)
+      surgery.validated = true
+      surgery.save
+    end
+    redirect_to surgeries_path
+  end
+
   private
 
   def set_surgery
