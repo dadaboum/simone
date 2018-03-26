@@ -67,7 +67,9 @@
             <p class="secondary-info"> <strong> Médecin :</strong> <%= @surgery.surgeon.name %></p>
           </li>
           <li>
-            <button class="discrete-button"> <i class="fab fa-telegram-plane"></i> Send email</button>
+            <%= link_to notice_path(@surgery), method: "POST" do %>
+              <button class="discrete-button"> <i class="fab fa-telegram-plane"></i> Send email</button>
+            <% end %>
           </li>
         </ul>
       <div class="surgery-forms-box">
