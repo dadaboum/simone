@@ -23,10 +23,10 @@
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
-          <li><%= link_to "Pre", surgeries_path(pre_or_post: "pre", surgery_id: params[:surgery_id], status: params[:status], validated: params[:validated]) %></li>
-          <li><%= link_to "Post", surgeries_path(pre_or_post: "post", surgery_id: params[:surgery_id], status: params[:status], validated: params[:validated]) %></li>
+          <li><%= link_to "Pre-opératoire", surgeries_path(pre_or_post: "pre", surgery_id: params[:surgery_id], status: params[:status], validated: params[:validated]) %></li>
+          <li><%= link_to "Post-opératoire", surgeries_path(pre_or_post: "post", surgery_id: params[:surgery_id], status: params[:status], validated: params[:validated]) %></li>
           <li role="separator" class="divider"></li>
-          <li><%= link_to "All", surgeries_path(surgery_id: params[:surgery_id], status: params[:status], validated: params[:validated]) %></li>
+          <li><%= link_to "Tous", surgeries_path(surgery_id: params[:surgery_id], status: params[:status], validated: params[:validated]) %></li>
         </ul>
       </div>
       <div class="dropdown">
@@ -38,7 +38,7 @@
           <li><%= link_to "Validé", surgeries_path(validated: "true", surgery_id: params[:surgery_id], status: params[:status], pre_or_post: params[:pre_or_post]) %></li>
           <li><%= link_to "En cours", surgeries_path(validated: "false", surgery_id: params[:surgery_id], status: params[:status], pre_or_post: params[:pre_or_post]) %></li>
           <li role="separator" class="divider"></li>
-          <li><%= link_to "Tout", surgeries_path(surgery_id: params[:surgery_id], status: params[:status]) %></li>
+          <li><%= link_to "Tous", surgeries_path(surgery_id: params[:surgery_id], status: params[:status]) %></li>
         </ul>
       </div>
     </div>
@@ -53,7 +53,7 @@
       <%= form_tag sms_batch_path, method: :post do %>
         <%= hidden_field_tag :surgery_ids, nil, id: "batch_input" %>
         <button type="submit" class="btn secondary-cta">
-          <i class="far fa-comment" style="padding-right: 8px"></i>SMS
+          <i class="far fa-comment" style="padding-right: 8px"></i>RENVOYER AU PATIENT
         </button>
       <% end %>
       <div class="dropdown">

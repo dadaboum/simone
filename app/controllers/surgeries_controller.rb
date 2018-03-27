@@ -33,12 +33,17 @@ before_action :set_surgery, only: [:show, :update]
       @surgery = Surgery.find(params[:surgery_id])
     else
       @surgery = @surgeries.first
-      params[:surgery_id] = @surgery.id
+      # params[:surgery_id] = @surgery.id
     end
 
     @status_array = ["alerte", "à vérifier", "ok", "non répondu"]
     @event = Event.new
     @events = @surgery.events.order(created_at: :asc)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
