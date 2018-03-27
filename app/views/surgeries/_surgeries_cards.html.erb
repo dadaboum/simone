@@ -3,9 +3,9 @@
 
     <!-- Liste des filtres -->
     <div class="filters">
-      <p>Filtrer par:</p>
+      Filtrer par:
       <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <button class="btn form-control dropdown-toggle font-15 height-30" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
           <%= params[:status].present? ? params[:status].capitalize : "Statut" %>
           <span class="caret"></span>
         </button>
@@ -18,8 +18,8 @@
         </ul>
       </div>
       <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          <%= params[:pre_or_post].present? ? (params[:pre_or_post] == "pre" ? "Pre" : "Post") : "Pre/Post" %>
+        <button class="btn dropdown-toggle form-control font-15 height-30" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <%= params[:pre_or_post].present? ? (params[:pre_or_post] == "pre" ? "Pre" : "Post") : "Pre / Post" %>
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
@@ -30,8 +30,8 @@
         </ul>
       </div>
       <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          <%= params[:validated].present? ? (params[:validated] == "true" ? "Validé" : "En cours") : "Validé / En cours" %>
+        <button class="btn dropdown-toggle form-control font-15 height-30" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <%= params[:validated].present? ? (params[:validated] == "true" ? "Validé" : "En cours") : "Validation" %>
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
@@ -45,17 +45,20 @@
 
     <!-- Liste des actions -->
     <div class="action-buttons">
+      <input type="checkbox" name="select-all">
       <%= form_tag update_batch_path(todo: 'validate'), method: :patch do %>
         <%= hidden_field_tag :surgery_ids, nil, id: "validate_batch_input" %>
-        <%= submit_tag "Valider", class: "btn validate-btn" %>
+        <%= submit_tag "VALIDER", class: "btn primary-cta" %>
       <% end %>
       <%= form_tag sms_batch_path, method: :post do %>
         <%= hidden_field_tag :surgery_ids, nil, id: "batch_input" %>
-        <%= submit_tag "SMS", class: "btn btn-default" %>
+        <button type="submit" class="btn secondary-cta">
+          <i class="far fa-comment" style="padding-right: 8px"></i>SMS
+        </button>
       <% end %>
       <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          Prioriser
+        <button class="btn secondary-cta dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          PRIORISER
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
