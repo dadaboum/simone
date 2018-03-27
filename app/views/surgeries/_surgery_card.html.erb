@@ -1,7 +1,5 @@
 <div class="surgery-card small-font">
-  <div class="surgery-checkbox">
-    <input type="checkbox" data-surgeryid="<%=surgery.id %>">
-  </div>
+  <input type="checkbox" data-surgeryid="<%=surgery.id %>">
   <%= link_to surgeries_path(surgery_id: surgery.id, status: params[:status], pre_or_post: params[:pre_or_post], validated: params[:validated]), remote: true do %>
     <% if surgery.id == params[:surgery_id].to_i %>
       <div class="surgery-content <%= surgery.status %>-border selected">

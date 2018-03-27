@@ -7,8 +7,9 @@ Rails.application.routes.draw do
   post '/surgeries/relanceSMS', to: 'patients#relance_sms', as: :relanceSMS
   post '/sms-batch', to: 'patients#sms_batch', as: :sms_batch
 
-  resources :forms, only: [ :index, :new, :create, :update]
+  get '/statistiques', to: 'pages#dashboard', as: :dashboard
 
+  resources :forms, only: [ :index, :new, :create, :update]
 
   resources :surgeries, only: [ :show, :update, :index ]
 
