@@ -2,6 +2,8 @@
   flex : 0 0 50%;
   padding: 5px;
   padding-top: 0px;
+  font-size: 16px;
+  font-weight: lighter;
 }
 
 .right-side-box {
@@ -18,11 +20,22 @@
 .patient-box {
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
-  padding-top: 10px;
-  text-align: center;
   color: white;
-  opacity: 0.8;
-  padding-bottom: 5px;
+  background-color: $blue;
+  display: flex;
+}
+
+.patient-name {
+  flex : 1 0 150px;
+  border-right: 1px solid rgba(255, 255, 255, 0.5);
+  text-align: center;
+  padding: 18px 0px;
+}
+
+.patient-phone {
+  flex : 0 1 400px;
+  padding-left: 30px;
+  padding: 18px 0px 18px 18px;
 }
 
 .surgery-box {
@@ -61,8 +74,9 @@
 .surgery-forms-box {
   margin: 0px 30px;
   padding: 10px 10px;
-  border-left: 3px solid rgba(0,0,0,0.2);
-  background-color: rgba(0,0,0,0.05);
+  border: 1px solid $blue;
+  border-radius: 3px;
+  color: $blue;
   // text-align: center;
 }
 
@@ -230,5 +244,17 @@
 .event-input {
   flex: 0 1 280px;
 }
+
+.grey-title {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.38);
+  font-weight: normal;
+}
+
+.font-14 {
+  font-size: 14px;
+}
+
+
 
 
