@@ -43,7 +43,10 @@ const toggleAll = (event) => {
 
 function selectAll() {
   const check = document.querySelector('input[type=checkbox]');
-  check.addEventListener("click", toggleAll);
+  if (check) {
+    check.addEventListener("click", toggleAll);
+  }
+
 };
 
 export { selectAll };
