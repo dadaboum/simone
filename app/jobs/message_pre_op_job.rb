@@ -15,7 +15,7 @@ class MessagePreOpJob < ApplicationJob
         TwilioTextMessenger.new(result[2], message).call
         event = Event.new(description: "message pré-opération envoyé", flag: "green")
         surgery_patient = Surgery.find(result[3])
-        surgery_patient.status = "yellow"
+        surgery_patient.status = "non répondu"
         surgery_patient.save
         event.surgery = surgery_patient
         event.save
