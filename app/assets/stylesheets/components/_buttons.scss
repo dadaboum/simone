@@ -31,12 +31,19 @@
 }
 
 .validated-mock-btn {
-  padding: 8px 22px;
+  font-size: 14px;
+  padding: 8px 8px;
   color: $blue;
+  outline:0;
   &:hover {
+    text-decoration: underline;
     color: rgba(0, 0, 0, 0.6);
     border: 1px solid rgba(0,0,0,0.2);
   }
+}
+
+.validated-mock-btn:focus {
+  outline: 0;
 }
 
 .discrete-tag {
@@ -53,26 +60,54 @@
 }
 
 .add-event-btn {
-  border: 1px solid $blue;
+  border: none;
   border-radius: 50%;
   width: 30px;
   height: 30px;
   font-size: 20px;
   color: white;
   background-color: $blue;
+  background-position: center;
+  transition: background 0.8s;
+  outline: none;
+}
+
+.add-event-btn:hover {
+  background: rgba(67, 89, 245, 0.8) radial-gradient(circle, transparent 1%, rgba(67, 89, 245, 0.8) 1%) center/15000%;
+}
+
+.add-event-btn:active {
+  background-color: rgba(67, 89, 245, 0.5);
+  background-size: 100%;
+  transition: background 0s;
 }
 
 .rounded-dropdown-btn {
+  font-size: 14px;
   padding: 8px 18px;
   border-radius: 30px;
+  background-position: center;
+  transition: background 0.8s;
+  outline: none;
 }
 
+.rounded-dropdown-btn:hover {
+  background: rgba(0,0,0, 0.05) radial-gradient(circle, transparent 1%, rgba(0,0,0, 0.8) 1%) center/15000%;
+}
+
+
 .primary-cta {
-  padding: 8px 22px;
+  font-size: 14px;
+  padding: 8px 15px;
   border-radius: 30px;
-  border: 1px solid $blue;
+  border: none;
   color: white;
   background-color: $blue;
+  text-decoration: none;
+  cursor: pointer;
+  background-position: center;
+  transition: background 0.8s;
+  outline: none;
   a {
     color: white;
   }
@@ -81,9 +116,49 @@
   }
 }
 
-.secondary-cta {
-  padding: 8px 22px;
-  border-radius: 30px;
-  border: 1px solid $blue;
-  color: $blue;
+
+.primary-cta:hover {
+  background: rgba(67, 89, 245, 0.8) radial-gradient(circle, transparent 1%, rgba(67, 89, 245, 0.8) 1%) center/15000%;
 }
+
+
+.primary-cta:active {
+  background-color: rgba(67, 89, 245, 0.5);
+  background-size: 100%;
+  transition: background 0s;
+}
+
+
+
+
+.secondary-cta {
+  font-size: 14px;
+  padding: 8px 15px;
+  border-radius: 30px;
+  border: 1px solid blue;
+  color: $blue;
+  outline: 0;
+  background-position: center;
+  transition: all 0.8s;
+  outline: none;
+  a:hover {
+  text-decoration: none;
+  }
+}
+
+
+.secondary-cta:hover {
+  border: 1px solid rgba(67, 89, 245, 0.8);
+  color: white;
+  background: rgba(67, 89, 245, 0.8) radial-gradient(circle, transparent 1%, rgba(67, 89, 245, 0.8) 1%) center/15000%;
+  a {
+    color: white;
+  }
+}
+
+.secondary-cta:active {
+  background-color: rgba(67, 89, 245, 0.5);
+  background-size: 100%;
+  transition: background 0s;
+}
+
