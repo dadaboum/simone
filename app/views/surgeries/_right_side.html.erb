@@ -1,39 +1,40 @@
 <div class="right-side-wrapper">
   <div class="right-side-box">
-    <div class="patient-box"
-      <% if @surgery.status == "alerte" %>
-        style="background-color: #EE5F5B;"
-      <% elsif @surgery.status == "à vérifier" %>
-        style="background-color: #E67E22;"
-      <% elsif @surgery.status == "ok" %>
-        style="background-color: #32B796;"
-      <% elsif @surgery.status == "non répondu" %>
-        style="background-color: #6C6D69;"
-      <% end %>
-
-    >
-      <p> <%= @surgery.patient.first_name %> <%= @surgery.patient.last_name %> </p>
-      <p> <i class="fas fa-phone"></i> <%= @surgery.patient.phone_number %></p>
+    <div class="patient-box">
+      <div class="patient-name">
+         <%= @surgery.patient.first_name %> <%= @surgery.patient.last_name %>
+      </div>
+      <div class="patient-phone">
+        <i class="fas fa-phone" style="padding-right: 18px;"></i> <%= @surgery.patient.phone_number %>
+      </div>
     </div>
     <div class="surgery-box">
       <div class="surgery-title">
+        <% if Date.today > @surgery.date %>
+          <p class="grey-title">POST - <%=  @surgery.surgery_type.description %></p>
+          <% else %>
+          <p class="grey-title">PRE - <%=  @surgery.surgery_type.description %></p>
+        <% end %>
         <ul class="list-inline no-margin">
           <li style="padding-left: 0px;">
-              <p class= "no-margin"> <%=  @surgery.surgery_type.description %></p>
+              <% if Date.today > @surgery.date %>
+                <p class="font-14">Opération réalisée le  <%= @surgery.date %> </p>
+              <%  else %>
+                <p class="font-14">Opération prévue le  <%= @surgery.date %> </p>
+              <% end %>
           </li>
             <li>
               <div class="dropdown">
-                <button class="btn btn-default transparent-hover font-15 dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  <span <% if @surgery.status == "alerte" %>
-                    style="color: #EE5F5B;"> Alerte
+                <button class="rounded-dropdown-btn transparent-hover dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
+                <% if @surgery.status == "alerte" %>
+                    style="color: #EE5F5B; border-color: #EE5F5B;"> ALERTE
                   <% elsif @surgery.status == "à vérifier" %>
-                    style="color: #E67E22;"> A vérifier
+                    style="color: #E67E22; border-color: #E67E22;"> A VERIFIER
                   <% elsif @surgery.status == "ok" %>
-                    style="color: #32B796;"> Ok
+                    style="color: #32B796; border-color: #32B796;"> OK
                   <% elsif @surgery.status == "non répondu" %>
-                    style="color: #6C6D69;"> Non répondu
+                    style="color: #6C6D69; border-color: #6C6D69;"> NON REPONDU
                   <% end %>
-                  </span>
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu font-15 small-font" aria-labelledby="dropdownMenu1">
@@ -50,29 +51,22 @@
             <%= form_for @surgery, url: surgery_path(@surgery), method: :patch do |f| %>
               <% if @surgery.validated %>
                 <input type="hidden" value="unvalidate" name="todo">
-                <button type = "submit" class = "validated-btn"> <i class="far fa-check-square"></i> Validé </button>
+                <button type = "submit" class = "validated-mock-btn" style="border: 0px;"> <i class="fas fa-check" style="padding-right: 8px"></i> VALIDÉ </button>
               <% else %>
                 <input type="hidden" value="validate" name="todo">
-                <button type ="submit" class = "validate-btn"> <i class="far fa-square"></i> Valider </button>
+                <button type ="submit" class = "primary-cta"> VALIDER </button>
               <% end %>
             <% end %>
           </li>
         </ul>
       </div>
-      <div class="surgery-main-info">
-        <% if Date.today > @surgery.date %>
-          <p class="secondary-info">Opération réalisée le <u>  <%= @surgery.date %> </u></p>
-        <%  else %>
-          <p class="secondary-info">Opération prévue le <u>  <%= @surgery.date %> </u></p>
-        <% end %>
-      </div>
         <ul class="list-inline doctor-box">
           <li>
-            <p class="secondary-info"> <strong> Médecin :</strong> <%= @surgery.surgeon.name %></p>
+            <p class="font-14"> Médecin : <%= @surgery.surgeon.name %></p>
           </li>
           <li>
             <%= link_to notice_path(status: params[:status], surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]), method: "post" do %>
-              <button class="discrete-button"> <i class="fab fa-telegram-plane"></i> Send email</button>
+              <button class="secondary-cta"> <i class="fab fa-telegram-plane" style="padding-right: 8px"></i> ENVOYER PAR MAIL</button>
             <% end %>
           </li>
         </ul>
@@ -80,25 +74,24 @@
 
             <% if Date.today > @surgery.date %>
               <ul class= "list-inline">
-                <li> <p class = "discrete-tag">J+1</p> </li>
               <% if @surgery.post_form_answered %>
-                  <li><p class="secondary-info">
-                    <i class="fas fa-check"></i>
-                    Formulaire post-opération <u> rempli </u>
+                  <li><p class="font-14">
+                    <i class="fas fa-check" style="padding-right: 8px"></i>
+                    Formulaire post-opération rempli
                   </p></li>
                 </ul>
-                <button class="discrete-button"> <i class="fas fa-eye"></i></i><%= link_to 'Voir les réponses', surgery_path(@surgery) %></button>
+                <button class="primary-cta"> <i class="fas fa-eye" style="padding-right: 8px"></i></i><%= link_to 'VOIR LES RÉPONSES', surgery_path(@surgery) %></button>
               <% else %>
-                  <li><p class="secondary-info"> Formulaire post-opération <u>non rempli</u> </p></li>
+                  <li><p class="font-14"> Formulaire post-opération non rempli </p></li>
                 </ul>
                   <ul class="list-inline">
                     <li>
                       <%= link_to relanceSMS_path(status: params[:status], surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]), method: "post" do %>
-                        <button class="discrete-button"> <i class="far fa-comment"></i> Renvoyer au patient</button>
+                        <button class="secondary-cta"> <i class="far fa-comment" style="padding-right: 8px"></i> RENVOYER AU PATIENT</button>
                       <% end %>
                     </li>
                     <li>
-                      <button class="discrete-button"> <i class="fas fa-edit"></i><%= link_to 'Remplir', surgery_path(@surgery) %></button>
+                      <button class="secondary-cta"> <i class="fas fa-edit" style="padding-right: 8px"></i><%= link_to 'REMPLIR', surgery_path(@surgery) %></button>
                     </li>
                   </ul>
               <% end %>
@@ -106,25 +99,24 @@
             <% else %>
 
               <ul class= "list-inline">
-                <li> <p class = "discrete-tag">J-1</p> </li>
               <% if @surgery.pre_form_answered %>
-                  <li><p class="secondary-info">
-                    <i class="fas fa-check"></i>
-                    Formulaire pré-opération <u> rempli </u>
+                  <li><p class="form-14">
+                    <i class="fas fa-check" style="padding-right: 8px"></i>
+                    Formulaire pré-opération rempli
                   </p></li>
                 </ul>
-                <button class="discrete-button"> <i class="fas fa-eye"></i></i><%= link_to 'Voir les réponses', surgery_path(@surgery) %></button>
+                <button class="primary-cta"> <i class="fas fa-eye" style="padding-right: 8px"></i></i><%= link_to 'VOIR LES RÉPONSES', surgery_path(@surgery) %></button>
               <% else %>
-                  <li><p class="secondary-info"> Formulaire pré-opération <u>non rempli</u> </p></li>
+                  <li><p class="form-14"> Formulaire pré-opération non rempli </p></li>
                 </ul>
                   <ul class="list-inline">
                     <li>
                       <%= link_to relanceSMS_path(status: params[:status], surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]), method: "post" do %>
-                        <button class="discrete-button"> <i class="far fa-comment"></i> Renvoyer au patient</button>
+                        <button class="secondary-cta"> <i class="far fa-comment" style="padding-right: 8px"></i> RENVOYER AU PATIENT</button>
                       <% end %>
                     </li>
                     <li>
-                      <button class="discrete-button"> <i class="fas fa-edit"></i><%= link_to 'Remplir', surgery_path(@surgery) %></button>
+                      <button class="secondary-cta"> <i class="fas fa-edit" style="padding-right: 8px"></i><%= link_to 'REMPLIR', surgery_path(@surgery) %></button>
                     </li>
                   </ul>
               <% end %>
@@ -136,9 +128,9 @@
         </ul>
       </div>
       <div class="surgery-history-box">
-        <p>Historique</p>
+        <p class="grey-title">HISTORIQUE</p>
           <% @events.each do |event| %>
-            <div class="history-box secondary-info">
+            <div class="history-box">
               <div class="history-left">
                 <div class="history-separator-big"></div>
                 <div class=" <%= 'grey' if event.flag == nil %>
@@ -149,7 +141,7 @@
                 <div class="history-separator-big"
                 <% if event == @surgery.events.last %> style = "border-color: white;" <% end %>></div>
               </div>
-              <div class="history-right">
+              <div class="history-right font-14">
                 <%= event.created_at.strftime('%H : %M') + ' - ' + event.description %>
               </div>
             </div>
@@ -161,11 +153,10 @@
         </div>
         <div class="new-event-box">
           <%= form_for @event, url: surgery_path(@surgery), class: "form-inline", id: "new-event", method: :patch do |f|  %>
-            <p href="#" class="secondary-info add-event color-green ">Ajouter un commentaire</p>
             <div class="new-event-inputs">
+            <%= f.text_field :description, placeholder: "Ajouter un événement", class: "form-control font-15 width-40 height-30 event-input"  %>
             <%= f.select :flag, options_for_select([['Rouge', "red"], ['Orange','orange'], ['Vert', 'green'], ['Gris', 'grey']]), {}, class: 'form-control font-15 height-30 color-input' %>
-            <%= f.text_field :description, class: "form-control font-15 width-40 height-30 event-input"  %>
-              <button type="submit" class="add-event-btn height-30">+</button>
+              <button type="submit" class="add-event-btn">+</button>
             </div>
           <% end %>
         </div>

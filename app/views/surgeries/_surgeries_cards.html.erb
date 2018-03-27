@@ -44,28 +44,31 @@
     </div>
 
     <!-- Liste des actions -->
-    <div class="actions">
-      <div class="btn-group" role="group" aria-label="...">
-        <%= form_tag validate_batch_path, method: :patch do %>
-          <%= hidden_field_tag :surgery_ids, nil, id: "validate_batch_input" %>
-          <%= submit_tag "Valider", class: "btn btn-default small-font" %>
-        <% end %>
-
-
-        <button type="button" class="btn btn-default small-font">Relancer par SMS</button>
+    <div class="action-buttons">
+      <%= form_tag update_batch_path(todo: 'validate'), method: :patch do %>
+        <%= hidden_field_tag :surgery_ids, nil, id: "validate_batch_input" %>
+        <%= submit_tag "Valider", class: "btn validate-btn" %>
+      <% end %>
+      <%= form_tag sms_batch_path, method: :post do %>
+        <%= hidden_field_tag :surgery_ids, nil, id: "batch_input" %>
+        <%= submit_tag "SMS", class: "btn btn-default" %>
+      <% end %>
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          Prioriser
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
+          <% @status_array.each do |status| %>
+            <li>
+              <%= form_tag update_batch_path(status: status, todo: "prioritize"), method: :patch do %>
+                <%= hidden_field_tag :surgery_ids, nil, id: "batch_input" %>
+                <%= submit_tag "#{status.capitalize}", class: "no-submit" %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
       </div>
-        <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle small-font" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Changer la priorité
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
-            <li><%= link_to "Red", surgeries_path(status: "red", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]) %></li>
-            <li><%= link_to "Orange", surgeries_path(status: "orange", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]) %></li>
-            <li><%= link_to "Yellow", surgeries_path(status: "yellow", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]) %></li>
-            <li><%= link_to "Green", surgeries_path(status: "green", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]) %></li>
-          </ul>
-        </div>
     </div>
 
     <!-- Surgery cards -->

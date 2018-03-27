@@ -1,16 +1,41 @@
 <div class="sidebar">
   <% if user_signed_in? %>
     <div class="top-sidebar">
-      <div class="main-title"><%= current_user.hospital.name %></div>
-      <%= link_to 'Dashboard', root_path, id: ('selected' if params[:action] == 'home') %>
-      <%= link_to 'Opérations', surgeries_path, id: ('selected' if params[:action] == 'index' && params[:controller] == 'surgeries') %>
-      <%= link_to 'Questionnaires', forms_path, id: ('selected' if params[:action] == 'index' && params[:controller] == 'forms') %>
+      <div class="log-info">
+        <%= image_tag "logo_CdS.png", id: "logo_CdS" %>
+        <div class="main-title">
+          <%= current_user.hospital.name %>
+        </div>
+        <div class="user-logged">
+          <%= current_user.first_name %> <%= current_user.last_name %>
+        </div>
+      </div>
+      <div class="dashboard-sidebar">
+        <%= link_to surgeries_path, id: ('selected' if params[:action] == 'index' && params[:controller] == 'surgeries') do %>
+          <div class="fa-db-sidebar"><i class="fa fa-tasks"></i></div>
+          <div class="span-db-sidebar"><span>Tableau de bord</span></div>
+        <% end %>
+      </div>
+      <div class="stat-sidebar">
+        <%= link_to root_path, id: ('selected' if params[:action] == 'home') do %>
+          <div class="fa-stat-sidebar"><i class="fas fa-sliders-h"></i></div>
+          <div class="span-stat-sidebar"><span>Statistiques</span></div>
+        <% end %>
+      </div>
+      <div class="form-sidebar">
+        <%= link_to forms_path, id: ('selected' if params[:action] == 'index' && params[:controller] == 'forms') do %>
+          <div class="fa-form-sidebar"><i class="fab fa-wpforms"></i></div>
+          <div class="span-form-sidebar"><span>Formulaires</span></div>
+        <% end %>
+      </div>
     </div>
     <div class="bottom-sidebar">
       <%= link_to t(".sign_out", default: "Se déconnecter"), destroy_user_session_path, method: :delete %>
       </div>
     </div>
   <% else %>
-    <%= link_to t(".sign_in", default: "Login"), new_user_session_path %>
+    <div class="sidebar-login">
+      <%= link_to t(".sign_in", default: "Login"), new_user_session_path %>
+    </div>
   <% end %>
 </div>

@@ -14,6 +14,11 @@ const toggleActiveAndInput = (event) => {
       hiddenInput.value += `,${target_surgery_id}`;
     }
   }
+  const hiddenInputs = document.querySelectorAll('#batch_input');
+  hiddenInputs.forEach(function(e){
+    e.value = hiddenInput.value;
+  });
+
 };
 
 function ready() {

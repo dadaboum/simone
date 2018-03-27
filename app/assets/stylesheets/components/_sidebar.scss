@@ -1,6 +1,5 @@
 .sidebar {
-  color: white;
-  background-color: $grayer;
+  background-color: $blue;
   position: fixed;
   left: 0px;
   top: 0px;
@@ -11,29 +10,88 @@
   flex-direction: column;
   justify-content: space-between;
   z-index: 100;
+  box-shadow: 0px 4px 34px rgba(0, 0, 0, 0.2);
 }
 .main-title{
-  padding: 20px 0px;
-}
-.sidebar a {
-  text-decoration: none;
   color: white;
+  padding: 15px 0px;
+}
+
+.user-logged {
+  color: white;
+  font-size: 12px;
+  margin-top: -5px;
+}
+
+.log-info {
+  color: white;
+  margin-bottom: 40px;
+}
+
+.stat-sidebar {
+  width: 100%;
   display: flex;
-  height: 40px;
-  justify-content: center;
-  align-items: center;
-  font-size: 14px;
-  &:hover {
-    text-decoration: none;
-    color: $light-green;
-  }
+  justify-content: space-around;
 }
-.bottom-sidebar{
-  margin-bottom: 20px;
+
+.fa-form-sidebar i {
+  font-size: 19px;
 }
+
+.fa-db-sidebar i {
+  font-size: 15px;
+}
+
 #selected {
-  background-color: $light-green;
+  font-size: 15px;
+  color: white;
+  background-color: rgba(255,255,255, 0.4);
+  border-right: 5px solid white;
   &:hover {
     color: white;
   }
+  i {
+    margin-left: 15px;
+    font-size: 20px;
+  }
+}
+
+.sidebar span {
+  margin-left: 10px;
+}
+
+
+.sidebar a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.4);
+  display: flex;
+  height: 50px;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 14px;
+  i {
+    margin-left: 15px;
+    // font-size: 15px;
+  }
+  &:hover {
+    text-decoration: none;
+    color: white;
+  }
+}
+
+.bottom-sidebar a {
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.sidebar-login a {
+  justify-content: center;
+  align-items: center;
+}
+
+#logo_CdS {
+  margin-top: 30px;
+  width: 70%;
 }
