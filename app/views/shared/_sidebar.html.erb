@@ -21,7 +21,7 @@
         <% end %>
       </div>
       <div class="stat-sidebar">
-        <%= link_to root_path, id: ('selected' if params[:action] == 'home') do %>
+        <%= link_to dashboard_path, id: ('selected' if params[:action] == 'home') do %>
           <div class="fa-stat-sidebar"><i class="fas fa-sliders-h"></i></div>
           <div class="span-stat-sidebar"><span>Statistiques</span></div>
         <% end %>

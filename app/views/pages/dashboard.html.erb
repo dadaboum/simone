@@ -1,0 +1,138 @@
+<div class="content-container">
+  <div class="pre-op">
+    <div class="title-sms">
+      <div class="row">
+        <div class="col-xs-12 row-container">
+          <h3 style="color: black;">Analyses des actions Pré-opératoires</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 row-container">
+          <p>
+            SMS envoyés : 100%
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="all-flags">
+      <div class="red-alert">
+        <div class="row">
+          <div class="col-xs-12 col-md-4 col-md-offset-4" style="text-align: center">
+            <%= link_to surgeries_path(status: "red", pre_or_post: "pre") do %>
+              <div class="panel panel-danger <%= "red-alert-on" if nb_pre_op_red_flag > 0 %>">
+                <div class="panel-heading <%= "red-alert-on-heading" if nb_pre_op_red_flag > 0 %>">Alerte</div>
+                <div class="panel-body css-body">
+                  <p><%= nb_pre_op_red_flag %><%= "%" %></p>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <!--           DIV DES FLAGS ORANGE JAUNES ET VERTES            -->
+      <div class="flags">
+        <div class="alert-flags">
+          <%= link_to surgeries_path(status: "orange", pre_or_post: "pre") do %>
+            <div class="panel panel-warning <%= "orange-alert-on" if nb_pre_op_orange_flag > 0 %> resize-container">
+              <div class="panel-heading <%= "orange-alert-on-heading" if nb_pre_op_orange_flag > 0 %>" style="font-size: 15px;">A vérifier</div>
+              <div class="panel-body css-body">
+                <p><%= nb_pre_op_orange_flag %><%= "%" %></p>
+              </div>
+            </div>
+          <% end %>
+
+          <%= link_to surgeries_path(status: "yellow", pre_or_post: "pre") do %>
+            <div class="panel panel-default <%= "yellow-alert-on" if (nb_pre_op_yellow_flag > 0) %> resize-container">
+              <div class="panel-heading <%= "yellow-alert-on-heading" if (nb_pre_op_yellow_flag > 0) %>" style="font-size: 15px;">Non répondu</div>
+              <div class="panel-body css-body">
+                <p><%= nb_pre_op_yellow_flag %><%= "%" %></p>
+              </div>
+            </div>
+          <% end %>
+
+          <%= link_to surgeries_path(status: "green", pre_or_post: "pre") do %>
+            <div class="panel panel-success resize-container">
+              <div class="panel-heading" style="font-size: 15px;">Validé</div>
+              <div class="panel-body css-body">
+                <p><%= nb_pre_op_green_flag %><%= "%" %></p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+     <!--         FIN DE LA DIV DES FLAGS ORANGE JAUNES ET VERTES       -->
+      <div class="surgeries-count">
+       Total des opérations programmées le <%= (Date.tomorrow).strftime("%d/%m/%Y") %> : <%= Surgery.where("date='#{Date.tomorrow}'").count %>
+      </div>
+    </div>
+  </div>
+  <div class="post-op">
+    <div class="title-sms">
+      <div class="row">
+        <div class="col-xs-12 row-container">
+          <h3 style="color: black">Analyses des actions Post-opératoires</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 row-container">
+          <p>
+            SMS envoyés : 100%
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="all-flags">
+      <div class="red-alert">
+        <div class="row">
+          <div class="col-xs-12 col-md-4 col-md-offset-4" style="text-align: center">
+            <%= link_to surgeries_path(status: "red", pre_or_post: "post") do %>
+              <div class="panel panel-danger <%= "red-alert-on" if nb_post_op_red_flag > 0 %>">
+                <div class="panel-heading <%= "red-alert-on-heading" if nb_post_op_red_flag > 0 %>">Alerte
+                </div>
+                <div class="panel-body css-body">
+                  <p><%= nb_post_op_red_flag %><%= '%' %> </p>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="flags">
+        <div class="alert-flags">
+          <%= link_to surgeries_path(status: "orange", pre_or_post: "post") do %>
+            <div class="panel panel-warning <%= "orange-alert-on" if nb_post_op_orange_flag > 0 %> resize-container">
+              <div class="panel-heading <%= "orange-alert-on-heading" if nb_post_op_orange_flag > 0 %>" style="font-size: 15px;">A vérifier</div>
+              <div class="panel-body css-body">
+                <p><%= nb_post_op_orange_flag %><%= "%" %></p>
+              </div>
+            </div>
+          <% end %>
+
+          <%= link_to surgeries_path(status: "yellow", pre_or_post: "post") do %>
+            <div class="panel panel-default <%= "yellow-alert-on" if (nb_post_op_yellow_flag > 0) %> resize-container">
+              <div class="panel-heading <%= "yellow-alert-on-heading" if (nb_post_op_yellow_flag > 0) %>" style="font-size: 15px;">Non répondu</div>
+              <div class="panel-body css-body">
+                <p><%= nb_post_op_yellow_flag %><%= "%" %></p>
+              </div>
+            </div>
+          <% end %>
+
+          <%= link_to surgeries_path(status: "green", pre_or_post: "post") do %>
+            <div class="panel panel-success resize-container">
+              <div class="panel-heading" style="font-size: 15px;">Validé</div>
+              <div class="panel-body css-body">
+                <p><%= nb_post_op_green_flag %><%= "%" %></p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="surgeries-count">
+      Total des opérations effectuées le <%= (Date.yesterday).strftime("%d/%m/%Y") %> : <%= Surgery.where("date='#{Date.yesterday}'").count %>
+      </div>
+    </div>
+  </div>
+</div>
