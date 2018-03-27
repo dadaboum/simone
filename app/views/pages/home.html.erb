@@ -21,7 +21,7 @@
           <div class="col-xs-12 col-md-4 col-md-offset-4" style="text-align: center">
             <%= link_to surgeries_path(status: "red", pre_or_post: "pre") do %>
               <div class="panel panel-danger <%= "red-alert-on" if nb_pre_op_red_flag > 0 %>">
-                <div class="panel-heading <%= "red-alert-on-heading" if nb_pre_op_red_flag > 0 %>">Urgence</div>
+                <div class="panel-heading <%= "red-alert-on-heading" if nb_pre_op_red_flag > 0 %>">Alerte</div>
                 <div class="panel-body css-body">
                   <p><%= nb_pre_op_red_flag %><%= "%" %></p>
                 </div>
@@ -35,7 +35,7 @@
         <div class="alert-flags">
           <%= link_to surgeries_path(status: "orange", pre_or_post: "pre") do %>
             <div class="panel panel-warning <%= "orange-alert-on" if nb_pre_op_orange_flag > 0 %> resize-container">
-              <div class="panel-heading <%= "orange-alert-on-heading" if nb_pre_op_orange_flag > 0 %>" style="font-size: 15px;">A contrôler</div>
+              <div class="panel-heading <%= "orange-alert-on-heading" if nb_pre_op_orange_flag > 0 %>" style="font-size: 15px;">A vérifier</div>
               <div class="panel-body css-body">
                 <p><%= nb_pre_op_orange_flag %><%= "%" %></p>
               </div>
@@ -89,7 +89,7 @@
           <div class="col-xs-12 col-md-4 col-md-offset-4" style="text-align: center">
             <%= link_to surgeries_path(status: "red", pre_or_post: "post") do %>
               <div class="panel panel-danger <%= "red-alert-on" if nb_post_op_red_flag > 0 %>">
-                <div class="panel-heading <%= "red-alert-on-heading" if nb_post_op_red_flag > 0 %>">Urgence
+                <div class="panel-heading <%= "red-alert-on-heading" if nb_post_op_red_flag > 0 %>">Alerte
                 </div>
                 <div class="panel-body css-body">
                   <p><%= nb_post_op_red_flag %><%= '%' %> </p>
@@ -104,7 +104,7 @@
         <div class="alert-flags">
           <%= link_to surgeries_path(status: "orange", pre_or_post: "post") do %>
             <div class="panel panel-warning <%= "orange-alert-on" if nb_post_op_orange_flag > 0 %> resize-container">
-              <div class="panel-heading <%= "orange-alert-on-heading" if nb_post_op_orange_flag > 0 %>" style="font-size: 15px;">A contrôler</div>
+              <div class="panel-heading <%= "orange-alert-on-heading" if nb_post_op_orange_flag > 0 %>" style="font-size: 15px;">A vérifier</div>
               <div class="panel-body css-body">
                 <p><%= nb_post_op_orange_flag %><%= "%" %></p>
               </div>

@@ -1,19 +1,30 @@
 <div class="surgery-card small-font">
-  <input type="checkbox" data-surgeryid="<%=surgery.id %>">
-  <!-- Quand la checkbox est cochee : <i class="far fa-check-square"></i> -->
+  <div class="surgery-checkbox">
+    <input type="checkbox" data-surgeryid="<%=surgery.id %>">
+    <!-- Quand la checkbox est cochee : <i class="far fa-check-square"></i> -->
+  </div>
   <%= link_to surgeries_path(surgery_id: surgery.id, status: params[:status], pre_or_post: params[:pre_or_post], validated: params[:validated]) do %>
-    <div class="surgery-patient">
-      <p class="strong <%= surgery.status %>-card"><%= surgery.patient.first_name %> <%= surgery.patient.last_name %> - <%= surgery.surgeon.name %></p>
-      <p><%= surgery.surgery_type.description %></p>
-    </div>
-    <div class="surgery-form-type discrete-tag">
-      <% if surgery.date < Date.today %>
-        J+1
-      <% else %>
-        J-1
-      <% end %>
+    <div class="surgery-content <%= surgery.status %>-border">
+      <div class="surgery-patient">
+        <div class="surgery-details">
+          <p class="strong"><%= surgery.patient.first_name %> <%= surgery.patient.last_name %> - <%= surgery.surgeon.name %></p>
+        </div>
+        <div class="surgery-description">
+          <p><%= surgery.surgery_type.description %></p>
+        </div>
+      </div>
+      <div class="surgery-types">
+        <div class="surgery-status <%= surgery.status %>-color">
+          <%= surgery.status.upcase %>
+        </div>
+        <div class="surgery-date">
+          <% if surgery.date < Date.today %>
+            POST
+          <% else %>
+            PRE
+          <% end %>
+        </div>
+      </div>
     </div>
   <% end %>
-  <%= surgery.validated %>
-
 </div>
