@@ -100,11 +100,15 @@ before_action :set_surgery, only: [:show, :update]
     end
   end
 
-  def validate_batch
+  def update_batch
     ids = params[:surgery_ids]
     ids.split(",").each do |id|
       surgery = Surgery.find(id)
-      surgery.validated = true
+      if params[:todo] == "validate"
+        surgery.validated = true
+      elsif params[:todo] == "prioritize"
+        surgery.status = params[:status]
+      end
       surgery.save
     end
     redirect_to surgeries_path
