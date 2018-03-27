@@ -30,12 +30,9 @@
   }
 }
 
-.validated-btn {
-  padding: 6px 12px;
-  border: 1px solid $green;
-  border-radius: 2px;
-  font-size: 15px;
-  color: $green;
+.validated-mock-btn {
+  padding: 8px 22px;
+  color: $blue;
   &:hover {
     color: rgba(0, 0, 0, 0.6);
     border: 1px solid rgba(0,0,0,0.2);
@@ -57,14 +54,37 @@
 }
 
 .add-event-btn {
-  border: 1px solid rgba(0,0,0,0.2);
-  border-radius: 2px;
-  width: 40px;
+  border: 1px solid $blue;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
   font-size: 20px;
-  color: $green;
-  border: 1px solid $green;
-  &:hover {
+  color: white;
+  background-color: $blue;
+}
+
+.rounded-dropdown-btn {
+  padding: 8px 18px;
+  border-radius: 30px;
+}
+
+.primary-cta {
+  padding: 8px 22px;
+  border-radius: 30px;
+  border: 1px solid $blue;
+  color: white;
+  background-color: $blue;
+  a {
     color: white;
-    background-color: $green;
   }
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+.secondary-cta {
+  padding: 8px 22px;
+  border-radius: 30px;
+  border: 1px solid $blue;
+  color: $blue;
 }
