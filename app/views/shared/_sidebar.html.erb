@@ -10,12 +10,12 @@
           <%= current_user.first_name %> <%= current_user.last_name %>
         </div>
       </div>
-
+      <div class="dashboard-sidebar">
         <%= link_to surgeries_path, id: ('selected' if params[:action] == 'index' && params[:controller] == 'surgeries') do %>
-          <div class="fa-stat-sidebar"><i class="fa fa-tasks"></i></div>
-          <div class="span-stat-sidebar"><span>Tableau de bord</span></div>
+          <div class="fa-db-sidebar"><i class="fa fa-tasks"></i></div>
+          <div class="span-db-sidebar"><span>Tableau de bord</span></div>
         <% end %>
-
+      </div>
       <div class="stat-sidebar">
         <%= link_to root_path, id: ('selected' if params[:action] == 'home') do %>
           <div class="fa-stat-sidebar"><i class="fas fa-sliders-h"></i></div>
@@ -24,8 +24,8 @@
       </div>
       <div class="form-sidebar">
         <%= link_to forms_path, id: ('selected' if params[:action] == 'index' && params[:controller] == 'forms') do %>
-          <div class="fa-stat-sidebar"><i class="fab fa-wpforms"></i></div>
-          <div class="span-stat-sidebar"><span>Formulaires</span></div>
+          <div class="fa-form-sidebar"><i class="fab fa-wpforms"></i></div>
+          <div class="span-form-sidebar"><span>Formulaires</span></div>
         <% end %>
       </div>
     </div>
