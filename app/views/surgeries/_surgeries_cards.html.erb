@@ -46,7 +46,6 @@
     <!-- Liste des actions -->
     <div class="actions">
       <div class="btn-group" role="group" aria-label="...">
-        <!-- Validate action on multiple instances -->
         <%= form_tag validate_batch_path, method: :patch do %>
           <%= hidden_field_tag :surgery_ids, nil, id: "validate_batch_input" %>
           <%= submit_tag "Valider", class: "btn btn-default small-font" %>
