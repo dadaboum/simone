@@ -101,6 +101,7 @@ GEM
     multi_json (1.13.1)
     multipart-post (2.0.0)
     netrc (0.11.0)
+    ngrok-tunnel (2.1.0)
     nio4r (2.3.0)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
@@ -232,6 +233,7 @@ DEPENDENCIES
   font-awesome-sass
   jbuilder (~> 2.0)
   listen (~> 3.0.5)
+  ngrok-tunnel
   pg (~> 0.21)
   popper_js (~> 1.12.9)
   postmark-rails
