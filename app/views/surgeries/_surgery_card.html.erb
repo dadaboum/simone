@@ -4,27 +4,45 @@
     <!-- Quand la checkbox est cochee : <i class="far fa-check-square"></i> -->
   </div>
   <%= link_to surgeries_path(surgery_id: surgery.id, status: params[:status], pre_or_post: params[:pre_or_post], validated: params[:validated]) do %>
-    <div class="surgery-content <%= surgery.status %>-border">
-      <div class="surgery-patient">
-        <div class="surgery-details">
-          <p class="strong"><%= surgery.patient.first_name %> <%= surgery.patient.last_name %> - <%= surgery.surgeon.name %></p>
+    <% if surgery.id == params[:surgery_id].to_i %>
+      <div class="surgery-content <%= surgery.status %>-border selected">
+    <% elsif surgery.validated %>
+      <div class="surgery-content <%= surgery.status %>-border validated">
+    <% else %>
+      <div class="surgery-content <%= surgery.status %>-border">
+    <% end %>
+        <div class="surgery-patient">
+          <div class="surgery-details">
+            <% if surgery.validated %>
+              <p><%= surgery.patient.first_name %> <%= surgery.patient.last_name %> - <%= surgery.surgeon.name %> <i class="fas fa-check"></i></p>
+            <% else %>
+              <p><%= surgery.patient.first_name %> <%= surgery.patient.last_name %> - <%= surgery.surgeon.name %></p>
+            <% end %>
+          </div>
+          <div class="surgery-description">
+            <p><%= surgery.surgery_type.description %></p>
+          </div>
         </div>
-        <div class="surgery-description">
-          <p><%= surgery.surgery_type.description %></p>
+        <div class="surgery-types">
+          <div class="surgery-status <%= surgery.status %>-color">
+            <% if surgery.status == "alerte" %>
+              <p><%= surgery.status.upcase %>  <i class="fas fa-exclamation-circle"></i></p>
+            <% elsif surgery.status == "à vérifier" %>
+              <p><%= surgery.status.upcase %>  <i class="fas fa-question-circle"></i></p>
+            <% elsif surgery.status == "non répondu" %>
+              <p><%= surgery.status.upcase %>  <i class="fas fa-clock"></i></p>
+            <% else %>
+              <p><%= surgery.status.upcase %>  <i class="fas fa-thumbs-up"></i></p>
+            <% end %>
+          </div>
+          <div class="surgery-date">
+            <% if surgery.date < Date.today %>
+              <p>POST</p>
+            <% else %>
+              <p>PRE</p>
+            <% end %>
+          </div>
         </div>
-      </div>
-      <div class="surgery-types">
-        <div class="surgery-status <%= surgery.status %>-color">
-          <%= surgery.status.upcase %>
-        </div>
-        <div class="surgery-date">
-          <% if surgery.date < Date.today %>
-            POST
-          <% else %>
-            PRE
-          <% end %>
-        </div>
-      </div>
     </div>
   <% end %>
 </div>
