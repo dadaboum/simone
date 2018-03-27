@@ -2,7 +2,11 @@
   <% if user_signed_in? %>
     <div class="top-sidebar">
       <div class="log-info">
-        <%= image_tag "logo_CdS.png", id: "logo_CdS" %>
+        <% if (current_user.hospital).photo.nil? %>
+          logo à ajouter
+        <% else %>
+          <%= cl_image_tag (current_user.hospital).photo, id: "logo_hospital" %>
+        <% end %>
         <div class="main-title">
           <%= current_user.hospital.name %>
         </div>
