@@ -34,6 +34,14 @@
   justify-content: space-around;
 }
 
+.fa-form-sidebar i {
+  font-size: 19px;
+}
+
+.fa-db-sidebar i {
+  font-size: 15px;
+}
+
 #selected {
   font-size: 15px;
   color: white;
@@ -41,6 +49,10 @@
   border-right: 5px solid white;
   &:hover {
     color: white;
+  }
+  i {
+    margin-left: 15px;
+    font-size: 20px;
   }
 }
 
@@ -60,12 +72,14 @@
   font-size: 14px;
   i {
     margin-left: 15px;
+    // font-size: 15px;
   }
   &:hover {
     text-decoration: none;
     color: white;
   }
 }
+
 .bottom-sidebar a {
   justify-content: center;
   align-items: center;
