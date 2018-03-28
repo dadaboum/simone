@@ -4,11 +4,15 @@ before_action :set_surgery, only: [:show, :update]
   def index
     @surgeries = set_surgeries_filters_and_order
 
+    if params[:query].present?
+      selection = PgSearch.multisearch(params[:query])
+      @surgeries = selection.map(&:searchable).map(&:surgeries).flatten
+    end
+
     if params[:surgery_id].present?
       @surgery = Surgery.find(params[:surgery_id])
     else
       @surgery = @surgeries.first
-      # params[:surgery_id] = @surgery.id
     end
 
     @status_array = ["alerte", "à vérifier", "ok", "non répondu"]
@@ -147,15 +151,15 @@ before_action :set_surgery, only: [:show, :update]
     end
 
 
-    a = @surgeries.where(status: "alerte", validated: false)
-    b = @surgeries.where(status: "à vérifier", validated: false)
-    c = @surgeries.where(status: "ok", validated: false)
-    d = @surgeries.where(status: "non répondu", validated: false)
-    e = @surgeries.where(status: "alerte", validated: true)
-    f = @surgeries.where(status: "à vérifier", validated: true)
-    g = @surgeries.where(status: "ok", validated: true)
-    h = @surgeries.where(status: "non répondu", validated: true)
-    @surgeries = a + b + c + d + e + f + g + h
+    #a = @surgeries.where(status: "alerte", validated: false)
+    #b = @surgeries.where(status: "à vérifier", validated: false)
+    #c = @surgeries.where(status: "ok", validated: false)
+    #d = @surgeries.where(status: "non répondu", validated: false)
+    #e = @surgeries.where(status: "alerte", validated: true)
+    #f = @surgeries.where(status: "à vérifier", validated: true)
+    #g = @surgeries.where(status: "ok", validated: true)
+    #h = @surgeries.where(status: "non répondu", validated: true)
+    #@surgeries = a + b + c + d + e + f + g + h
 
     if params[:query].present?
       selection = PgSearch.multisearch(params[:query])
