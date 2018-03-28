@@ -8,7 +8,7 @@ before_action :set_surgery, only: [:show, :update]
       selection = PgSearch.multisearch(params[:query])
       @surgeries = selection.map(&:searchable).map(&:surgeries).flatten
     end
-
+    
     if params[:surgery_id].present?
       @surgery = Surgery.find(params[:surgery_id])
     else
@@ -149,7 +149,6 @@ before_action :set_surgery, only: [:show, :update]
     if params[:validated].present?
       @surgeries = @surgeries.where(validated: params[:validated])
     end
-
 
     #a = @surgeries.where(status: "alerte", validated: false)
     #b = @surgeries.where(status: "à vérifier", validated: false)
