@@ -10,7 +10,7 @@
     <meta property="og:title" content="<%= meta_title %>" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="<%= request.original_url %>" />
-    <meta property="og:image" content="<%= meta_image %>" width="1200" height="635" />
+    <meta property="og:image" content="<%= meta_image %>" width="1200" height="630" />
     <meta property="og:description" content="<%= meta_description %>" />
     <meta property="og:site_name" content="<%= meta_title %>" />
 
@@ -23,7 +23,7 @@
     <meta name="twitter:image:src" content="<%= meta_image %>">
 
     <%#= favicon_link_tag asset_path('cover.png'), :rel => 'icon', :type =>  'image/png' %>
-    <%= favicon_link_tag asset_path('favicon.png') %>
+    <%= favicon_link_tag asset_path('cover.png') %>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
