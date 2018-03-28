@@ -22,14 +22,16 @@ class PatientsController < ApplicationController
 
   def sms_content_patient_and_event(surgery)
     patient = surgery.patient
+    typeform_pre = Form.find(surgery.pre_form_id).typeform_id
+    typeform_post = Form.find(surgery.post_form_id).typeform_id
     if Date.today < surgery.date
-      message = "Bonjour, #{patient.first_name} #{patient.last_name}, lien du questionnaire pré-opératoire : https://davidbenamran.typeform.com/to/Dcyfaj?surgery_id=#{params[:surgery_id]}"
+      message = "Bonjour, #{patient.first_name} #{patient.last_name}, lien du questionnaire pré-opératoire : https://davidbenamran.typeform.com/to/#{typeform_pre}?surgery_id=#{params[:surgery_id]}"
       event = Event.new(description: "relance message pré-opératoire", flag: "green")
     else
-      message = "Bonjour, #{patient.first_name} #{patient.last_name}, lien du questionnaire post-opératoire : https://davidbenamran.typeform.com/to/yccqO5?surgery_id=#{params[:surgery_id]}"
+      message = "Bonjour, #{patient.first_name} #{patient.last_name}, lien du questionnaire post-opératoire : https://davidbenamran.typeform.com/to/#{typeform_post}?surgery_id=#{params[:surgery_id]}"
       event = Event.new(description: "relance message post-opératoire", flag: "green")
     end
-    # sms = TwilioTextMessenger.new(patient.phone_number, message).call
+    sms = TwilioTextMessenger.new(patient.phone_number, message).call
     event.surgery = surgery
     event.save
   end

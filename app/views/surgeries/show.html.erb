@@ -1,5 +1,6 @@
 <div class="content-container">
   <div class="core-left-surgery">
+    <div class="sticky-box">
     <% if @surgery.date > Date.today %>
       <h4 class='text-center'>Formulaire pré-admission</h4>
     <% else %>
@@ -22,6 +23,12 @@
         <%= f.text_area :pre_comments, placeholder: "Ecrivez votre commentaire...", class: 'comment-field' %>
         <%= f.submit 'Ajouter un commentaire', class: 'btn btn-sm btn-primary' %>
       <% end %>
+      <div class="comment-box text-center">
+        <%= simple_form_for(@surgery) do |f| %>
+          <%= f.text_area :pre_comments, placeholder: "Ecrivez votre commentaire...", class: 'comment-field' %>
+          <%= f.submit 'Ajouter un commentaire', class: 'btn btn-sm btn-primary' %>
+        <% end %>
+      </div>
     </div>
   </div>
 

@@ -3,6 +3,7 @@
   <%= render "index_action_buttons" %>
   <div class="surgery-cards-wrapper">
     <% if @surgery %>
+      <% params[:surgery_id] = @surgery.id unless params[:surgery_id].present? %>
       <% @surgeries.each do |surgery| %>
         <%= render "surgery_card", surgery: surgery %>
       <% end %>

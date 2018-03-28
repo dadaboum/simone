@@ -1,13 +1,22 @@
+
 .core-left-surgery {
   flex: 0 0 50%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+}
+
+.sticky-box {
+  position: sticky;
+  top: 0px;
+  width: 100%;
 }
 
 #typeform-embed {
-  height: 70%;
+  width: 100%;
+  height: 500px;
 }
+
 .comment-box {
   .comment-field {
     width: 100%;
