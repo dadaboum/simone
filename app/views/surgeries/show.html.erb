@@ -1,25 +1,27 @@
 <div class="content-container">
   <div class="core-left-surgery">
-    <% if @surgery.date > Date.today %>
-      <h4 class='text-center'>Formulaire pré-admission</h4>
-      <% if @pre_form_answer %>
-        <%= render 'form_answer_display', form_answer: @pre_form_answer %>
+    <div class="sticky-box">
+      <% if @surgery.date > Date.today %>
+        <h4 class='text-center'>Formulaire pré-admission</h4>
+        <% if @pre_form_answer %>
+          <%= render 'form_answer_display', form_answer: @pre_form_answer %>
+        <% else %>
+          <div id="typeform-embed" data-surgeryid="<%= @surgery.id %>" data-typeformid="<%= @surgery.pre_form.typeform_id %>"></div>
+        <% end %>
       <% else %>
-        <div id="typeform-embed" data-surgeryid="<%= @surgery.id %>" data-typeformid="<%= @surgery.pre_form.typeform_id %>"></div>
+        <h4 class='text-center'>Formulaire post-opératoire</h4>
+        <% if @post_form_answer %>
+          <%= render 'form_answer_display', form_answer: @post_form_answer %>
+        <% else %>
+          <div id="typeform-embed" data-surgeryid="<%= @surgery.id %>" data-typeformid="<%= @surgery.post_form.typeform_id %>"></div>
+        <% end %>
       <% end %>
-    <% else %>
-      <h4 class='text-center'>Formulaire post-opératoire</h4>
-      <% if @post_form_answer %>
-        <%= render 'form_answer_display', form_answer: @post_form_answer %>
-      <% else %>
-        <div id="typeform-embed" data-surgeryid="<%= @surgery.id %>" data-typeformid="<%= @surgery.post_form.typeform_id %>"></div>
-      <% end %>
-    <% end %>
-    <div class="comment-box text-center">
-      <%= simple_form_for(@surgery) do |f| %>
-        <%= f.text_area :pre_comments, placeholder: "Ecrivez votre commentaire...", class: 'comment-field' %>
-        <%= f.submit 'Ajouter un commentaire', class: 'btn btn-sm btn-primary' %>
-      <% end %>
+      <div class="comment-box text-center">
+        <%= simple_form_for(@surgery) do |f| %>
+          <%= f.text_area :pre_comments, placeholder: "Ecrivez votre commentaire...", class: 'comment-field' %>
+          <%= f.submit 'Ajouter un commentaire', class: 'btn btn-sm btn-primary' %>
+        <% end %>
+      </div>
     </div>
   </div>
 

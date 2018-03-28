@@ -2,12 +2,19 @@
   flex: 0 0 50%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+}
+
+.sticky-box {
+  position: sticky;
+  top: 0px;
 }
 
 #typeform-embed {
-  height: 70%;
+  width: 500px;
+  height: 500px;
 }
+
 .comment-box {
   .comment-field {
     width: 100%;

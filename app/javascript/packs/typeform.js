@@ -1,4 +1,4 @@
 import { typeformAdd } from '../components/typeform_embed';
-if (!form_answer) {
+if (document.getElementById('typeform-embed')) {
   typeformAdd();
 };
