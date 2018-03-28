@@ -63,9 +63,12 @@ before_action :set_surgery, only: [:show, :update]
       @event.description = @event.description + " par " + current_user.first_name + " " + current_user.last_name
       @event.save!
       @surgery.save!
+      # set instances for index and redirect
+      @events = @surgery.events.order(created_at: :asc)
+      @surgeries = set_surgeries_filters_and_order
       respond_to do |format|
         format.html { redirect_to surgeries_path(surgery_id: @surgery.id) }
-        format.js
+        format.js {render action: "index"}
       end
 
     # case 2 : when updating priority
@@ -90,15 +93,21 @@ before_action :set_surgery, only: [:show, :update]
       @event.description = current_user.first_name + " " + current_user.last_name + " " + @event.description
       @event.save!
       @surgery.save!
+      # set instances for index and redirect
+      @events = @surgery.events
+      @surgeries = set_surgeries_filters_and_order
       respond_to do |format|
         format.html { redirect_to surgeries_path(surgery_id: @surgery.id) }
-        format.js
+        format.js {render action: "index"}
       end
 
     # case 3 : when adding an event
     elsif event_params
       @event.update(event_params)
       @event.save!
+      # set instances for index and redirect (only update the right-side)
+      @events = @surgery.events
+      @surgeries = set_surgeries_filters_and_order
       respond_to do |format|
         format.html { redirect_to surgeries_path(surgery_id: @surgery.id) }
         format.js
@@ -112,8 +121,6 @@ before_action :set_surgery, only: [:show, :update]
     @surgery.update(surgery_params)
     redirect_to surgery_path(@surgery)
     end
-    @events = @surgery.events
-    @surgeries = set_surgeries_filters_and_order
   end
 
   def update_batch
