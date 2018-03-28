@@ -24,10 +24,10 @@ simone.save
 
 puts "Created Nurse Simone"
 
-guilhem = Surgeon.create(name:"Dr Guilhem", email:"guilhem@gmail.com")
-paul = Surgeon.create(name:"Dr Paul", email:"paul@gmail.com")
-jacques = Surgeon.create(name:"Dr Jacques", email:"jjoubert86@gmail.com")
-Surgeon.create(name:"Guilhem", email:"gr@gmail.com")
+guilhem = Surgeon.create(name:"Dr Guilhem", email:"davidbenamran@gmail.com")
+paul = Surgeon.create(name:"Dr Paul", email:"davidbenamran@gmail.com")
+jacques = Surgeon.create(name:"Dr Jacques", email:"davidbenamran@gmail.com")
+Surgeon.create(name:"Guilhem", email:"davidbenamran@gmail.com")
 
 puts "Created Dr Guilhem and Dr Paul"
 
