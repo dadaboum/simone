@@ -1,4 +1,4 @@
-<div class="right-side-wrapper">
+<div class="right-side-wrapper" id="all-right-side">
   <%= form_tag surgeries_path(surgery_id: params[:surgery_id], validated: params[:validated], pre_or_post: params[:pre_or_post]), id: "searchbar", method: :get do %>
     <%= text_field_tag :query, params[:query], class: "form-control font-15 height-30 event-input", placeholder: "Recherchez un patient ou médecin..." %>
   <% end %>
