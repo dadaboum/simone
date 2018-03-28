@@ -1,46 +1,46 @@
 <div class="filters">
-      <div id="filter-title">
-        <% if params[:validated] || params[:pre_or_post] || params[:query] || params[:status] %>
-          <%= link_to "Effacer les filtres", surgeries_path %>
-        <% elsif %>
-          Filtrer par :
-        <% end %>
-      </div>
-      <div class="dropdown">
-        <button class="btn form-control dropdown-toggle font-15 height-30" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          <%= params[:status].present? ? params[:status].capitalize : "Priorité" %>
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
-          <% @status_array.each do |status| %>
-            <li><%= link_to "#{status.capitalize}", surgeries_path(status: "#{status}", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post], validated: params[:validated], query: params[:query]) %></li>
-          <% end %>
-          <li role="separator" class="divider"></li>
-          <li><%= link_to "Tous", surgeries_path(surgery_id: params[:surgery_id], validated: params[:validated], pre_or_post: params[:pre_or_post], query: params[:query]) %></li>
-        </ul>
-      </div>
-      <div class="dropdown">
-        <button class="btn dropdown-toggle form-control font-15 height-30" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          <%= params[:pre_or_post].present? ? (params[:pre_or_post] == "pre" ? "Pre" : "Post") : "Pre / Post" %>
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
-          <li><%= link_to "Pre-opératoire", surgeries_path(pre_or_post: "pre", surgery_id: params[:surgery_id], status: params[:status], validated: params[:validated], query: params[:query]) %></li>
-          <li><%= link_to "Post-opératoire", surgeries_path(pre_or_post: "post", surgery_id: params[:surgery_id], status: params[:status], validated: params[:validated], query: params[:query]) %></li>
-          <li role="separator" class="divider"></li>
-          <li><%= link_to "Tous", surgeries_path(surgery_id: params[:surgery_id], status: params[:status], validated: params[:validated], query: params[:query]) %></li>
-        </ul>
-      </div>
-      <div class="dropdown">
-        <button class="btn dropdown-toggle form-control font-15 height-30" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          <%= params[:validated].present? ? (params[:validated] == "true" ? "Validé" : "En cours") : "Validation" %>
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
-          <li><%= link_to "Validé", surgeries_path(validated: "true", surgery_id: params[:surgery_id], status: params[:status], pre_or_post: params[:pre_or_post], query: params[:query]) %></li>
-          <li><%= link_to "En cours", surgeries_path(validated: "false", surgery_id: params[:surgery_id], status: params[:status], pre_or_post: params[:pre_or_post], query: params[:query]) %></li>
-          <li role="separator" class="divider"></li>
-          <li><%= link_to "Tous", surgeries_path(surgery_id: params[:surgery_id], status: params[:status], query: params[:query]) %></li>
-        </ul>
-      </div>
-    </div>
+  <div id="filter-title">
+    <% if params[:validated] || params[:pre_or_post] || params[:query] || params[:status] %>
+      <%= link_to "Effacer les filtres", surgeries_path %>
+    <% elsif %>
+      Filtrer par:
+    <% end %>
+  </div>
+  <div class="dropdown">
+    <button class="btn form-control dropdown-toggle font-15 height-30" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      <%= params[:status].present? ? params[:status].capitalize : "Priorité" %>
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
+      <% @status_array.each do |status| %>
+        <li><%= link_to "#{status.capitalize}", surgeries_path(status: "#{status}", surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post], validated: params[:validated], query: params[:query]) %></li>
+      <% end %>
+      <li role="separator" class="divider"></li>
+      <li><%= link_to "Tous", surgeries_path(surgery_id: params[:surgery_id], validated: params[:validated], pre_or_post: params[:pre_or_post], query: params[:query]) %></li>
+    </ul>
+  </div>
+  <div class="dropdown">
+    <button class="btn dropdown-toggle form-control font-15 height-30" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      <%= params[:pre_or_post].present? ? (params[:pre_or_post] == "pre" ? "Pre" : "Post") : "Pre / Post" %>
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
+      <li><%= link_to "Pre-opératoire", surgeries_path(pre_or_post: "pre", surgery_id: params[:surgery_id], status: params[:status], validated: params[:validated], query: params[:query]) %></li>
+      <li><%= link_to "Post-opératoire", surgeries_path(pre_or_post: "post", surgery_id: params[:surgery_id], status: params[:status], validated: params[:validated], query: params[:query]) %></li>
+      <li role="separator" class="divider"></li>
+      <li><%= link_to "Tous", surgeries_path(surgery_id: params[:surgery_id], status: params[:status], validated: params[:validated], query: params[:query]) %></li>
+    </ul>
+  </div>
+  <div class="dropdown">
+    <button class="btn dropdown-toggle form-control font-15 height-30" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      <%= params[:validated].present? ? (params[:validated] == "true" ? "Validé" : "En cours") : "Validation" %>
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
+      <li><%= link_to "Validé", surgeries_path(validated: "true", surgery_id: params[:surgery_id], status: params[:status], pre_or_post: params[:pre_or_post], query: params[:query]) %></li>
+      <li><%= link_to "En cours", surgeries_path(validated: "false", surgery_id: params[:surgery_id], status: params[:status], pre_or_post: params[:pre_or_post], query: params[:query]) %></li>
+      <li role="separator" class="divider"></li>
+      <li><%= link_to "Tous", surgeries_path(surgery_id: params[:surgery_id], status: params[:status], query: params[:query]) %></li>
+    </ul>
+  </div>
+</div>
