@@ -41,7 +41,7 @@
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu font-15 small-font" aria-labelledby="dropdownMenu1">
-                  <%= form_for @surgery, url: surgery_path(@surgery), method: :patch, remote: true do |f| %>
+                  <%= form_for @surgery, url: surgery_path(@surgery, status: params[:status], pre_or_post: params[:pre_or_post], validated: params[:validated]), method: :patch, remote: true do |f| %>
                   <li> <input class="no-submit" type="submit" value="Alerte" name="change_status" ></li>
                   <li> <input class="no-submit" type="submit" value="A vérifier" name="change_status" ></li>
                   <li> <input class="no-submit" type="submit" value="Ok" name="change_status" ></li>
@@ -51,7 +51,7 @@
               </div>
           </li>
           <li>
-            <%= form_for @surgery, url: surgery_path(@surgery), method: :patch, remote: true do |f| %>
+            <%= form_for @surgery, url: surgery_path(@surgery, status: params[:status], pre_or_post: params[:pre_or_post], validated: params[:validated]), method: :patch, remote: true do |f| %>
               <% if @surgery.validated %>
                 <input type="hidden" value="unvalidate" name="todo">
                 <button type = "submit" class = "validated-mock-btn" style="border: 0px;"> <i class="fas fa-check" style="padding-right: 4px"></i> VALIDÉ </button>
