@@ -1,4 +1,7 @@
 <div class="right-side-wrapper">
+  <%= form_tag surgeries_path, id: "searchbar", method: :get do %>
+    <%= text_field_tag :query, params[:query], class: "form-control font-15 height-30 event-input", placeholder: "Recherchez un patient ou médecin..." %>
+  <% end %>
   <div class="right-side-box">
     <div class="patient-box">
       <div class="patient-name">

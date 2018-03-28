@@ -19,6 +19,7 @@ before_action :set_surgery, only: [:show, :update]
       @surgeries = @surgeries.where(validated: params[:validated])
     end
 
+
     a = @surgeries.where(status: "alerte", validated: false)
     b = @surgeries.where(status: "à vérifier", validated: false)
     c = @surgeries.where(status: "ok", validated: false)
@@ -34,6 +35,14 @@ before_action :set_surgery, only: [:show, :update]
     else
       @surgery = @surgeries.first
       # params[:surgery_id] = @surgery.id
+    end
+
+    if params[:query].present?
+      selection = PgSearch.multisearch(params[:query])
+      @surgeries = []
+      selection.each do |pg|
+        pg.searchable.surgeries.each { |surgery| @surgeries << surgery }
+      end
     end
 
     @status_array = ["alerte", "à vérifier", "ok", "non répondu"]

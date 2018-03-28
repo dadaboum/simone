@@ -8,6 +8,7 @@ gem 'pg', '~> 0.21'
 gem 'puma'
 gem 'rails', '5.1.5'
 gem 'redis'
+gem 'pg_search'
 
 gem 'autoprefixer-rails'
 gem 'popper_js', '~> 1.12.9'
@@ -24,6 +25,7 @@ gem 'cloudinary'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
+  gem 'pry-byebug'
 end
 
 group :development, :test do

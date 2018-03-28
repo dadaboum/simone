@@ -27,12 +27,17 @@ puts "Created Nurse Simone"
 guilhem = Surgeon.create(name:"Dr Guilhem", email:"guilhem@gmail.com")
 paul = Surgeon.create(name:"Dr Paul", email:"paul@gmail.com")
 jacques = Surgeon.create(name:"Dr Jacques", email:"jjoubert86@gmail.com")
+Surgeon.create(name:"Guilhem", email:"gr@gmail.com")
 
 puts "Created Dr Guilhem and Dr Paul"
 
 david = Patient.new(first_name: "David", last_name: "Benamran", phone_number: "0672303881")
 david.hospital = clinique_du_sport
 david.save
+
+david2 = Patient.new(first_name: "David", last_name: "Dadaboom", phone_number: "0672306881")
+david2.hospital = clinique_du_sport
+david2.save
 
 jonathan = Patient.new(first_name: "Jonathan", last_name: "Joubert", phone_number: "0677509667")
 jonathan.hospital = clinique_du_sport
@@ -107,6 +112,32 @@ david_event2.save!
 david_event2 = Event.new(description: "Le patient a appelé directement le médecin, indiquant qu'il était pris de fièvre et ressentait des douleurs soudaines", flag: "red")
 david_event2.surgery = david_operation
 david_event2.save!
+
+david2_operation = Surgery.new(is_done: false, date: Date.yesterday)
+david2_operation.patient = david2
+david2_operation.surgery_type = knee
+david2_operation.surgeon = guilhem
+david2_operation.pre_form = pre_form_knee
+david2_operation.pre_form_answered = true
+david2_operation.status = "alerte"
+david2_operation.post_form_answered = false
+david2_operation.post_form = post_form_knee
+david2_operation.validated = false
+david2_operation.save!
+
+
+david2_event = Event.new(description: "Le questionnaire pré-opération a bien été envoyé", flag: "green")
+
+david2_event.surgery = david2_operation
+david2_event.save!
+
+david2_event2 = Event.new(description: "Le patient a répondu au questionnaire. Une action est requise", flag: "orange")
+david2_event2.surgery = david2_operation
+david2_event2.save!
+
+david2_event2 = Event.new(description: "Le patient a appelé directement le médecin, indiquant qu'il était pris de fièvre et ressentait des douleurs soudaines", flag: "red")
+david2_event2.surgery = david2_operation
+david2_event2.save!
 
 jonathan_operation = Surgery.new(is_done: true, date: Date.yesterday)
 jonathan_operation.patient = jonathan
