@@ -1,2 +1,7 @@
 document.querySelector(".content-container").innerHTML = '<%= j render "index_content" %>';
-// window.history.pushState({urlPath: '/surgeries?surgery_id=' + '<%= params[:surgery_id] %>' }, '', '/surgeries?surgery_id=' + '<%= params[:surgery_id] %>');
+// pour voir les urls: window.history.pushState({urlPath: '/surgeries?surgery_id=' + '<%= params[:surgery_id] %>' }, '', '/surgeries?surgery_id=' + '<%= params[:surgery_id] %>');
+
+var head = document.querySelector("head");
+var scriptElement = document.createElement("script");
+scriptElement.src = '<%= javascript_pack_tag 'application' %>'.match(/src="(.*)">/)[1];
+head.appendChild(scriptElement);
