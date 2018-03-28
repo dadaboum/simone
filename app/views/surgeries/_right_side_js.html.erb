@@ -1,44 +1,46 @@
+<!--WARNIIIING :  THIS IS FOR THE AJAX -->
+
 <div class="right-side-wrapper">
   <div class="right-side-box">
     <div class="patient-box">
       <div class="patient-name">
-         <%= @surgery.patient.first_name %> <%= @surgery.patient.last_name %>
+         <%= surgery.patient.first_name %> <%= surgery.patient.last_name %>
       </div>
       <div class="patient-phone">
-        <i class="fas fa-phone" style="padding-right: 18px;"></i> <%= @surgery.patient.phone_number %>
+        <i class="fas fa-phone" style="padding-right: 18px;"></i> <%= surgery.patient.phone_number %>
       </div>
     </div>
     <div class="surgery-box">
       <div class="surgery-title">
-        <% if Date.today > @surgery.date %>
-          <p class="grey-title">POST - <%=  @surgery.surgery_type.description %></p>
+        <% if Date.today > surgery.date %>
+          <p class="grey-title">POST - <%=  surgery.surgery_type.description %></p>
           <% else %>
-          <p class="grey-title">PRE - <%=  @surgery.surgery_type.description %></p>
+          <p class="grey-title">PRE - <%=  surgery.surgery_type.description %></p>
         <% end %>
         <ul class="list-inline no-margin">
           <li style="padding-left: 0px;">
-              <% if Date.today > @surgery.date %>
-                <p class="font-14">Opération le  <%= @surgery.date.strftime('%d / %m / %y') %> </p>
+              <% if Date.today > surgery.date %>
+                <p class="font-14">Opération le  <%= surgery.date.strftime('%d / %m / %y') %> </p>
               <%  else %>
-                <p class="font-14">Opération le  <%= @surgery.date.strftime('%d / %m / %y') %> </p>
+                <p class="font-14">Opération le  <%= surgery.date.strftime('%d / %m / %y') %> </p>
               <% end %>
           </li>
             <li>
               <div class="dropdown">
-                <button class="rounded-dropdown-btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="priority-dropdown"
-                <% if @surgery.status == "alerte" %>
+                <button class="rounded-dropdown-btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
+                <% if surgery.status == "alerte" %>
                     style="color: #EE5F5B; border-color: #EE5F5B;"> ALERTE <i class="fas fa-exclamation-circle"></i>
-                  <% elsif @surgery.status == "à vérifier" %>
+                  <% elsif surgery.status == "à vérifier" %>
                     style="color: #E67E22; border-color: #E67E22;"> A VERIFIER <i class="fas fa-question-circle"></i>
-                  <% elsif @surgery.status == "ok" %>
+                  <% elsif surgery.status == "ok" %>
                     style="color: #32B796; border-color: #32B796;"> OK <i class="fas fa-thumbs-up"></i>
-                  <% elsif @surgery.status == "non répondu" %>
+                  <% elsif surgery.status == "non répondu" %>
                     style="color: #6C6D69; border-color: #6C6D69;"> <i class="fas fa-clock"></i> NON REPONDU
                   <% end %>
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu font-15 small-font" aria-labelledby="dropdownMenu1">
-                  <%= form_for @surgery, url: surgery_path(@surgery), method: :patch, remote: true do |f| %>
+                  <%= form_for surgery, url: surgery_path(surgery), method: :patch do |f| %>
                   <li> <input class="no-submit" type="submit" value="Alerte" name="change_status" ></li>
                   <li> <input class="no-submit" type="submit" value="A vérifier" name="change_status" ></li>
                   <li> <input class="no-submit" type="submit" value="Ok" name="change_status" ></li>
@@ -48,8 +50,8 @@
               </div>
           </li>
           <li>
-            <%= form_for @surgery, url: surgery_path(@surgery), method: :patch, remote: true do |f| %>
-              <% if @surgery.validated %>
+            <%= form_for surgery, url: surgery_path(surgery), method: :patch, remote: true do |f| %>
+              <% if surgery.validated %>
                 <input type="hidden" value="unvalidate" name="todo">
                 <button type = "submit" class = "validated-mock-btn" style="border: 0px;"> <i class="fas fa-check" style="padding-right: 4px"></i> VALIDÉ </button>
               <% else %>
@@ -62,24 +64,24 @@
       </div>
         <ul class="list-inline doctor-box">
           <li>
-            <p class="font-14"> Médecin : <%= @surgery.surgeon.name %></p>
+            <p class="font-14"> Médecin : <%= surgery.surgeon.name %></p>
           </li>
           <li>
-            <%= link_to notice_path(status: params[:status], surgery_id: params[:surgery_id], preremo_or_post: params[:pre_or_post]), method: "post" do %>
+            <%= link_to notice_path(status: params[:status], surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]), method: "post" do %>
               <button class="secondary-cta"> <i class="fab fa-telegram-plane" style="padding-right: 8px"></i> ENVOYER PAR MAIL</button>
             <% end %>
           </li>
         </ul>
       <div class="surgery-forms-box">
 
-            <% if Date.today > @surgery.date %>
+            <% if Date.today > surgery.date %>
               <ul class="list-inline">
-              <% if @surgery.post_form_answered %>
+              <% if surgery.post_form_answered %>
                   <li><p class="font-14">
                     <i class="fas fa-check" style="padding-right: 4px"></i>
                     Formulaire post-opération rempli
                   </p></li>
-                <li><button class="primary-cta"> <i class="fas fa-eye" style="padding-right: 8px"></i></i><%= link_to 'VOIR LES RÉPONSES', surgery_path(@surgery) %></button></li>
+                <li><button class="primary-cta"> <i class="fas fa-eye" style="padding-right: 8px"></i></i><%= link_to 'VOIR LES RÉPONSES', surgery_path(surgery) %></button></li>
               </ul>
               <% else %>
                 <ul class="list-inline">
@@ -90,19 +92,19 @@
                       <% end %>
                     </li>
                     <li>
-                      <button class="primary-cta"> <i class="fas fa-edit" style="padding-right: 8px"></i><%= link_to 'REMPLIR', surgery_path(@surgery) %></button>
+                      <button class="primary-cta"> <i class="fas fa-edit" style="padding-right: 8px"></i><%= link_to 'REMPLIR', surgery_path(surgery) %></button>
                     </li>
                   </ul>
               <% end %>
 
             <% else %>
                 <ul class="list-inline">
-              <% if @surgery.pre_form_answered %>
+              <% if surgery.pre_form_answered %>
                  <li> <p class="form-14">
                     <i class="fas fa-check" style="padding-right: 4px"></i>
                     Formulaire pré-opération rempli
                   </p></li>
-                  <li><button class="primary-cta"> <i class="fas fa-eye" style="padding-right: 8px"></i></i><%= link_to 'VOIR LES RÉPONSES', surgery_path(@surgery) %></button></li>
+                  <li><button class="primary-cta"> <i class="fas fa-eye" style="padding-right: 8px"></i></i><%= link_to 'VOIR LES RÉPONSES', surgery_path(surgery) %></button></li>
               <% else %>
                   <li> <p class="form-14"> <i class="fas fa-times" style="padding-right: 4px"></i> Formulaire pré-opération non rempli </p></li>
                     <li>
@@ -111,7 +113,7 @@
                       <% end %>
                     </li>
                     <li>
-                      <button class="primary-cta"> <i class="fas fa-edit" style="padding-right: 8px"></i><%= link_to 'REMPLIR', surgery_path(@surgery) %></button>
+                      <button class="primary-cta"> <i class="fas fa-edit" style="padding-right: 8px"></i><%= link_to 'REMPLIR', surgery_path(surgery) %></button>
                     </li>
               <% end %>
                 </ul>
@@ -124,20 +126,20 @@
       </div>
       <div class="surgery-history-box">
         <p class="grey-title">HISTORIQUE</p>
-          <% @events.each do |event| %>
+          <% events.each do |item_event| %>
             <div class="history-box">
               <div class="history-left">
                 <div class="history-separator-big"></div>
-                <div class=" <%= 'grey' if event.flag == nil %>
-                             <%= 'red' if event.flag == 'red' %>
-                             <%= 'green' if event.flag == 'green' %>
-                             <%= 'orange' if event.flag == 'orange' %>
+                <div class=" <%= 'grey' if item_event.flag == nil %>
+                             <%= 'red' if item_event.flag == 'red' %>
+                             <%= 'green' if item_event.flag == 'green' %>
+                             <%= 'orange' if item_event.flag == 'orange' %>
                  bullet"></div>
                 <div class="history-separator-big"
-                <% if event == @surgery.events.last %> style = "border-color: white;" <% end %>></div>
+                <% if item_event == surgery.events.last %> style = "border-color: white;" <% end %>></div>
               </div>
               <div class="history-right font-14">
-                <%= event.created_at.strftime('%H : %M') + ' - ' + event.description %>
+                <%= item_event.created_at.strftime('%H : %M') + ' - ' + item_event.description %>
               </div>
             </div>
             <div class="history-sep-box">
@@ -147,7 +149,7 @@
           <% end %>
         </div>
         <div class="new-event-box">
-          <%= form_for @event, url: surgery_path(@surgery), class: "form-inline", id: "new-event", method: :patch do |f|  %>
+          <%= form_for event, url: surgery_path(surgery), class: "form-inline", id: "new-event", method: :patch do |f|  %>
             <div class="new-event-inputs">
             <%= f.text_field :description, placeholder: "Ajouter un événement", class: "form-control font-15 width-40 height-30 event-input"  %>
             <%= f.select :flag, options_for_select([['Rouge', "red"], ['Orange','orange'], ['Vert', 'green'], ['Gris', 'grey']]), {}, class: 'form-control font-15 height-30 color-input' %>
@@ -159,6 +161,7 @@
       </div>
     </div>
   </div>
+
 
 
 

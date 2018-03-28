@@ -61,40 +61,70 @@ before_action :set_surgery, only: [:show, :update]
 
   def update
     @surgery = Surgery.find(params[:id])
-    event = Event.new
+    @events = @surgery.events
+    @event = Event.new
+    @event.surgery = @surgery
 
-    #when clicking on the validate button
+    # case 1 : when clicking on the validate button
     if params[:todo].present?
       if params[:todo] == "validate"
         @surgery.validated = true
+        @event.description = "Fiche validée"
+        @event.flag = "green"
       elsif params[:todo] == "unvalidate"
         @surgery.validated = false
+        @event.description = "Fiche dévalidée"
+        @event.flag = "orange"
       end
+      @event.description = @event.description + " par " + current_user.first_name + " " + current_user.last_name
+      @event.save!
       @surgery.save!
-      redirect_to surgeries_path(surgery_id: @surgery.id)
+      respond_to do |format|
+        format.html { redirect_to surgeries_path(surgery_id: @surgery.id) }
+        format.js
+      end
 
-    #when updating priority
+    # case 2 : when updating priority
     elsif params[:change_status].present?
-      @surgery.status = "alerte" if params[:change_status] == "Alerte"
-      @surgery.status = "à vérifier" if params[:change_status] == "A vérifier"
-      @surgery.status = "ok" if params[:change_status] == "Ok"
-      @surgery.status = "non répondu" if params[:change_status] == "Non répondu"
+      if params[:change_status] == "Alerte"
+      @surgery.status = "alerte"
+      @event.description = "a changé la priorité à 'Alerte'"
+      @event.flag = "red"
+      elsif params[:change_status] == "A vérifier"
+      @surgery.status = "à vérifier"
+      @event.description = "a changé la priorité à 'A vérifier'"
+      @event.flag = "orange"
+      elsif params[:change_status] == "Ok"
+      @surgery.status = "ok"
+      @event.description = "a changé la priorité à 'Ok"
+      @event.flag = "green"
+      elsif params[:change_status] == "Non répondu"
+      @surgery.status = "non répondu"
+      @event.description = "a changé la priorité à 'Non répondu'"
+      @event.flag = "grey"
+      end
+      @event.description = current_user.first_name + " " + current_user.last_name + " " + @event.description
+      @event.save!
       @surgery.save!
-      redirect_to surgeries_path(surgery_id: @surgery.id)
+      respond_to do |format|
+        format.html { redirect_to surgeries_path(surgery_id: @surgery.id) }
+        format.js
+      end
 
-    #when adding an event
+    # case 3 : when adding an event
     elsif event_params
-      event.update(event_params)
-      event.surgery = @surgery
-      event.save!
-      redirect_to surgeries_path(surgery_id: @surgery.id)
+      @event.update(event_params)
+      @event.save!
+      respond_to do |format|
+        format.html { redirect_to surgeries_path(surgery_id: @surgery.id) }
+        format.js
+      end
 
-    #when adding a comment
-    else
-    event.description = "Commentaire pré-opératoire : " + surgery_params[:pre_comments] if surgery_params[:pre_comments]
-    event.description = "Commentaire post-opératoire : " + surgery_params[:post_comments] if surgery_params[:post_comments]
-    event.surgery = @surgery
-    event.save
+    # case 4 : when adding a comment from the form show
+    elsif surgery_params[:pre_comments].present? || surgery_params[:post_comments].present?
+    @event.description = "Commentaire pré-opératoire : " + surgery_params[:pre_comments] if surgery_params[:pre_comments]
+    @event.description = "Commentaire post-opératoire : " + surgery_params[:post_comments] if surgery_params[:post_comments]
+    @event.save
     @surgery.update(surgery_params)
     redirect_to surgery_path(@surgery)
     end

@@ -1,0 +1,39 @@
+// var validateCta = document.getElementById("validate-cta")
+// var devalidateCta = document.getElementById("devalidate-cta")
+// var priorityDropdown = document.getElementById("priority-dropdown")
+// var allForms = document.querySelectorAll(".form-to-listen-to")
+
+
+function refreshRightSide(innerHTML) {
+  const newRightSide = document.getElementById('all-right-side');
+  newRightSide.innerHTML = innerHTML;
+}
+
+refreshRightSide('<%= j render "surgeries/right_side_js", surgery: @surgery, events: @events, event: @event %>');
+
+// allForms.forEach((form) => {
+//   form.addEventListener("submit", (event) => {
+//     console.log("coucou")
+//     refreshRightSide('<%= j render "surgeries/right_side_js", surgery: @surgery, events: @events, event: @event %>');
+//   })
+// })
+
+// if (validateCta) {
+//   validateCta.addEventListener("click", (event) => {
+//     refreshRightSide('<%= j render "surgeries/right_side_js", surgery: @surgery, events: @events, event: @event %>');
+//     event.preventDefault();
+//   })
+// }
+
+// if (devalidateCta) {
+//   devalidateCta.addEventListener("click", (event) => {
+//     refreshRightSide('<%= j render "surgeries/right_side_js", surgery: @surgery, events: @events, event: @event %>')
+//   })
+// }
+
+// if (devalidateCta) {
+//   priorityDropdown.addEventListener("click", (event) => {
+//     refreshRightSide('<%= j render "surgeries/right_side_js", surgery: @surgery, events: @events, event: @event %>')
+//     event.preventDefault();
+//   })
+// }
