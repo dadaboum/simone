@@ -82,7 +82,7 @@
                     <i class="fas fa-check" style="padding-right: 4px"></i>
                     Formulaire post-opération rempli
                   </p></li>
-                <li><button class="primary-cta"> <i class="fas fa-eye" style="padding-right: 8px"></i></i><%= link_to 'VOIR LES RÉPONSES', surgery_path(@surgery) %></button></li>
+                <li><button id="see-answers-btn" class="primary-cta"> <i class="fas fa-eye" style="padding-right: 8px"></i></i><%= link_to 'VOIR LES RÉPONSES', surgery_path(@surgery) %></button></li>
               </ul>
               <% else %>
                 <ul class="list-inline">
@@ -93,7 +93,7 @@
                       <% end %>
                     </li>
                     <li>
-                      <button class="primary-cta"> <i class="fas fa-edit" style="padding-right: 8px"></i><%= link_to 'REMPLIR', surgery_path(@surgery) %></button>
+                      <button id="fill-in-btn" class="primary-cta"> <i class="fas fa-edit" style="padding-right: 8px"></i><%= link_to 'REMPLIR', surgery_path(@surgery) %></button>
                     </li>
                   </ul>
               <% end %>
@@ -105,7 +105,7 @@
                     <i class="fas fa-check" style="padding-right: 4px"></i>
                     Formulaire pré-opératoire rempli
                   </p></li>
-                  <li><button class="primary-cta"> <i class="fas fa-eye" style="padding-right: 8px"></i></i><%= link_to 'VOIR LES RÉPONSES', surgery_path(@surgery) %></button></li>
+                  <li><button id="see-answers-btn" class="primary-cta"> <i class="fas fa-eye" style="padding-right: 8px"></i></i><%= link_to 'VOIR LES RÉPONSES', surgery_path(@surgery) %></button></li>
               <% else %>
                   <li> <p class="form-14"> <i class="fas fa-times" style="padding-right: 4px"></i> Formulaire pré-opération non rempli </p></li>
                     <li>
