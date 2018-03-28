@@ -19,16 +19,15 @@ before_action :set_surgery, only: [:show, :update]
       @surgeries = @surgeries.where(validated: params[:validated])
     end
 
-
-    a = @surgeries.where(status: "alerte", validated: false)
-    b = @surgeries.where(status: "à vérifier", validated: false)
-    c = @surgeries.where(status: "ok", validated: false)
-    d = @surgeries.where(status: "non répondu", validated: false)
-    e = @surgeries.where(status: "alerte", validated: true)
-    f = @surgeries.where(status: "à vérifier", validated: true)
-    g = @surgeries.where(status: "ok", validated: true)
-    h = @surgeries.where(status: "non répondu", validated: true)
-    @surgeries = a + b + c + d + e + f + g + h
+    # a = @surgeries.where(status: "alerte", validated: false)
+    # b = @surgeries.where(status: "à vérifier", validated: false)
+    # c = @surgeries.where(status: "ok", validated: false)
+    # d = @surgeries.where(status: "non répondu", validated: false)
+    # e = @surgeries.where(status: "alerte", validated: true)
+    # f = @surgeries.where(status: "à vérifier", validated: true)
+    # g = @surgeries.where(status: "ok", validated: true)
+    # h = @surgeries.where(status: "non répondu", validated: true)
+    # @surgeries = a + b + c + d + e + f + g + h
 
     if params[:surgery_id].present?
       @surgery = Surgery.find(params[:surgery_id])
@@ -47,7 +46,9 @@ before_action :set_surgery, only: [:show, :update]
 
     @status_array = ["alerte", "à vérifier", "ok", "non répondu"]
     @event = Event.new
-    @events = @surgery.events.order(created_at: :asc)
+    if @surgery
+      @events = @surgery.events.order(created_at: :asc)
+    end
 
     respond_to do |format|
       format.html
