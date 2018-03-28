@@ -131,7 +131,7 @@
             <div class="history-box">
               <div class="history-left">
                 <div class="history-separator-big"></div>
-                <div class=" <%= 'grey' if event.flag == nil %>
+                <div class=" <%= 'grey' if (event.flag == nil) || (event.flag == 'grey') %>
                              <%= 'red' if event.flag == 'red' %>
                              <%= 'green' if event.flag == 'green' %>
                              <%= 'orange' if event.flag == 'orange' %>

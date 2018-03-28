@@ -2,47 +2,13 @@ class SurgeriesController < ApplicationController
 before_action :set_surgery, only: [:show, :update]
 
   def index
-    @surgeries = current_user.hospital.surgeries.order("lower(patients.last_name)")
-    if params[:status].present?
-      @surgeries = @surgeries.where(status: params[:status])
-    end
-
-    if params[:pre_or_post].present?
-      if params[:pre_or_post] == "pre"
-        @surgeries = @surgeries.where("date > ?", Date.today)
-      elsif params[:pre_or_post] == "post"
-        @surgeries = @surgeries.where("date < ?", Date.today)
-      end
-    end
-
-    if params[:validated].present?
-      @surgeries = @surgeries.where(validated: params[:validated])
-    end
-
-
-    a = @surgeries.where(status: "alerte", validated: false)
-    b = @surgeries.where(status: "à vérifier", validated: false)
-    c = @surgeries.where(status: "ok", validated: false)
-    d = @surgeries.where(status: "non répondu", validated: false)
-    e = @surgeries.where(status: "alerte", validated: true)
-    f = @surgeries.where(status: "à vérifier", validated: true)
-    g = @surgeries.where(status: "ok", validated: true)
-    h = @surgeries.where(status: "non répondu", validated: true)
-    @surgeries = a + b + c + d + e + f + g + h
+    @surgeries = set_surgeries_filters_and_order
 
     if params[:surgery_id].present?
       @surgery = Surgery.find(params[:surgery_id])
     else
       @surgery = @surgeries.first
       # params[:surgery_id] = @surgery.id
-    end
-
-    if params[:query].present?
-      selection = PgSearch.multisearch(params[:query])
-      @surgeries = []
-      selection.each do |pg|
-        pg.searchable.surgeries.each { |surgery| @surgeries << surgery }
-      end
     end
 
     @status_array = ["alerte", "à vérifier", "ok", "non répondu"]
@@ -74,8 +40,8 @@ before_action :set_surgery, only: [:show, :update]
   end
 
   def update
+    @status_array = ["alerte", "à vérifier", "ok", "non répondu"]
     @surgery = Surgery.find(params[:id])
-    @events = @surgery.events
     @event = Event.new
     @event.surgery = @surgery
 
@@ -142,6 +108,8 @@ before_action :set_surgery, only: [:show, :update]
     @surgery.update(surgery_params)
     redirect_to surgery_path(@surgery)
     end
+    @events = @surgery.events
+    @surgeries = set_surgeries_filters_and_order
   end
 
   def update_batch
@@ -159,6 +127,45 @@ before_action :set_surgery, only: [:show, :update]
   end
 
   private
+
+  def set_surgeries_filters_and_order
+    @surgeries = current_user.hospital.surgeries.order("lower(patients.last_name)")
+    if params[:status].present?
+      @surgeries = @surgeries.where(status: params[:status])
+    end
+
+    if params[:pre_or_post].present?
+      if params[:pre_or_post] == "pre"
+        @surgeries = @surgeries.where("date > ?", Date.today)
+      elsif params[:pre_or_post] == "post"
+        @surgeries = @surgeries.where("date < ?", Date.today)
+      end
+    end
+
+    if params[:validated].present?
+      @surgeries = @surgeries.where(validated: params[:validated])
+    end
+
+
+    a = @surgeries.where(status: "alerte", validated: false)
+    b = @surgeries.where(status: "à vérifier", validated: false)
+    c = @surgeries.where(status: "ok", validated: false)
+    d = @surgeries.where(status: "non répondu", validated: false)
+    e = @surgeries.where(status: "alerte", validated: true)
+    f = @surgeries.where(status: "à vérifier", validated: true)
+    g = @surgeries.where(status: "ok", validated: true)
+    h = @surgeries.where(status: "non répondu", validated: true)
+    @surgeries = a + b + c + d + e + f + g + h
+
+    if params[:query].present?
+      selection = PgSearch.multisearch(params[:query])
+      @surgeries = []
+      selection.each do |pg|
+        pg.searchable.surgeries.each { |surgery| @surgeries << surgery }
+      end
+    end
+    return @surgeries
+  end
 
   def set_surgery
     @surgery = Surgery.find(params[:id])

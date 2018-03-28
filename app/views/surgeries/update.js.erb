@@ -9,7 +9,10 @@ function refreshRightSide(innerHTML) {
   newRightSide.innerHTML = innerHTML;
 }
 
-refreshRightSide('<%= j render "surgeries/right_side_js", surgery: @surgery, events: @events, event: @event %>');
+refreshRightSide('<%= j render "surgeries/right_side" %>');
+
+document.querySelector(".content-container").innerHTML = '<%= j render "index_content" %>';
+// window.history.pushState({urlPath: '/surgeries?surgery_id=' + '<%= params[:surgery_id] %>' }, '', '/surgeries?surgery_id=' + '<%= params[:surgery_id] %>');
 
 // allForms.forEach((form) => {
 //   form.addEventListener("submit", (event) => {
