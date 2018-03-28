@@ -1,6 +1,6 @@
 const toggleActiveAndInput = (event) => {
   if (event.currentTarget.name !== "select-all") {
-    event.currentTarget.parentNode.classList.toggle("active");
+    event.currentTarget.parentNode.querySelector('.surgery-content').classList.toggle("active");
     const target_surgery_id = event.currentTarget.dataset.surgeryid;
     const hiddenInput = document.querySelector('#validate_batch_input');
     if (hiddenInput.value.includes(target_surgery_id)){
@@ -43,7 +43,10 @@ const toggleAll = (event) => {
 
 function selectAll() {
   const check = document.querySelector('input[type=checkbox]');
-  check.addEventListener("click", toggleAll);
+  if (check) {
+    check.addEventListener("click", toggleAll);
+  }
+
 };
 
 export { selectAll };

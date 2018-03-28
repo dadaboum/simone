@@ -27,12 +27,17 @@ puts "Created Nurse Simone"
 guilhem = Surgeon.create(name:"Dr Guilhem", email:"guilhem@gmail.com")
 paul = Surgeon.create(name:"Dr Paul", email:"paul@gmail.com")
 jacques = Surgeon.create(name:"Dr Jacques", email:"jjoubert86@gmail.com")
+Surgeon.create(name:"Guilhem", email:"gr@gmail.com")
 
 puts "Created Dr Guilhem and Dr Paul"
 
 david = Patient.new(first_name: "David", last_name: "Benamran", phone_number: "0672303881")
 david.hospital = clinique_du_sport
 david.save
+
+david2 = Patient.new(first_name: "David", last_name: "Dadaboom", phone_number: "0672306881")
+david2.hospital = clinique_du_sport
+david2.save
 
 jonathan = Patient.new(first_name: "Jonathan", last_name: "Joubert", phone_number: "0677509667")
 jonathan.hospital = clinique_du_sport
@@ -95,18 +100,44 @@ david_operation.validated = false
 david_operation.save!
 
 
-david_event = Event.new(description: "Le questionnaire pré-opération a bien été envoyé", flag: "green")
+david_event = Event.new(description: "Le formulaire pré-opératoire a bien été envoyé", flag: "green")
 
 david_event.surgery = david_operation
 david_event.save!
 
-david_event2 = Event.new(description: "Le patient a répondu au questionnaire. Une action est requise", flag: "orange")
+david_event2 = Event.new(description: "Le patient a répondu au formulaire. Une action est requise", flag: "orange")
 david_event2.surgery = david_operation
 david_event2.save!
 
-david_event2 = Event.new(description: "Le patient a appelé directement le médecin, indiquant qu'il était pris de fièvre et ressentait des douleurs soudaines", flag: "red")
+david_event2 = Event.new(description: "Le patient a appelé directement le chirurgien, indiquant qu'il était pris de fièvre et ressentait des douleurs soudaines", flag: "red")
 david_event2.surgery = david_operation
 david_event2.save!
+
+david2_operation = Surgery.new(is_done: false, date: Date.yesterday)
+david2_operation.patient = david2
+david2_operation.surgery_type = knee
+david2_operation.surgeon = guilhem
+david2_operation.pre_form = pre_form_knee
+david2_operation.pre_form_answered = true
+david2_operation.status = "alerte"
+david2_operation.post_form_answered = false
+david2_operation.post_form = post_form_knee
+david2_operation.validated = false
+david2_operation.save!
+
+
+david2_event = Event.new(description: "Le questionnaire pré-opération a bien été envoyé", flag: "green")
+
+david2_event.surgery = david2_operation
+david2_event.save!
+
+david2_event2 = Event.new(description: "Le patient a répondu au questionnaire. Une action est requise", flag: "orange")
+david2_event2.surgery = david2_operation
+david2_event2.save!
+
+david2_event2 = Event.new(description: "Le patient a appelé directement le médecin, indiquant qu'il était pris de fièvre et ressentait des douleurs soudaines", flag: "red")
+david2_event2.surgery = david2_operation
+david2_event2.save!
 
 jonathan_operation = Surgery.new(is_done: true, date: Date.yesterday)
 jonathan_operation.patient = jonathan
@@ -122,19 +153,19 @@ jonathan_operation.validated = false
 jonathan_operation.save!
 
 
-jonathan_event = Event.new(description: "message pré-opération envoyé", flag: "green")
+jonathan_event = Event.new(description: "SMS pré-opératoire envoyé", flag: "green")
 jonathan_event.surgery = jonathan_operation
 jonathan_event.save!
 
-jonathan_event = Event.new(description: "formulaire pre op bien rempli", flag: "green")
+jonathan_event = Event.new(description: "Formulaire pre-opératoire bien rempli", flag: "green")
 jonathan_event.surgery = jonathan_operation
 jonathan_event.save!
 
-jonathan_event = Event.new(description: "message post-opération envoyé", flag: "green")
+jonathan_event = Event.new(description: "SMS post-opératoire envoyé", flag: "green")
 jonathan_event.surgery = jonathan_operation
 jonathan_event.save!
 
-jonathan_event = Event.new(description: "formulaire post op bien rempli", flag: "green")
+jonathan_event = Event.new(description: "Formulaire post-opératoire bien rempli", flag: "green")
 jonathan_event.surgery = jonathan_operation
 jonathan_event.save!
 
@@ -161,11 +192,11 @@ marie_operation.post_form = post_form_knee
 marie_operation.validated = true
 marie_operation.save!
 
-marie_event = Event.new(description: "message pré-opération envoyé")
+marie_event = Event.new(description: "SMS pre-opératoire envoyé")
 marie_event.surgery = marie_operation
 marie_event.save!
 
-marie_event2 = Event.new(description: "Still no answer")
+marie_event2 = Event.new(description: "Formulaire non complété")
 marie_event2.surgery = marie_operation
 marie_event2.save!
 
@@ -181,11 +212,11 @@ paula_operation.post_form = post_form_knee
 paula_operation.validated = true
 paula_operation.save!
 
-paula_event = Event.new(description: "message pré-opération envoyé")
+paula_event = Event.new(description: "SMS pre-opératoire envoyé")
 paula_event.surgery = paula_operation
 paula_event.save!
 
-paula_event2 = Event.new(description: "Still no answer")
+paula_event2 = Event.new(description: "Formulaire non complété")
 paula_event2.surgery = paula_operation
 paula_event2.save!
 
@@ -201,11 +232,11 @@ jean_operation.post_form = post_form_knee
 jean_operation.validated = true
 jean_operation.save!
 
-jean_event = Event.new(description: "message pré-opération envoyé")
+jean_event = Event.new(description: "SMS pre-opératoire envoyé")
 jean_event.surgery = jean_operation
 jean_event.save!
 
-jean_event2 = Event.new(description: "Still no answer")
+jean_event2 = Event.new(description: "Formulaire non complété")
 jean_event2.surgery = jean_operation
 jean_event2.save!
 
@@ -221,11 +252,11 @@ herve_operation.post_form = post_form_knee
 herve_operation.validated = true
 herve_operation.save!
 
-herve_event = Event.new(description: "message pré-opération envoyé")
+herve_event = Event.new(description: "SMS pre-opératoire envoyé")
 herve_event.surgery = herve_operation
 herve_event.save!
 
-herve_event2 = Event.new(description: "Still no answer")
+herve_event2 = Event.new(description: "Formulaire non complété")
 herve_event2.surgery = herve_operation
 herve_event2.save!
 

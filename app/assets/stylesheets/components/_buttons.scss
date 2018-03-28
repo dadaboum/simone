@@ -73,11 +73,11 @@
 }
 
 .add-event-btn:hover {
-  background: rgba(67, 89, 245, 0.8) radial-gradient(circle, transparent 1%, rgba(67, 89, 245, 0.8) 1%) center/15000%;
+  background: rgba($blue, $beta) radial-gradient(circle, transparent 1%, rgba($blue, $beta) 1%) center/15000%;
 }
 
 .add-event-btn:active {
-  background-color: rgba(67, 89, 245, 0.5);
+  background-color: rgba($blue, $alpha);
   background-size: 100%;
   transition: background 0s;
 }
@@ -118,12 +118,12 @@
 
 
 .primary-cta:hover {
-  background: rgba(67, 89, 245, 0.8) radial-gradient(circle, transparent 1%, rgba(67, 89, 245, 0.8) 1%) center/15000%;
+  background: rgba($blue, $beta) radial-gradient(circle, transparent 1%, rgba($blue, $beta) 1%) center/15000%;
 }
 
 
 .primary-cta:active {
-  background-color: rgba(67, 89, 245, 0.5);
+  background-color: rgba($blue, $alpha);
   background-size: 100%;
   transition: background 0s;
 }
@@ -135,7 +135,7 @@
   font-size: 14px;
   padding: 8px 15px;
   border-radius: 30px;
-  border: 1px solid blue;
+  border: 1px solid $blue;
   color: $blue;
   outline: 0;
   background-position: center;
@@ -148,16 +148,16 @@
 
 
 .secondary-cta:hover {
-  border: 1px solid rgba(67, 89, 245, 0.8);
+  border: 1px solid rgba($blue, $beta);
   color: white;
-  background: rgba(67, 89, 245, 0.8) radial-gradient(circle, transparent 1%, rgba(67, 89, 245, 0.8) 1%) center/15000%;
+  background: rgba($blue, $beta) radial-gradient(circle, transparent 1%, rgba($blue, $beta) 1%) center/15000%;
   a {
     color: white;
   }
 }
 
 .secondary-cta:active {
-  background-color: rgba(67, 89, 245, 0.5);
+  background-color: rgba($blue, $alpha);
   background-size: 100%;
   transition: background 0s;
 }
