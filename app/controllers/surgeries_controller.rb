@@ -40,7 +40,18 @@ before_action :set_surgery, only: [:show, :update]
       @pre_form_answer = answer if answer.form.pre_or_post == "pre"
       @post_form_answer = answer if answer.form.pre_or_post == "post"
     end
+    if @surgery.date > Date.today
+      @form_answer = @pre_form_answer
+    else
+      @form_answer = @post_form_answer
+    end
+
     @event = Event.new
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def update

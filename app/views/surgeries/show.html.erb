@@ -1,20 +1,27 @@
 <div class="content-container">
   <div class="core-left-surgery">
     <div class="sticky-box">
-      <% if @surgery.date > Date.today %>
-        <h4 class='text-center'>Formulaire pré-admission</h4>
-        <% if @pre_form_answer %>
-          <%= render 'form_answer_display', form_answer: @pre_form_answer %>
-        <% else %>
-          <div id="typeform-embed" data-surgeryid="<%= @surgery.id %>" data-typeformid="<%= @surgery.pre_form.typeform_id %>"></div>
-        <% end %>
+    <% if @surgery.date > Date.today %>
+      <h4 class='text-center'>Formulaire pré-admission</h4>
+    <% else %>
+      <h4 class='text-center'>Formulaire post-opératoire</h4>
+    <% end %>
+    <div class="form-box" style="height: 500px">
+      <% if @form_answer %>
+        <%= render 'form_answer_display', form_answer: @form_answer %>
       <% else %>
-        <h4 class='text-center'>Formulaire post-opératoire</h4>
-        <% if @post_form_answer %>
-          <%= render 'form_answer_display', form_answer: @post_form_answer %>
+        <% if @surgery.date > Date.today %>
+          <div id="typeform-embed" data-surgeryid="<%= @surgery.id %>" data-typeformid="<%= @surgery.pre_form.typeform_id %>"></div>
         <% else %>
           <div id="typeform-embed" data-surgeryid="<%= @surgery.id %>" data-typeformid="<%= @surgery.post_form.typeform_id %>"></div>
         <% end %>
+      <% end %>
+    </div>
+    <%= link_to 'submit', surgery_path(@surgery), remote: :true, id: "fake-submit", class: "btn btn-primary" %>
+    <div class="comment-box text-center">
+      <%= simple_form_for(@surgery) do |f| %>
+        <%= f.text_area :pre_comments, placeholder: "Ecrivez votre commentaire...", class: 'comment-field' %>
+        <%= f.submit 'Ajouter un commentaire', class: 'btn btn-sm btn-primary' %>
       <% end %>
       <div class="comment-box text-center">
         <%= simple_form_for(@surgery) do |f| %>
@@ -32,3 +39,4 @@
 
 <%= javascript_include_tag "https://embed.typeform.com/embed.js" %>
 <%= javascript_pack_tag 'typeform' %>
+<%= javascript_pack_tag 'hidden' %>
