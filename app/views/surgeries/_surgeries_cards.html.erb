@@ -1,9 +1,16 @@
-  <div class="core-left">
-    <%= render "index_filters" %>
-    <%= render "index_action_buttons" %>
-    <div class="surgery-cards-wrapper">
+<div class="core-left">
+  <%= render "index_filters" %>
+  <%= render "index_action_buttons" %>
+  <div class="surgery-cards-wrapper">
+    <% if @surgery %>
       <% @surgeries.each do |surgery| %>
         <%= render "surgery_card", surgery: surgery %>
       <% end %>
-    </div>
+    <% else %>
+      <div id="filters-empty-result" class="text-center">
+        <p>Aucune opération ne correspond à vos critères de recherche</p>
+        <%= link_to "Effacer les filtres", surgeries_path %>
+      </div>
+    <% end %>
   </div>
+</div>

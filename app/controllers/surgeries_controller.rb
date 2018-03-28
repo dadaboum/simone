@@ -17,7 +17,7 @@ before_action :set_surgery, only: [:show, :update]
 
     @status_array = ["alerte", "à vérifier", "ok", "non répondu"]
     @event = Event.new
-    @events = @surgery.events.order(created_at: :asc)
+    @events = @surgery.events.order(created_at: :asc) if @surgery
 
     respond_to do |format|
       format.html
