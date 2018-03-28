@@ -19,8 +19,13 @@
     background-color: transparent;
   }
 }
+
+
 #filter-title{
-  width: 120px;
+  font-size: 15px;
+  color: #6C6D69;
+  width: 75px;
+  align-self: flex-end;
   a:hover {
     text-decoration: none;
   }

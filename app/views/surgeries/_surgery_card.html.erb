@@ -11,7 +11,7 @@
         <div class="surgery-patient">
           <div class="surgery-details">
             <% if surgery.validated %>
-              <p><%= surgery.patient.first_name %> <%= surgery.patient.last_name %> - <%= surgery.surgeon.name %> <i class="fas fa-check"></i></p>
+              <p><i class="fas fa-check" style="padding-right: 5px;"></i><%= surgery.patient.first_name %> <%= surgery.patient.last_name %> - <%= surgery.surgeon.name %></p>
             <% else %>
               <p><%= surgery.patient.first_name %> <%= surgery.patient.last_name %> - <%= surgery.surgeon.name %></p>
             <% end %>
