@@ -22,7 +22,8 @@
     <meta name="twitter:creator" content="<%= DEFAULT_META["twitter_account"] %>">
     <meta name="twitter:image:src" content="<%= meta_image %>">
 
-    <%= favicon_link_tag asset_path('cover.png'), :rel => 'icon', :type =>  'image/png' %>
+    <%#= favicon_link_tag asset_path('cover.png'), :rel => 'icon', :type =>  'image/png' %>
+    <%= favicon_link_tag asset_path('cover.png') %>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
