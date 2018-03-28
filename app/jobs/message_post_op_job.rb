@@ -10,9 +10,9 @@ class MessagePostOpJob < ApplicationJob
     results.rows.each do |result|
       # result est un array avec [last_name, first_name, phone_number, description, id de la table surgeries]
       if result[3].nil?
-        message = "Bonjour, #{result[1]} #{result[0]}, lien du questionnaire pré-opération : https://davidbenamran.typeform.com/to/yccqO5?surgery_id=#{result[3]}"
+        message = "Bonjour #{result[1]} #{result[0]}, formulaire pré-opératoire : https://davidbenamran.typeform.com/to/yccqO5?surgery_id=#{result[3]}"
         TwilioTextMessenger.new(result[2], message).call
-        event = Event.new(description: "message post-opération envoyé", flag: "green")
+        event = Event.new(description: "SMS post-opératoire envoyé", flag: "green")
         surgery_patient = Surgery.find(result[4])
         surgery_patient.status = "non répondu"
         surgery_patient.save
