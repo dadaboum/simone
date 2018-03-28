@@ -41,7 +41,7 @@
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu font-15 small-font" aria-labelledby="dropdownMenu1">
-                  <%= form_for @surgery, url: surgery_path(@surgery, status: params[:status], pre_or_post: params[:pre_or_post], validated: params[:validated]), method: :patch, remote: true do |f| %>
+                  <%= form_for @surgery, url: surgery_path(@surgery, status: params[:status], pre_or_post: params[:pre_or_post], validated: params[:validated], query: params[:query]), method: :patch, remote: true do |f| %>
                   <li> <input class="no-submit" type="submit" value="Alerte" name="change_status" ></li>
                   <li> <input class="no-submit" type="submit" value="A vérifier" name="change_status" ></li>
                   <li> <input class="no-submit" type="submit" value="Ok" name="change_status" ></li>
@@ -51,7 +51,7 @@
               </div>
           </li>
           <li>
-            <%= form_for @surgery, url: surgery_path(@surgery, status: params[:status], pre_or_post: params[:pre_or_post], validated: params[:validated]), method: :patch, remote: true do |f| %>
+            <%= form_for @surgery, url: surgery_path(@surgery, status: params[:status], pre_or_post: params[:pre_or_post], query: params[:query], validated: params[:validated]), method: :patch, remote: true do |f| %>
               <% if @surgery.validated %>
                 <input type="hidden" value="unvalidate" name="todo">
                 <button type = "submit" class = "validated-mock-btn" style="border: 0px;"> <i class="fas fa-check" style="padding-right: 4px"></i> VALIDÉ </button>
@@ -82,7 +82,7 @@
                     <i class="fas fa-check" style="padding-right: 4px"></i>
                     Formulaire post-opération rempli
                   </p></li>
-                <li><button class="primary-cta"> <i class="fas fa-eye" style="padding-right: 8px"></i></i><%= link_to 'VOIR LES RÉPONSES', surgery_path(@surgery) %></button></li>
+                <li><button id="see-answers-btn" class="primary-cta"> <i class="fas fa-eye" style="padding-right: 8px"></i></i><%= link_to 'VOIR LES RÉPONSES', surgery_path(@surgery) %></button></li>
               </ul>
               <% else %>
                 <ul class="list-inline padding-left-8">
@@ -93,7 +93,7 @@
                       <% end %>
                     </li>
                     <li>
-                      <button class="primary-cta"> <i class="fas fa-edit" style="padding-right: 8px"></i><%= link_to 'REMPLIR', surgery_path(@surgery) %></button>
+                      <button id="fill-in-btn" class="primary-cta"> <i class="fas fa-edit" style="padding-right: 8px"></i><%= link_to 'REMPLIR', surgery_path(@surgery) %></button>
                     </li>
                   </ul>
               <% end %>
@@ -105,7 +105,7 @@
                     <i class="fas fa-check" style="padding-right: 4px"></i>
                     Formulaire pré-opératoire rempli
                   </p></li>
-                  <li><button class="primary-cta"> <i class="fas fa-eye" style="padding-right: 8px"></i></i><%= link_to 'VOIR LES RÉPONSES', surgery_path(@surgery) %></button></li>
+                  <li><button id="see-answers-btn" class="primary-cta"> <i class="fas fa-eye" style="padding-right: 8px"></i></i><%= link_to 'VOIR LES RÉPONSES', surgery_path(@surgery) %></button></li>
               <% else %>
                   <li> <p class="form-14"> <i class="fas fa-times" style="padding-right: 4px"></i> Formulaire pré-opération non rempli </p></li>
                     <li>
@@ -150,7 +150,7 @@
           <% end %>
         </div>
         <div class="new-event-box">
-          <%= form_for @event, url: surgery_path(@surgery), class: "form-inline", id: "new-event", method: :patch, remote: true, html: {data: {ajax: "right-side-only"}} do |f|  %>
+          <%= form_for @event, url: surgery_path(@surgery, status: params[:status], pre_or_post: params[:pre_or_post], validated: params[:validated], query: params[:query]), class: "form-inline", id: "new-event", method: :patch, remote: true, html: {data: {ajax: "right-side-only"}} do |f|  %>
             <div class="new-event-inputs">
             <%= f.text_field :description, placeholder: "Ajouter un événement", class: "form-control font-15 width-40 height-30 event-input"  %>
             <%= f.select :flag, options_for_select([['Rouge', "red"], ['Orange','orange'], ['Vert', 'green'], ['Gris', 'grey']]), {}, class: 'form-control font-15 height-30 color-input' %>

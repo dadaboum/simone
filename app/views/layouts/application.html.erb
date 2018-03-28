@@ -31,7 +31,11 @@
   </head>
   <body>
     <%= render 'shared/flashes' %>
-    <%= render 'shared/sidebar' %>
+
+    <% if (params[:controller] != "Pages" && params[:action] != "home") %>
+      <%= render 'shared/sidebar' %>
+    <% end %>
+
     <%= yield %>
 
     <%= javascript_include_tag 'application' %>
