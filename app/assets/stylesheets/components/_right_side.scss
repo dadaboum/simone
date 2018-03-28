@@ -203,9 +203,12 @@
 }
 
 .no-submit {
+  text-align: start;
   background-color: white;
   border: 0px;
   font-size: 13px;
+  width: 100%;
+  outline: 0;
 }
 
 .bullet-in-dropdown {
