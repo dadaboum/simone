@@ -18,3 +18,9 @@ body {
   display: block !important;
 }
 
+#filters-empty-result {
+  padding: 50px;
+  a:hover {
+    text-decoration: none;
+  }
+}

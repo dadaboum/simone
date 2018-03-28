@@ -1,9 +1,0 @@
-  <div class="core-left">
-    <%= render "index_filters" %>
-    <%= render "index_action_buttons" %>
-    <div class="surgery-cards-wrapper">
-      <% @surgeries.each do |surgery| %>
-        <%= render "surgery_card", surgery: surgery %>
-      <% end %>
-    </div>
-  </div>
