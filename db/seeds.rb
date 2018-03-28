@@ -95,16 +95,16 @@ david_operation.validated = false
 david_operation.save!
 
 
-david_event = Event.new(description: "Le questionnaire pré-opération a bien été envoyé", flag: "green")
+david_event = Event.new(description: "Le formulaire pré-opératoire a bien été envoyé", flag: "green")
 
 david_event.surgery = david_operation
 david_event.save!
 
-david_event2 = Event.new(description: "Le patient a répondu au questionnaire. Une action est requise", flag: "orange")
+david_event2 = Event.new(description: "Le patient a répondu au formulaire. Une action est requise", flag: "orange")
 david_event2.surgery = david_operation
 david_event2.save!
 
-david_event2 = Event.new(description: "Le patient a appelé directement le médecin, indiquant qu'il était pris de fièvre et ressentait des douleurs soudaines", flag: "red")
+david_event2 = Event.new(description: "Le patient a appelé directement le chirurgien, indiquant qu'il était pris de fièvre et ressentait des douleurs soudaines", flag: "red")
 david_event2.surgery = david_operation
 david_event2.save!
 
@@ -122,19 +122,19 @@ jonathan_operation.validated = false
 jonathan_operation.save!
 
 
-jonathan_event = Event.new(description: "message pré-opération envoyé", flag: "green")
+jonathan_event = Event.new(description: "SMS pré-opératoire envoyé", flag: "green")
 jonathan_event.surgery = jonathan_operation
 jonathan_event.save!
 
-jonathan_event = Event.new(description: "formulaire pre op bien rempli", flag: "green")
+jonathan_event = Event.new(description: "Formulaire pre-opératoire bien rempli", flag: "green")
 jonathan_event.surgery = jonathan_operation
 jonathan_event.save!
 
-jonathan_event = Event.new(description: "message post-opération envoyé", flag: "green")
+jonathan_event = Event.new(description: "SMS post-opératoire envoyé", flag: "green")
 jonathan_event.surgery = jonathan_operation
 jonathan_event.save!
 
-jonathan_event = Event.new(description: "formulaire post op bien rempli", flag: "green")
+jonathan_event = Event.new(description: "Formulaire post-opératoire bien rempli", flag: "green")
 jonathan_event.surgery = jonathan_operation
 jonathan_event.save!
 
@@ -161,11 +161,11 @@ marie_operation.post_form = post_form_knee
 marie_operation.validated = true
 marie_operation.save!
 
-marie_event = Event.new(description: "message pré-opération envoyé")
+marie_event = Event.new(description: "SMS pre-opératoire envoyé")
 marie_event.surgery = marie_operation
 marie_event.save!
 
-marie_event2 = Event.new(description: "Still no answer")
+marie_event2 = Event.new(description: "Formulaire non complété")
 marie_event2.surgery = marie_operation
 marie_event2.save!
 
@@ -181,11 +181,11 @@ paula_operation.post_form = post_form_knee
 paula_operation.validated = true
 paula_operation.save!
 
-paula_event = Event.new(description: "message pré-opération envoyé")
+paula_event = Event.new(description: "SMS pre-opératoire envoyé")
 paula_event.surgery = paula_operation
 paula_event.save!
 
-paula_event2 = Event.new(description: "Still no answer")
+paula_event2 = Event.new(description: "Formulaire non complété")
 paula_event2.surgery = paula_operation
 paula_event2.save!
 
@@ -201,11 +201,11 @@ jean_operation.post_form = post_form_knee
 jean_operation.validated = true
 jean_operation.save!
 
-jean_event = Event.new(description: "message pré-opération envoyé")
+jean_event = Event.new(description: "SMS pre-opératoire envoyé")
 jean_event.surgery = jean_operation
 jean_event.save!
 
-jean_event2 = Event.new(description: "Still no answer")
+jean_event2 = Event.new(description: "Formulaire non complété")
 jean_event2.surgery = jean_operation
 jean_event2.save!
 
@@ -221,11 +221,11 @@ herve_operation.post_form = post_form_knee
 herve_operation.validated = true
 herve_operation.save!
 
-herve_event = Event.new(description: "message pré-opération envoyé")
+herve_event = Event.new(description: "SMS pre-opératoire envoyé")
 herve_event.surgery = herve_operation
 herve_event.save!
 
-herve_event2 = Event.new(description: "Still no answer")
+herve_event2 = Event.new(description: "Formulaire non complété")
 herve_event2.surgery = herve_operation
 herve_event2.save!
 

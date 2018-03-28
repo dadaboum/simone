@@ -32,13 +32,13 @@ class WebhooksController < ApplicationController
     score = response["calculated"]["score"]
     if score == 0
       event.flag = "green"
-      event.description = "Questionnaire : Ok"
+      event.description = "Formulaire rempli : Ok - Rien à signaler"
     elsif score < 100
       event.flag = "orange"
-      event.description = "Questionnaire : A vérifier"
+      event.description = "Formulaire rempli : A vérifier"
     else
       event.flag = "red"
-      event.description = "Questionnaire : Alerte"
+      event.description = "Formulaire rempli : Alerte"
     end
     event.surgery = surgery
     event.save!
