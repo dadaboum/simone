@@ -5,7 +5,9 @@
         <% if (current_user.hospital).photo.nil? %>
           logo à ajouter
         <% else %>
-          <%= cl_image_tag (current_user.hospital).photo, id: "logo_hospital" %>
+        <div class="margin-sides-10">
+          <div id= "logo_hospital" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path(current_user.hospital.photo, width: 120, height: 60, crop: :limit) %>')"></div>
+        </div>
         <% end %>
         <div class="main-title">
           <%= current_user.hospital.name %>

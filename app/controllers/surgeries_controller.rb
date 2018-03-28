@@ -8,7 +8,7 @@ before_action :set_surgery, only: [:show, :update]
       selection = PgSearch.multisearch(params[:query])
       @surgeries = selection.map(&:searchable).map(&:surgeries).flatten
     end
-    
+
     if params[:surgery_id].present?
       @surgery = Surgery.find(params[:surgery_id])
     else
@@ -74,32 +74,32 @@ before_action :set_surgery, only: [:show, :update]
     # case 2 : when updating priority
     elsif params[:change_status].present?
       if params[:change_status] == "Alerte"
-      @surgery.status = "alerte"
-      @event.description = "a changé la priorité à 'Alerte'"
-      @event.flag = "red"
+        @surgery.status = "alerte"
+        @event.description = "a changé la priorité à 'Alerte'"
+        @event.flag = "red"
       elsif params[:change_status] == "A vérifier"
-      @surgery.status = "à vérifier"
-      @event.description = "a changé la priorité à 'A vérifier'"
-      @event.flag = "orange"
+        @surgery.status = "à vérifier"
+        @event.description = "a changé la priorité à 'A vérifier'"
+        @event.flag = "orange"
       elsif params[:change_status] == "Ok"
-      @surgery.status = "ok"
-      @event.description = "a changé la priorité à 'Ok"
-      @event.flag = "green"
+        @surgery.status = "ok"
+        @event.description = "a changé la priorité à 'Ok"
+        @event.flag = "green"
       elsif params[:change_status] == "Non répondu"
-      @surgery.status = "non répondu"
-      @event.description = "a changé la priorité à 'Non répondu'"
-      @event.flag = "grey"
+        @surgery.status = "non répondu"
+        @event.description = "a changé la priorité à 'Non répondu'"
+        @event.flag = "grey"
       end
-      @event.description = current_user.first_name + " " + current_user.last_name + " " + @event.description
-      @event.save!
-      @surgery.save!
-      # set instances for index and redirect
-      @events = @surgery.events
-      @surgeries = set_surgeries_filters_and_order
-      respond_to do |format|
-        format.html { redirect_to surgeries_path(surgery_id: @surgery.id) }
-        format.js {render action: "index"}
-      end
+        @event.description = current_user.first_name + " " + current_user.last_name + " " + @event.description
+        @event.save!
+        @surgery.save!
+        # set instances for index and redirect
+        @events = @surgery.events
+        @surgeries = set_surgeries_filters_and_order
+        respond_to do |format|
+          format.html { redirect_to surgeries_path(surgery_id: @surgery.id) }
+          format.js {render action: "index"}
+        end
 
     # case 3 : when adding an event
     elsif event_params
@@ -115,11 +115,12 @@ before_action :set_surgery, only: [:show, :update]
 
     # case 4 : when adding a comment from the form show
     elsif surgery_params[:pre_comments].present? || surgery_params[:post_comments].present?
-    @event.description = "Commentaire pré-opératoire : " + surgery_params[:pre_comments] if surgery_params[:pre_comments]
-    @event.description = "Commentaire post-opératoire : " + surgery_params[:post_comments] if surgery_params[:post_comments]
-    @event.save
-    @surgery.update(surgery_params)
-    redirect_to surgery_path(@surgery)
+      @event.description = surgery_params[:pre_comments] if surgery_params[:pre_comments]
+      @event.description = surgery_params[:post_comments] if surgery_params[:post_comments]
+      @event.description = "Commentaire de " + current_user.first_name + " " + current_user.last_name + " " + @event.description
+      @event.save
+      @surgery.update(surgery_params)
+      redirect_to surgery_path(@surgery)
     end
   end
 
@@ -182,10 +183,10 @@ before_action :set_surgery, only: [:show, :update]
   end
 
   def surgery_params
-    params.require(:surgery).permit(:pre_comments, :post_comments, :validated)
+    params.require(:surgery).permit(:pre_comments, :post_comments, :validated) if params[:surgery].present?
   end
 
   def event_params
-    params.require(:event).permit(:flag, :description)
+    params.require(:event).permit(:flag, :description) if params[:event].present?
   end
 end

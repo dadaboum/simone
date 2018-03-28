@@ -91,7 +91,21 @@
   align-items: center;
 }
 
+.hero-image::after {
+
+  background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%);
+
+}
+
+.margin-sides-10 {
+  margin: 0px 10px;
+}
+
 #logo_hospital {
-  margin-top: 30px;
-  width: 70%;
+  margin: 0 auto;
+  margin-top:30px;
+  border-radius: 2px;
+
+  height: 40px;
+  width: 120px;
 }
