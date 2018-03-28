@@ -30,19 +30,16 @@ before_action :set_surgery, only: [:show, :update]
     h = @surgeries.where(status: "non répondu", validated: true)
     @surgeries = a + b + c + d + e + f + g + h
 
+
+    if params[:query].present?
+      selection = PgSearch.multisearch(params[:query])
+      @surgeries = selection.map(&:searchable).map(&:surgeries).flatten
+    end
+
     if params[:surgery_id].present?
       @surgery = Surgery.find(params[:surgery_id])
     else
       @surgery = @surgeries.first
-      # params[:surgery_id] = @surgery.id
-    end
-
-    if params[:query].present?
-      selection = PgSearch.multisearch(params[:query])
-      @surgeries = []
-      selection.each do |pg|
-        pg.searchable.surgeries.each { |surgery| @surgeries << surgery }
-      end
     end
 
     @status_array = ["alerte", "à vérifier", "ok", "non répondu"]
