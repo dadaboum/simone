@@ -141,7 +141,7 @@ before_action :set_surgery, only: [:show, :update]
       end
       surgery.save
     end
-    redirect_to surgeries_path
+    redirect_to surgeries_path(query: params[:query], statut: params[:status], pre_or_post: params[:pre_or_post], validated: params[:validated])
   end
 
   private
@@ -167,8 +167,14 @@ before_action :set_surgery, only: [:show, :update]
       end
     end
 
-    if params[:validated].present?
-      surgeries = surgeries.where(validated: params[:validated])
+    if !params[:query].present?
+      if params[:validated] == "all"
+        surgeries
+      elsif params[:validated].present?
+        surgeries = surgeries.where(validated: params[:validated])
+      else
+        surgeries = surgeries.where(validated: false)
+      end
     end
 
     #a = @surgeries.where(status: "alerte", validated: false)

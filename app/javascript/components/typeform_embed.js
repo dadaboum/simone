@@ -1,7 +1,6 @@
 import * as typeformEmbed from '@typeform/embed';
 
 function fakeSubmit(){
-  console.log("We waited 3s and we are in the callback fct");
   document.getElementById('fake-submit').click();
 }
 
