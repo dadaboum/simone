@@ -19,7 +19,7 @@ puts "Created hospital Clinique du sport"
 simone = User.new(email: "simone@gmail.com", password: "motdepasse")
 simone.hospital = clinique_du_sport
 simone.last_name = "Benamran"
-simone.first_name = "Simone"
+simone.first_name = "Simon"
 simone.save
 
 puts "Created Nurse Simone"
