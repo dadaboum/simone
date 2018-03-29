@@ -7,6 +7,22 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  h1 {
+    color: white;
+    font-size: 86px;
+    font-weight: bold;
+    text-shadow: 0px 1px rgba(0, 0, 0, 0.2);
+  }
+  a {
+    text-decoration: none;
+  }
+  p {
+    font-size: 25px;
+    font-weight: lighter;
+    color: rgb(255, 255, 255);
+    opacity: 0.9;
+    margin-bottom: 30px;
+  }
 }
 
 .login-user {
@@ -16,7 +32,7 @@
   border: 1px solid #F2F2F2;
   border-radius: 80px;
   width: 170px;
-  height: 70px;
+  height: 50px;
   &:hover {
     // border-width: 2px;
     h5 {
@@ -25,34 +41,28 @@
   }
   h5 {
     color: rgba(255, 255, 255, 0.7);
-    margin-top: 23px;
+    // margin-top: 23px;
   }
-}
-.banner a {
-  text-decoration: none;
-}
-.banner h1 {
-  color: white;
-  font-size: 50px;
-  font-weight: bold;
-  text-shadow: 0px 1px rgba(0, 0, 0, 0.2);
-}
-.banner p {
-  font-size: 25px;
-  font-weight: lighter;
-  color: rgb(255, 255, 255);
-  opacity: 0.6;
-  margin-bottom: 30px;
 }
 
-.contact-us {
-  color: white;
-  border: 1px solid #F2F2F2;
-  border-radius: 80px;
-  width: 270px;
-  height: 70px;
-  margin-left: 25%;
-  h4 {
-    margin-top: 19px;
+.email-form {
+  display: flex;
+  justify-content: space-around;
+  align-items: center ;
+  p {
+    font-size: 18px;
+    margin: 0 0 0px;
   }
 }
+
+// .contact-us {
+//   color: white;
+//   border: 1px solid #F2F2F2;
+//   border-radius: 80px;
+//   width: 270px;
+//   height: 70px;
+//   margin-left: 25%;
+//   h4 {
+//     margin-top: 19px;
+//   }
+// }

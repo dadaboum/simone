@@ -12,5 +12,6 @@ Rails.application.routes.draw do
   resources :forms, only: [ :index, :new, :create, :update]
 
   resources :surgeries, only: [ :show, :update, :index ]
+  resources :visitors, only: [ :create ]
 
 end

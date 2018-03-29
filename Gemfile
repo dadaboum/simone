@@ -9,6 +9,7 @@ gem 'puma'
 gem 'rails', '5.1.5'
 gem 'redis'
 gem 'pg_search'
+gem 'gibbon'
 
 gem 'autoprefixer-rails'
 gem 'popper_js', '~> 1.12.9'
