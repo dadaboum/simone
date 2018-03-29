@@ -54,10 +54,10 @@
             <%= form_for @surgery, url: surgery_path(@surgery, status: params[:status], pre_or_post: params[:pre_or_post], query: params[:query], validated: params[:validated]), method: :patch, remote: true do |f| %>
               <% if @surgery.validated %>
                 <input type="hidden" value="unvalidate" name="todo">
-                <button type = "submit" class = "validated-mock-btn" style="border: 0px;"> <i class="fas fa-check" style="padding-right: 4px"></i> VALIDÉ </button>
+                <button type = "submit" class = "validated-mock-btn" style="border: 0px;"> <i class="fas fa-check" style="padding-right: 4px"></i> ARCHIVÉ </button>
               <% else %>
                 <input type="hidden" value="validate" name="todo">
-                <button type ="submit" class = "primary-cta rippleripple" id="validate-cta"> VALIDER </button>
+                <button type ="submit" class = "primary-cta rippleripple" id="validate-cta"> ARCHIVER </button>
               <% end %>
             <% end %>
           </li>

@@ -33,14 +33,14 @@
   </div>
   <div class="dropdown">
     <button class="btn dropdown-toggle form-control font-15 height-30" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-      <%= params[:validated].present? ? (params[:validated] == "true" ? "Validé" : "En cours") : "Validation" %>
+      <%= params[:validated].present? ? (params[:validated] == "true" ? "Archivés" : "En cours") : "Tous les dossiers" %>
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu small-font" aria-labelledby="dropdownMenu1">
-      <li><%= link_to "Validé", surgeries_path(validated: "true", surgery_id: params[:surgery_id], status: params[:status], pre_or_post: params[:pre_or_post], query: params[:query]) %></li>
+      <li><%= link_to "Archivés", surgeries_path(validated: "true", surgery_id: params[:surgery_id], status: params[:status], pre_or_post: params[:pre_or_post], query: params[:query]) %></li>
       <li><%= link_to "En cours", surgeries_path(validated: "false", surgery_id: params[:surgery_id], status: params[:status], pre_or_post: params[:pre_or_post], query: params[:query]) %></li>
       <li role="separator" class="divider"></li>
-      <li><%= link_to "Tous", surgeries_path(surgery_id: params[:surgery_id], status: params[:status], query: params[:query]) %></li>
+      <li><%= link_to "Tous", surgeries_path(surgery_id: params[:surgery_id], status: params[:status], query: params[:query], validated: "all") %></li>
     </ul>
   </div>
 </div>

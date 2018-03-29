@@ -1,0 +1,20 @@
+<button class="rounded-dropdown-btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="priority-dropdown"
+<% if surgery.status == "alerte" %>
+    style="color: #EE5F5B; border-color: #EE5F5B;"> ALERTE <i class="fas fa-exclamation-circle"></i>
+  <% elsif surgery.status == "à vérifier" %>
+    style="color: #E67E22; border-color: #E67E22;"> A VERIFIER <i class="fas fa-question-circle"></i>
+  <% elsif surgery.status == "ok" %>
+    style="color: #32B796; border-color: #32B796;"> OK <i class="fas fa-thumbs-up"></i>
+  <% elsif surgery.status == "non répondu" %>
+    style="color: #6C6D69; border-color: #6C6D69;"> <i class="fas fa-clock"></i> NON REPONDU
+  <% end %>
+  <span class="caret"></span>
+</button>
+<ul class="dropdown-menu font-15 small-font" aria-labelledby="dropdownMenu1">
+  <%= form_for surgery, url: surgery_path(surgery, status: params[:status], pre_or_post: params[:pre_or_post], validated: params[:validated], query: params[:query]), method: :patch, remote: true do |f| %>
+  <li> <input class="no-submit" type="submit" value="Alerte" name="change_status" ></li>
+  <li> <input class="no-submit" type="submit" value="A vérifier" name="change_status" ></li>
+  <li> <input class="no-submit" type="submit" value="Ok" name="change_status" ></li>
+  <li><input class="no-submit" type="submit" value="Non répondu" name="change_status"></li>
+  <% end %>
+</ul>
