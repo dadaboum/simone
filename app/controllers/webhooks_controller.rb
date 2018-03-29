@@ -25,21 +25,26 @@ class WebhooksController < ApplicationController
     #updating 'answered' status of preform / postform in surgery
     surgery.pre_form_answered = true if form.pre_or_post == "pre"
     surgery.post_form_answered = true if form.pre_or_post == "post"
-    surgery.save!
 
     #creating event
     event = Event.new
     score = response["calculated"]["score"]
     if score == 0
+      surgery.status = "ok"
       event.flag = "green"
       event.description = "Formulaire rempli : Ok - Rien à signaler"
     elsif score < 100
+      surgery.status = "à vérifier"
       event.flag = "orange"
       event.description = "Formulaire rempli : A vérifier"
     else
+      surgery.status = "alerte"
       event.flag = "red"
       event.description = "Formulaire rempli : Alerte"
     end
+
+    surgery.save!
+
     event.surgery = surgery
     event.save!
 
