@@ -70,12 +70,7 @@ jeremy = Patient.new(first_name: "Jeremy", last_name: "Merlot", phone_number: "0
 jeremy.hospital = clinique_du_sport
 jeremy.save
 
-eric = Patient.new(first_name: "Eric", last_name: "Durand", phone_number: "0677509667")
-eric.hospital = clinique_du_sport
-eric.save
-
 puts "Created patients David, Jonathan, Marie, Jean, PA and Paula"
-
 
 
 knee = SurgeryType.create(description: "Ligamentoplastie du genou")
