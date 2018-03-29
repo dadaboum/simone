@@ -130,7 +130,7 @@
         <div class="new-event-box">
           <%= form_for @event, url: surgery_path(@surgery, status: params[:status], pre_or_post: params[:pre_or_post], validated: params[:validated], query: params[:query]), class: "form-inline", id: "new-event", method: :patch, remote: true, html: {data: {ajax: "right-side-only"}} do |f|  %>
             <div class="new-event-inputs">
-            <%= f.text_field :description, placeholder: "Ajouter un événement", class: "form-control font-15 width-40 height-30 event-input"  %>
+            <%= f.text_area :description, placeholder: "Ajouter un événement", class: "form-control font-15 width-40 height-30 event-input"  %>
             <%= f.select :flag, options_for_select([['Rouge', "red"], ['Orange','orange'], ['Vert', 'green'], ['Gris', 'grey']]), {}, class: 'form-control font-15 height-30 color-input' %>
               <button type="submit" class="add-event-btn">+</button>
             </div>
@@ -145,7 +145,7 @@
                              <%= 'green' if event.flag == 'green' %>
                              <%= 'orange' if event.flag == 'orange' %>
                  bullet"></div>
-                <div class="history-separator-big"></div>
+                <div class="history-separator-big" <% if event == @surgery.events.first %> style="border-color: white;" <% end %>></div>
               </div>
               <div class="history-right font-14">
                 <%= event.created_at.strftime('%H : %M') + ' - ' + event.description %>
