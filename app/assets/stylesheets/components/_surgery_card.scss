@@ -13,17 +13,27 @@
   font-size: 14px;
   color: rgba(0, 0, 0, 0.7);
   #dropdownMenu1 {
-    width: 120px;
+    width: 130px;
     box-shadow: none !important;
+    border: none;
     border-bottom: 1px solid $blue;
     background-color: transparent;
     padding: 1px !important;
+    margin-right: 5px;
+    &:focus {
+      outline: none !important;
+      border-bottom: 1px solid $blue;
+    }
+    &:active {
+      outline: none !important;
+      border-bottom: 1px solid $blue;
+    }
   }
 }
 #filter-title{
   font-size: 15px;
   color: #6C6D69;
-  width: 115px;
+  width: 90px;
   align-self: flex-end;
   a:hover {
     text-decoration: none;
