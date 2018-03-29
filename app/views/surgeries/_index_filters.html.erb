@@ -1,7 +1,7 @@
 <div class="filters">
   <div id="filter-title">
     <% if params[:validated] || params[:pre_or_post] || params[:query] || params[:status] %>
-      <%= link_to "Effacer les filtres", surgeries_path %>
+      <%= link_to "Effacer filtres", surgeries_path %>
     <% elsif %>
       Filtrer par:
     <% end %>
