@@ -20,12 +20,12 @@
         </div>
         <%= link_to 'submit', surgery_path(@surgery), remote: :true, id: "fake-submit", class: "btn btn-primary hidden" %>
       </div>
-      <div class="comment-box text-center">
-        <%= simple_form_for(@surgery) do |f| %>
-          <%= f.text_area :pre_comments, placeholder: "Ecrivez votre commentaire...", class: 'comment-field' %>
-          <%= f.submit 'Ajouter un commentaire', class: 'btn btn-sm btn-primary' %>
-        <% end %>
-      </div>
+      <!-- <div class="comment-box text-center">
+        <%#= simple_form_for(@surgery) do |f| %>
+          <%#= f.text_area :pre_comments, placeholder: "Ecrivez votre commentaire...", class: 'comment-field' %>
+          <%#= f.submit 'Ajouter un commentaire', class: 'btn btn-sm btn-primary' %>
+        <%# end %>
+      </div> -->
     </div>
   </div>
 
