@@ -89,11 +89,11 @@
                   <li> <p class="font-14"> <i class="fas fa-times" style="padding-right: 4px"></i> Formulaire post-opératoire non rempli </p></li>
                     <li>
                       <%= link_to relanceSMS_path(status: params[:status], surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]), method: "post" do %>
-                        <button class="secondary-cta"> <i class="far fa-comment" style="padding-right: 8px"></i> RENVOYER AU PATIENT</button>
+                        <button class="secondary-cta"> <i class="far fa-comment" style="padding-right: 8px"></i> RELANCE AU PATIENT</button>
                       <% end %>
                     </li>
                     <li>
-                      <button id="fill-in-btn" class="primary-cta"> <i class="fas fa-edit" style="padding-right: 8px"></i><%= link_to 'REMPLIR', surgery_path(@surgery) %></button>
+                      <button id="fill-in-btn" class="primary-cta"> <i class="fas fa-edit" style="padding-right: 8px"></i><%= link_to 'SAISIR', surgery_path(@surgery) %></button>
                     </li>
                   </ul>
               <% end %>
