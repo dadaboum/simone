@@ -5,5 +5,6 @@ class PagesController < ApplicationController
   end
 
   def home
+    @visitor = Visitor.new
   end
 end

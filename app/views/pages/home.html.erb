@@ -1,16 +1,18 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1478707734876-10bbf5b7a44b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6f12a6591fe495fbdae670bf547cc4b7&auto=format&fit=crop&w=1051&q=80');">
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1521540124319-66c09f0d5999?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=de1ecb553b42a0e7c749445672db4cf2&auto=format&fit=crop&w=983&q=80');">
   <%= link_to new_user_session_path do %>
     <div class="login-user">
-      <h5>S'identifier</h5>
+      <h5>Se connecter</h5>
     </div>
   <% end %>
   <div class="banner-content" >
-    <h1>CARE ON</h1>
-    <p>Focus on the patient, leave the organization to us</p>
-    <%= link_to root_path do %>
-      <div class="contact-us">
-        <h4>Contactez nous</h4>
-      </div>
-    <% end %>
+    <h1>CareOn</h1>
+    <p>Gardez le lien avec vos patients, avant et après vos opérations en ambulatoire</p>
+    <div class="email-form">
+      <p>Laissez votre email pour recevoir plus de news !</p>
+      <%= simple_form_for(@visitor, html: { class: 'form-inline' }) do |f|  %>
+        <%= f.input :email, label: false, placeholder: "Votre email" %>
+        <%= f.submit "Envoyer", class: "btn btn-primary" %>
+      <% end %>
+    </div>
   </div>
 </div>
