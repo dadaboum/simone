@@ -24,7 +24,6 @@ class PatientsController < ApplicationController
     patient = surgery.patient
     typeform_pre = Form.find(surgery.pre_form_id).typeform_id
     typeform_post = Form.find(surgery.post_form_id).typeform_id
-    raise
     if Date.today < surgery.date
       message = "Bonjour, #{patient.first_name} #{patient.last_name}, lien du questionnaire pré-opératoire : https://davidbenamran.typeform.com/to/#{typeform_pre}?surgery_id=#{surgery.id}"
       event = Event.new(description: "relance message pré-opératoire", flag: "green")
