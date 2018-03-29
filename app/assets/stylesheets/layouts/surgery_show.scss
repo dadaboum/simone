@@ -14,13 +14,24 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
+.form-all {
+  height: 100vh;
+}
+
+.form-box {
+  height: 100vh;
+}
+
 #typeform-embed {
   width: 100%;
-  height: 70vh;
+  height: 100vh;
 }
+
 .pre-scrollable {
-  max-height: 450px !important;
+  // max-height: 450px !important;
 }
+
 .comment-box {
   margin-bottom: 30px;
   .comment-field {

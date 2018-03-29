@@ -12,7 +12,7 @@ before_action :set_surgery, only: [:show, :update]
 
     @status_array = ["alerte", "à vérifier", "ok", "non répondu"]
     @event = Event.new
-    @events = @surgery.events.order(created_at: :asc) if @surgery
+    @events = @surgery.events.order(created_at: :desc) if @surgery
 
     respond_to do |format|
       format.html
@@ -22,7 +22,7 @@ before_action :set_surgery, only: [:show, :update]
 
   def show
     @surgery = Surgery.find(params[:id])
-    @events = @surgery.events.order(created_at: :asc)
+    @events = @surgery.events.order(created_at: :desc)
 
     @surgeries = current_user.hospital.surgeries
     if params[:status].present?
@@ -70,7 +70,7 @@ before_action :set_surgery, only: [:show, :update]
       @event.save!
       @surgery.save!
       # set instances for index and redirect
-      @events = @surgery.events.order(created_at: :asc)
+      @events = @surgery.events.order(created_at: :desc)
       @surgeries = set_surgeries_filters_and_order
       respond_to do |format|
         format.html { redirect_to surgeries_path(surgery_id: @surgery.id) }
@@ -100,7 +100,7 @@ before_action :set_surgery, only: [:show, :update]
         @event.save!
         @surgery.save!
         # set instances for index and redirect
-        @events = @surgery.events.order(created_at: :asc)
+        @events = @surgery.events.order(created_at: :desc)
         @surgeries = set_surgeries_filters_and_order
         respond_to do |format|
           format.html { redirect_to surgeries_path(surgery_id: @surgery.id) }
@@ -112,7 +112,7 @@ before_action :set_surgery, only: [:show, :update]
       @event.update(event_params)
       @event.save!
       # set instances for index and redirect (only update the right-side)
-      @events = @surgery.events.order(created_at: :asc)
+      @events = @surgery.events.order(created_at: :desc)
       @surgeries = set_surgeries_filters_and_order
       respond_to do |format|
         format.html { redirect_to surgeries_path(surgery_id: @surgery.id) }

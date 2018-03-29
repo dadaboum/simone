@@ -73,7 +73,6 @@ jeremy.save
 puts "Created patients David, Jonathan, Marie, Jean, PA and Paula"
 
 
-
 knee = SurgeryType.create(description: "Ligamentoplastie du genou")
 rtij = SurgeryType.create(description: "Rupture des tendons ischio-jambier")
 arthro = SurgeryType.create(description: "Arthroscopie")
