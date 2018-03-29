@@ -4,11 +4,6 @@ before_action :set_surgery, only: [:show, :update]
   def index
     @surgeries = set_surgeries_filters_and_order
 
-    if params[:query].present?
-      selection = PgSearch.multisearch(params[:query])
-      @surgeries = selection.map(&:searchable).map(&:surgeries).flatten
-    end
-
     if params[:surgery_id].present?
       @surgery = Surgery.find(params[:surgery_id])
     else
@@ -152,21 +147,28 @@ before_action :set_surgery, only: [:show, :update]
   private
 
   def set_surgeries_filters_and_order
-    @surgeries = current_user.hospital.surgeries.order("lower(patients.last_name)")
+    surgeries = current_user.hospital.surgeries.order("lower(patients.last_name)")
+
+    if params[:query].present?
+      selection = PgSearch.multisearch(params[:query])
+      surgeries_id = selection.map(&:searchable).map(&:surgeries).flatten.map(&:id)
+      surgeries = Surgery.where(id: surgeries_id)
+    end
+
     if params[:status].present?
-      @surgeries = @surgeries.where(status: params[:status])
+      surgeries = surgeries.where(status: params[:status])
     end
 
     if params[:pre_or_post].present?
       if params[:pre_or_post] == "pre"
-        @surgeries = @surgeries.where("date > ?", Date.today)
+        surgeries = surgeries.where("date > ?", Date.today)
       elsif params[:pre_or_post] == "post"
-        @surgeries = @surgeries.where("date < ?", Date.today)
+        surgeries = surgeries.where("date < ?", Date.today)
       end
     end
 
     if params[:validated].present?
-      @surgeries = @surgeries.where(validated: params[:validated])
+      surgeries = surgeries.where(validated: params[:validated])
     end
 
     #a = @surgeries.where(status: "alerte", validated: false)
@@ -179,14 +181,8 @@ before_action :set_surgery, only: [:show, :update]
     #h = @surgeries.where(status: "non répondu", validated: true)
     #@surgeries = a + b + c + d + e + f + g + h
 
-    if params[:query].present?
-      selection = PgSearch.multisearch(params[:query])
-      @surgeries = []
-      selection.each do |pg|
-        pg.searchable.surgeries.each { |surgery| @surgeries << surgery }
-      end
-    end
-    return @surgeries
+
+    return surgeries
   end
 
   def set_surgery

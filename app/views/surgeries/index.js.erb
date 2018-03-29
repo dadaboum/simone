@@ -3,5 +3,5 @@ document.querySelector(".content-container").innerHTML = '<%= j render "index_co
 
 var head = document.querySelector("head");
 var scriptElement = document.createElement("script");
-scriptElement.src = '<%= javascript_pack_tag 'application' %>'.match(/src="(.*)">/)[1];
+scriptElement.src = '<%= javascript_pack_tag "application" %>'.match(/src="(.*)">/)[1];
 head.appendChild(scriptElement);
