@@ -1,24 +1,28 @@
-
 .core-left-surgery {
   flex: 0 0 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 50%;
 }
-
 .sticky-box {
   position: sticky;
   top: 0px;
   width: 100%;
-  height: calc(100vh-50px);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-
 #typeform-embed {
   width: 100%;
-  height: 500px;
+  height: 70vh;
 }
-
+.pre-scrollable {
+  max-height: 450px !important;
+}
 .comment-box {
+  margin-bottom: 30px;
   .comment-field {
     width: 100%;
     margin: 10px 0px;
@@ -26,4 +30,21 @@
 }
 .hidden {
   visibility: hidden;
+}
+.content-display{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding: 5px 0px;
+  .question-count{
+    flex: 0 0 5%;
+  }
+  .question-content{
+    flex: 0 0 50%;
+    text-align: left;
+  }
+  .answer-content{
+    flex: 0 0 45%;
+    text-align: end;
+  }
 }
