@@ -326,7 +326,7 @@ puts "WARNING: you have to click on update for both forms on /forms"
 
 # Commentaires: par l'infirmiere
 
-# Bonjour, je suis infirmièr à la clinique du Sport, au sein du service de chirurgie orthopédique.
+# Bonjour, je suis infirmier à la clinique du Sport, au sein du service de chirurgie orthopédique.
 # Ce que j'aime dans mon métier, c'est le contact avec les patients, avec mon expérience, en un coup d'oeil je peux évaluer leur état
 # Mais le métier change, la médecine change. Plus d'un patient sur deux est aujourd'hui opéré chez nous en ambulatoire,
 # arrivé le matin, opéré dans la journée, le patient dort chez lui le soir
