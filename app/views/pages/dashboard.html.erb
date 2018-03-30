@@ -91,9 +91,9 @@
   <div class="post-op">
     <div class="all-flags" style="text-align: center">
       <div class="little-circle-container">
-        <p class="little-circle-title">SMS ENVOYÉS</p>
+        <p class="little-circle-title">PATIENTS A SUIVRE AUJOURD'HUI</p>
         <div class="little-circle">
-          <span class="little-circle-stat"> 100% </span>
+          <span class="little-circle-stat"> <%= Surgery.where("date='#{Date.yesterday}'").count + Surgery.where("date='#{Date.tomorrow}'").count %> </span>
         </div>
       </div>
       <div class="little-circle-container">

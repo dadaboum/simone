@@ -114,6 +114,9 @@
   a:hover {
     text-decoration: none;
   }
+  &:hover {
+    color:white;
+  }
 }
 
 
@@ -126,6 +129,11 @@
   background-color: rgba($blue, $alpha);
   background-size: 100%;
   transition: background 0s;
+}
+
+.primary-cta:focus {
+  color:white;
+  outline: 0;
 }
 
 .secondary-cta {
@@ -144,7 +152,7 @@
 }
 .doctor-box{
   .secondary-cta{
-    border: none;
+    border-color: white;
   }
 }
 
@@ -158,8 +166,12 @@
 }
 
 .secondary-cta:active {
+  color: white;
   background-color: rgba($blue, $alpha);
   background-size: 100%;
   transition: background 0s;
 }
 
+.secondary-cta:focus {
+  color: $blue;
+}
