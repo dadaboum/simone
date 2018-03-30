@@ -33,7 +33,7 @@
   <body>
     <%= render 'shared/flashes' %>
 
-    <% if (params[:controller] != "Pages" && params[:action] != "home") %>
+    <% if !( params[:action] == "home" || params[:controller] == "visitors" ) %>
       <%= render 'shared/sidebar' %>
     <% end %>
 
@@ -41,5 +41,6 @@
 
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
+    <%= javascript_pack_tag 'bootstrap' %>
   </body>
 </html>

@@ -1,2 +1,3 @@
-// TODO: create partial for core-left-surgery
 document.querySelector(".form-box").innerHTML = '<%= j render "form_answer_display", form_answer: @form_answer %>';
+document.querySelector(".dropdown").innerHTML = '<%= j render "priority_button", surgery: @surgery %>';
+document.querySelector(".surgery-forms-box").innerHTML = '<%= j render "surgery_form_box", surgery: @surgery %>';

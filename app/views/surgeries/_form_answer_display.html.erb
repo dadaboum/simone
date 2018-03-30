@@ -1,13 +1,19 @@
-<div class="form-answered pre-scrollable">
-  <ol>
-    <% i = 0 %>
-    <% form_answer.form.question_array.each do |question| %>
-      <% question_shorten_id = question["id"].split("_")[1] %>
-      <% answer_el = form_answer.answer_array.find {|h| h["field"]["id"] == question_shorten_id } %>
-      <% if answer_el %>
-        <% if !question['id'].include? 'list_'  %>
-          <li>
+<div class="form-answered">
+  <% i = 0 %>
+  <% c = 0 %>
+  <% form_answer.form.question_array.each do |question| %>
+    <% question_shorten_id = question["id"].split("_")[1] %>
+    <% answer_el = form_answer.answer_array.find {|h| h["field"]["id"] == question_shorten_id } %>
+    <% if answer_el %>
+      <% if !question['id'].include? 'list_'  %>
+        <div class="content-display font-14">
+          <div class="question-count">
+            <%= c += 1 %>
+          </div>
+          <div class="question-content">
             <%= question['question'].split("<br>").last %>
+          </div>
+          <div class="answer-content">
             <% if answer_el["type"] == "boolean" %>
               <% if answer_el["boolean"] %>
                 <strong>Oui</strong>
@@ -19,10 +25,18 @@
             <% elsif answer_el["type"] == "text" %>
               <strong><%= answer_el["text"] %></strong>
             <% end %>
-          </li>
-        <% elsif i == 0 %>
-          <li>
+          </div>
+        </div>
+      <% elsif i == 0 %>
+        <div class="content-display font-14">
+          <div class="question-count">
+            <%= c %>
+            <% c += 1 %>
+          </div>
+          <div class="question-content">
             <%= question['question'].split("<br>").last %>
+          </div>
+          <div class="answer-content">
             <strong>
               <% answer_el["choices"]["labels"].each do |label| %>
                 <%= label %>
@@ -30,9 +44,9 @@
               <%= answer_el["choices"]["other"] %>
             </strong>
            <% i += 1 %>
-          </li>
-        <% end %>
+          </div>
+        </div>
       <% end %>
     <% end %>
-  </ol>
+  <% end %>
 </div>

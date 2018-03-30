@@ -1,0 +1,52 @@
+<% if Date.today > surgery.date %>
+  <ul class="list-inline padding-left-8">
+  <% if surgery.post_form_answered %>
+      <li><p class="font-14">
+        <i class="fas fa-check" style="padding-right: 4px"></i>
+        Formulaire post-opération rempli
+      </p></li>
+    <% if params[:action] != 'show' %>
+      <li><button id="see-answers-btn" class="primary-cta"> <i class="fas fa-eye" style="padding-right: 8px"></i></i><%= link_to 'VOIR LES RÉPONSES', surgery_path(surgery) %></button></li>
+    <% end %>
+  </ul>
+  <% else %>
+    <ul class="list-inline padding-left-8">
+      <li> <p class="font-14"> <i class="fas fa-times" style="padding-right: 4px"></i> Formulaire post-opératoire non rempli </p></li>
+        <li>
+          <%= link_to relanceSMS_path(status: params[:status], surgery_id: surgery.id, pre_or_post: params[:pre_or_post]), method: "post" do %>
+            <button class="secondary-cta"> <i class="far fa-comment" style="padding-right: 8px"></i> SMS AU PATIENT</button>
+          <% end %>
+        </li>
+        <li>
+          <button id="fill-in-btn" class="primary-cta"> <i class="fas fa-edit" style="padding-right: 8px"></i><%= link_to 'REMPLIR FORMULAIRE', surgery_path(surgery) %></button>
+        </li>
+      </ul>
+  <% end %>
+
+<% else %>
+    <ul class="list-inline padding-left-8">
+  <% if surgery.pre_form_answered %>
+     <li> <p class="font-14">
+        <i class="fas fa-check" style="padding-right: 4px"></i>
+        Formulaire pré-opératoire rempli
+      </p></li>
+      <% if params[:action] != 'show' %>
+        <li><button id="see-answers-btn" class="primary-cta"> <i class="fas fa-eye" style="padding-right: 8px"></i></i><%= link_to 'VOIR LES RÉPONSES', surgery_path(surgery) %></button></li>
+      <% end %>
+  <% else %>
+      <li> <p class="form-14"> <i class="fas fa-times" style="padding-right: 4px"></i> Formulaire pré-opération non rempli </p></li>
+        <li>
+          <%= link_to relanceSMS_path(status: params[:status], surgery_id: surgery.id, pre_or_post: params[:pre_or_post]), method: "post" do %>
+            <button class="secondary-cta"> <i class="far fa-comment" style="padding-right: 8px"></i> SMS AU PATIENT</button>
+          <% end %>
+        </li>
+        <% if params[:action] != 'show' %>
+          <li>
+            <button class="primary-cta"> <i class="fas fa-edit" style="padding-right: 8px"></i><%= link_to 'REMPLIR FORMULAIRE', surgery_path(surgery) %></button>
+          </li>
+        <% end %>
+  <% end %>
+    </ul>
+<% end %>
+</ul>
+

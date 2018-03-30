@@ -101,8 +101,7 @@
 .surgery-history-box {
   border-radius: 3px;
   margin: 30px;
-  margin-top: 40px;
-  margin-bottom: 0px;
+  margin-bottom: 10px;
 }
 
 .history-box {
@@ -144,7 +143,7 @@
 }
 
 .history-separator-small {
-  height: 15px;
+  height: 5px;
   margin-left: 4px;
   flex: 0 0 10px;
   border-left: 1px solid rgba(0, 0, 0, 0.6);
@@ -242,8 +241,8 @@
 }
 
 .new-event-box {
-  margin: 0px 30px;
-  padding: 10px 10px;
+  // margin: 0px 30px;
+  // padding: 10px 10px;
 }
 
 .new-event-inputs {
@@ -263,7 +262,7 @@
 }
 
 .event-input {
-  flex: 0 1 280px;
+  flex: 0 1 305px;
 }
 
 .grey-title {

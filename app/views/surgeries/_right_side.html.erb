@@ -27,37 +27,16 @@
               <% end %>
           </li>
             <li>
-              <div class="dropdown">
-                <button class="rounded-dropdown-btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="priority-dropdown"
-                <% if @surgery.status == "alerte" %>
-                    style="color: #EE5F5B; border-color: #EE5F5B;"> ALERTE <i class="fas fa-exclamation-circle"></i>
-                  <% elsif @surgery.status == "à vérifier" %>
-                    style="color: #E67E22; border-color: #E67E22;"> A VERIFIER <i class="fas fa-question-circle"></i>
-                  <% elsif @surgery.status == "ok" %>
-                    style="color: #32B796; border-color: #32B796;"> OK <i class="fas fa-thumbs-up"></i>
-                  <% elsif @surgery.status == "non répondu" %>
-                    style="color: #6C6D69; border-color: #6C6D69;"> <i class="fas fa-clock"></i> NON REPONDU
-                  <% end %>
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu font-15 small-font" aria-labelledby="dropdownMenu1">
-                  <%= form_for @surgery, url: surgery_path(@surgery, status: params[:status], pre_or_post: params[:pre_or_post], validated: params[:validated], query: params[:query]), method: :patch, remote: true do |f| %>
-                  <li> <input class="no-submit" type="submit" value="Alerte" name="change_status" ></li>
-                  <li> <input class="no-submit" type="submit" value="A vérifier" name="change_status" ></li>
-                  <li> <input class="no-submit" type="submit" value="Ok" name="change_status" ></li>
-                  <li><input class="no-submit" type="submit" value="Non répondu" name="change_status"></li>
-                  <% end %>
-                </ul>
-              </div>
+              <%= render 'priority_button', surgery: @surgery %>
           </li>
           <li>
             <%= form_for @surgery, url: surgery_path(@surgery, status: params[:status], pre_or_post: params[:pre_or_post], query: params[:query], validated: params[:validated]), method: :patch, remote: true do |f| %>
               <% if @surgery.validated %>
                 <input type="hidden" value="unvalidate" name="todo">
-                <button type = "submit" class = "validated-mock-btn" style="border: 0px;"> <i class="fas fa-check" style="padding-right: 4px"></i> VALIDÉ </button>
+                <button type = "submit" class = "validated-mock-btn" style="border: 0px;"> <i class="fas fa-check" style="padding-right: 4px"></i> ARCHIVÉ </button>
               <% else %>
                 <input type="hidden" value="validate" name="todo">
-                <button type ="submit" class = "primary-cta rippleripple" id="validate-cta"> VALIDER </button>
+                <button type ="submit" class = "primary-cta rippleripple" id="validate-cta"> ARCHIVER </button>
               <% end %>
             <% end %>
           </li>
@@ -68,65 +47,25 @@
             <p class="font-14"> Médecin : <%= @surgery.surgeon.name %></p>
           </li>
           <li>
-            <%= link_to notice_path( status: params[:status], surgery_id: params[:surgery_id], preremo_or_post: params[:pre_or_post]), method: "post" do %>
-              <button class="secondary-cta"> <i class="fab fa-telegram-plane" style="padding-right: 8px"></i> ENVOYER PAR MAIL</button>
+            <%= link_to notice_path( status: params[:status], surgery_id: @surgery.id, preremo_or_post: params[:pre_or_post]), method: "post" do %>
+              <button class="secondary-cta"> <i class="fab fa-telegram-plane" style="padding-right: 8px"></i> Notifier le médecin</button>
             <% end %>
           </li>
         </ul>
       <div class="surgery-forms-box">
-
-            <% if Date.today > @surgery.date %>
-              <ul class="list-inline padding-left-8">
-              <% if @surgery.post_form_answered %>
-                  <li><p class="font-14">
-                    <i class="fas fa-check" style="padding-right: 4px"></i>
-                    Formulaire post-opération rempli
-                  </p></li>
-                <li><button id="see-answers-btn" class="primary-cta"> <i class="fab fa-wpforms" style="padding-right: 8px"></i><%= link_to 'VOIR LE FORMULAIRE', surgery_path(@surgery)%></button></li>
-              </ul>
-              <% else %>
-                <ul class="list-inline padding-left-8">
-                  <li> <p class="font-14"> <i class="fas fa-times" style="padding-right: 4px"></i> Formulaire post-opératoire non rempli </p></li>
-                    <li>
-                      <%= link_to relanceSMS_path(status: params[:status], surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]), method: "post" do %>
-                        <button class="secondary-cta"> <i class="far fa-comment" style="padding-right: 8px"></i> RENVOYER AU PATIENT</button>
-                      <% end %>
-                    </li>
-                    <li>
-                      <button id="fill-in-btn" class="primary-cta"> <i class="fas fa-edit" style="padding-right: 8px"></i><%= link_to 'REMPLIR', surgery_path(@surgery) %></button>
-                    </li>
-                  </ul>
-              <% end %>
-
-            <% else %>
-                <ul class="list-inline padding-left-8">
-              <% if @surgery.pre_form_answered %>
-                 <li> <p class="font-14">
-                    <i class="fas fa-check" style="padding-right: 4px"></i>
-                    Formulaire pré-opératoire rempli
-                  </p></li>
-                  <li><button id="see-answers-btn" class="primary-cta"><i class="fab fa-wpforms" style="padding-right: 8px"></i> <%= link_to 'VOIR LE FORMULAIRE', surgery_path(@surgery)%> </button></li>
-              <% else %>
-                  <li> <p class="form-14"> <i class="fas fa-times" style="padding-right: 4px"></i> Formulaire pré-opération non rempli </p></li>
-                    <li>
-                      <%= link_to relanceSMS_path(status: params[:status], surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]), method: "post" do %>
-                        <button class="secondary-cta"> <i class="far fa-comment" style="padding-right: 8px"></i> RENVOYER AU PATIENT</button>
-                      <% end %>
-                    </li>
-                    <li>
-                      <button class="primary-cta"> <i class="fas fa-edit" style="padding-right: 8px"></i><%= link_to 'REMPLIR', surgery_path(@surgery) %></button>
-                    </li>
-              <% end %>
-                </ul>
-
-            <% end %>
-
-
-
-        </ul>
+        <%= render 'surgery_form_box', surgery: @surgery %>
       </div>
       <div class="surgery-history-box">
         <p class="grey-title">HISTORIQUE</p>
+        <div class="new-event-box">
+          <%= form_for @event, url: surgery_path(@surgery, status: params[:status], pre_or_post: params[:pre_or_post], validated: params[:validated], query: params[:query]), class: "form-inline", id: "new-event", method: :patch, remote: true, html: {data: {ajax: "right-side-only"}} do |f|  %>
+            <div class="new-event-inputs">
+            <%= f.text_area :description, placeholder: "Ajouter un événement", class: "form-control font-15 width-40 height-30 event-input"  %>
+            <%= f.select :flag, options_for_select([['Rouge', "red"], ['Orange','orange'], ['Vert', 'green'], ['Gris', 'grey']]), {}, class: 'form-control font-15 height-30 color-input' %>
+              <button type="submit" class="add-event-btn">+</button>
+            </div>
+          <% end %>
+        </div>
           <% @events.each do |event| %>
             <div class="history-box">
               <div class="history-left">
@@ -136,8 +75,7 @@
                              <%= 'green' if event.flag == 'green' %>
                              <%= 'orange' if event.flag == 'orange' %>
                  bullet"></div>
-                <div class="history-separator-big"
-                <% if event == @surgery.events.last %> style = "border-color: white;" <% end %>></div>
+                <div class="history-separator-big" <% if event == @surgery.events.first %> style="border-color: white;" <% end %>></div>
               </div>
               <div class="history-right font-14">
                 <%= event.created_at.strftime('%H : %M') + ' - ' + event.description %>
@@ -148,16 +86,7 @@
               <div class="history-right"></div>
             </div>
           <% end %>
-        </div>
-        <div class="new-event-box">
-          <%= form_for @event, url: surgery_path(@surgery, status: params[:status], pre_or_post: params[:pre_or_post], validated: params[:validated], query: params[:query]), class: "form-inline", id: "new-event", method: :patch, remote: true, html: {data: {ajax: "right-side-only"}} do |f|  %>
-            <div class="new-event-inputs">
-            <%= f.text_field :description, placeholder: "Ajouter un événement", class: "form-control font-15 width-40 height-30 event-input"  %>
-            <%= f.select :flag, options_for_select([['Rouge', "red"], ['Orange','orange'], ['Vert', 'green'], ['Gris', 'grey']]), {}, class: 'form-control font-15 height-30 color-input' %>
-              <button type="submit" class="add-event-btn">+</button>
-            </div>
-          <% end %>
-        </div>
+      </div>
         </div>
       </div>
     </div>
