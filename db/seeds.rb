@@ -12,7 +12,7 @@ Hospital.destroy_all
 
 puts "Destroyed all DB"
 
-clinique_du_sport = Hospital.create(name:"Clinique du Sport", photo: "kznmaxzbiaqdzeurxh4h.png")
+clinique_du_sport = Hospital.create(name:"Hôpital Américain", photo: "gdka47htfsn2nsg2jsq1.jpg")
 
 puts "Created hospital Clinique du sport"
 
