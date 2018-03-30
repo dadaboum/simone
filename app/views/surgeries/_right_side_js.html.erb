@@ -67,7 +67,7 @@
             <p class="font-14"> Médecin : <%= surgery.surgeon.name %></p>
           </li>
           <li>
-            <%= link_to notice_path(status: params[:status], surgery_id: params[:surgery_id], pre_or_post: params[:pre_or_post]), method: "post" do %>
+            <%= link_to notice_path(status: params[:status], surgery_id: surgery.id, pre_or_post: params[:pre_or_post]), method: "post" do %>
               <button class="secondary-cta"> <i class="fab fa-telegram-plane" style="padding-right: 8px"></i> Notifier le médecin</button>
             <% end %>
           </li>

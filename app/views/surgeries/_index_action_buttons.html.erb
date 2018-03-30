@@ -4,12 +4,12 @@
     <%= hidden_field_tag :surgery_ids, nil, id: "validate_batch_input" %>
     <%= submit_tag "ARCHIVER", class: "btn primary-cta" %>
   <% end %>
-  <%= form_tag sms_batch_path, method: :post do %>
-    <%= hidden_field_tag :surgery_ids, nil, id: "batch_input" %>
-    <button type="submit" class="btn secondary-cta">
+  <%#= form_tag sms_batch_path, method: :post do %>
+    <%#= hidden_field_tag :surgery_ids, nil, id: "batch_input" %>
+    <!-- <button type="submit" class="btn secondary-cta">
       <i class="far fa-comment" style="padding-right: 8px"></i>SMS AU PATIENT
     </button>
-  <% end %>
+  <%# end %> -->
   <div class="dropdown">
     <button class="btn secondary-cta dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
       PRIORISER
