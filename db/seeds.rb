@@ -38,7 +38,7 @@ david = Patient.new(first_name: "David", last_name: "Benamran", phone_number: "0
 david.hospital = clinique_du_sport
 david.save
 
-david2 = Patient.new(first_name: "Nina", last_name: "Dadaboom", phone_number: "0672306881")
+david2 = Patient.new(first_name: "Yves", last_name: "Dadaboom", phone_number: "0672306881")
 david2.hospital = clinique_du_sport
 david2.save
 
@@ -54,7 +54,7 @@ marie = Patient.new(first_name: "Marie", last_name: "Robert", phone_number: "067
 marie.hospital = clinique_du_sport
 marie.save
 
-jean = Patient.new(first_name: "Yves", last_name: "Laplace", phone_number: "0677509667")
+jean = Patient.new(first_name: "Jean", last_name: "Laplace", phone_number: "0677509667")
 jean.hospital = clinique_du_sport
 jean.save
 
