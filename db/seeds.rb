@@ -54,7 +54,7 @@ marie = Patient.new(first_name: "Marie", last_name: "Robert", phone_number: "067
 marie.hospital = clinique_du_sport
 marie.save
 
-jean = Patient.new(first_name: "Jean", last_name: "Laplace", phone_number: "0677509667")
+jean = Patient.new(first_name: "Yves", last_name: "Laplace", phone_number: "0677509667")
 jean.hospital = clinique_du_sport
 jean.save
 
