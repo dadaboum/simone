@@ -116,7 +116,7 @@ before_action :set_surgery, only: [:show, :update]
       @surgeries = set_surgeries_filters_and_order
       respond_to do |format|
         format.html { redirect_to surgeries_path(surgery_id: @surgery.id) }
-        format.js
+        format.js {render action: "index"}
       end
 
     # case 4 : when adding a comment from the form show
