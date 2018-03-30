@@ -104,7 +104,7 @@ puts "Created J+1 form for the knee surgery"
 david_operation = Surgery.new(is_done: true, date: Date.yesterday)
 david_operation.patient = david
 david_operation.surgery_type = knee
-david_operation.surgeon = guilhem
+david_operation.surgeon = jacques
 david_operation.pre_form = pre_form_knee
 david_operation.pre_form_answered = true
 david_operation.status = "non répondu"
@@ -241,7 +241,7 @@ jean_event2.save!
 herve_operation = Surgery.new(is_done: false, date: Date.tomorrow)
 herve_operation.patient = herve
 herve_operation.surgery_type = arthro
-herve_operation.surgeon = jacques
+herve_operation.surgeon = guilhem
 herve_operation.pre_form = pre_form_knee
 herve_operation.pre_form_answered = false
 herve_operation.status = "non répondu"
