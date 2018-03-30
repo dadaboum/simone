@@ -1,3 +1,17 @@
+.svg-container {
+  position: relative;
+  width: 270px;
+  height: 270px;
+}
+
+.grey-circle {
+  position: absolute;
+}
+
+.color-circle {
+  position: absolute;
+}
+
 .right-side-wrapper {
   flex : 0 0 50%;
   padding-top: 0px;
