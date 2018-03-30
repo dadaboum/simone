@@ -18,7 +18,7 @@
             <% end %>
           <% end %>
         </div>
-        <%= link_to 'submit', surgery_path(@surgery), remote: :true, id: "fake-submit", class: "btn btn-primary hidden" %>
+        <%= link_to 'submit', surgery_path(@surgery, surgery_id: params[:surgery_id]), remote: :true, id: "fake-submit", class: "btn btn-primary hidden" %>
       </div>
       <!-- <div class="comment-box text-center">
         <%#= simple_form_for(@surgery) do |f| %>
