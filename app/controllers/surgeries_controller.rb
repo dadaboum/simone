@@ -59,7 +59,7 @@ before_action :set_surgery, only: [:show, :update]
     if params[:todo].present?
       if params[:todo] == "validate"
         @surgery.validated = true
-        @event.description = "Fiche validée"
+        @event.description = "Fiche archivée"
         @event.flag = "green"
       elsif params[:todo] == "unvalidate"
         @surgery.validated = false
