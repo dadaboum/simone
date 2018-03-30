@@ -1,0 +1,253 @@
+.chart-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bail-inutile {
+ color: black;
+}
+
+.chart-container {
+  flex: 0 0 260px;
+  position: relative;
+  height: 260px;
+  width: 260px;
+  text-align: center;
+}
+
+.chart-position {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.chart-title {
+  position: absolute;
+  top: 55px;
+  left: 25%;
+  right: 25%;
+}
+
+.chart-subtitle {
+  position: absolute;
+  top: 150px;
+  left: 25%;
+  right: 25%;
+  font-size: 12px;
+  color: rgba(0,0,0,0.5)
+}
+
+
+.yellow-rectangle {
+  position: absolute;
+  background-color: #FDB631;
+  top: 0px;
+  left: 0px;
+  height: 120px;
+}
+
+.pie-container {
+  position: relative;
+  height: 204px;
+  width: 204px;
+}
+
+.dashboard-pie-red {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  background-color: white;
+  border: 4px solid red;
+}
+
+.dashboard-pie-grey {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  background-color: white;
+  border: 4px solid rgba(0,0,0,0.6);
+}
+
+
+#alert-pie {
+  height: 202px;
+  width: 202px;
+  border-radius: 50%;
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  background-image:
+        /* 10% = 126deg = 90 + ( 360 * .1 ) */
+  linear-gradient(126deg, transparent 50%, white 50%),
+  linear-gradient(90deg, white 50%, transparent 50%);
+}
+
+#opposite-alert-pie {
+  height: 202px;
+  width: 202px;
+  border-radius: 50%;
+  position: absolute;
+  top: -1;
+  left: -1;
+  background-image:
+        /* 10% = 126deg = 90 + ( 360 * .1 ) */
+  linear-gradient(126deg, transparent 50%, white 50%),
+  linear-gradient(360deg, white 50%, transparent 50%);
+  border: 4px solid rgba(0,0,0,0.5);
+}
+
+$configs: (
+  chart-a-verifier: (
+    svgSize: 230px,
+    <% a = Surgery.where("(date='#{Date.yesterday}' or date='#{Date.tomorrow}') and status is null or status='à vérifier'").count%>
+    <% b = Surgery.all.count %>
+    percentage: <%= (a.to_f / b * 100).to_i %>,
+    strokeWidth: 15px,
+    backgroundColor: rgba(0,0,0,0.1),
+    foregroundColor: #E67E22,
+    labelColor: #E67E22,
+    labelFontSize: 5rem,
+    duration: 3s,
+    animationDelay: 1s
+  ),
+  chart-alert: (
+    svgSize: 230px,
+    <% a = Surgery.where("(date='#{Date.yesterday}' or date='#{Date.tomorrow}') and status='alerte'").count%>
+    <% b = Surgery.all.count %>
+    percentage: <%= (a.to_f / b * 100).to_i %>,
+    strokeWidth: 15px,
+    backgroundColor: rgba(0,0,0,0.1),
+    foregroundColor: #EE5F5B,
+    labelColor: #EE5F5B,
+    labelFontSize: 5rem,
+    duration: 3s,
+    animationDelay: 1s
+  ),
+  chart-non-repondu: (
+    svgSize: 230px,
+    <% a = Surgery.where("(date='#{Date.yesterday}' or date='#{Date.tomorrow}') and status='non répondu'").count%>
+    <% b = Surgery.all.count %>
+    percentage: <%= (a.to_f / b * 100).to_i %>,
+    strokeWidth: 15px,
+    backgroundColor: rgba(0,0,0,0.1),
+    foregroundColor: #6C6D69,
+    labelColor: #6C6D69,
+    labelFontSize: 5rem,
+    duration: 3s,
+    animationDelay: 1s
+  ),
+  chart-ok: (
+    svgSize: 230px,
+    <% a = Surgery.where("(date='#{Date.yesterday}' or date='#{Date.tomorrow}') and status='ok'").count%>
+    <% b = Surgery.all.count %>
+    percentage: <%= (a.to_f / b * 100).to_i %>,
+    strokeWidth: 15px,
+    backgroundColor: rgba(0,0,0,0.1),
+    foregroundColor: #32B796,
+    labelColor: #32B796,
+    labelFontSize: 5rem,
+    duration: 3s,
+    animationDelay: 1s
+  )
+);
+
+
+/* ------- DO NOT EDIT BELOW --------- */
+$pi: 3.14;
+$labelData: '';
+@for $i from 0 to 101 {
+  $labelData: $labelData + $i + '%' + '\a';
+}
+
+@each $chart, $param in $configs {
+
+  $c: (map-get($param, svgSize) - map-get($param, strokeWidth)) * $pi;
+  $cOffSet: (map-get($param, percentage)/100)*$c;
+
+  .#{$chart} {
+    width: map-get($param, svgSize);
+    height: map-get($param, svgSize);
+    margin: 0;
+    position: relative;
+
+    &.animate {
+      svg .circle-foreground {
+        animation: offset map-get($param, duration) ease-in-out forwards;
+        animation-delay: map-get($param, animationDelay);
+      }
+      figcaption:after {
+        animation: #{$chart}-label map-get($param, duration) steps(map-get($param, percentage)) forwards;
+        animation-delay: map-get($param, animationDelay);
+      }
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+      .circle-background {
+        r: (map-get($param, svgSize) - map-get($param, strokeWidth))/2;
+        cx: 50%;
+        cy: 50%;
+        fill: none;
+        stroke: map-get($param, backgroundColor);
+        stroke-width: map-get($param, strokeWidth);
+      }
+      .circle-foreground {
+        @extend .circle-background;
+        stroke: map-get($param, foregroundColor);
+        stroke-dasharray: $cOffSet $c;
+        stroke-dashoffset: $cOffSet;
+        stroke-linecap: round;
+        transform-origin: 50% 50%;
+        transform: rotate(-90deg);
+      }
+    }
+    figcaption {
+      display: inline-block;
+      width: 100%;
+      height: map-get($param, labelFontSize);
+      overflow: hidden;
+      text-align: center;
+      color: map-get($param, labelColor);
+      position: absolute;
+      top: calc(50% - #{map-get($param, labelFontSize)/2});
+      left: 0;
+      font-size: 0;
+      &:after {
+        display: inline-block;
+        content: $labelData;
+        white-space: pre;
+        font-size: map-get($param, labelFontSize);
+        line-height: map-get($param, labelFontSize);
+      }
+    }
+  }
+  @keyframes #{$chart}-label {
+    100% {
+      transform: translateY(map-get($param, labelFontSize) * (-(map-get($param, percentage))));
+    }
+  }
+}
+@keyframes offset {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+
+/* codepen styling only */
+@import url(https://fonts.googleapis.com/css?family=Abel);
+
+figure {
+  margin: 1rem!important;
+}
+figcaption {
+  font-family: 'Abel', sans-serif;
+}
