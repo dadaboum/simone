@@ -35,7 +35,7 @@
   top: 150px;
   left: 25%;
   right: 25%;
-  font-size: 12px;
+  font-size: 21px;
   color: rgba(0,0,0,0.5)
 }
 
@@ -104,12 +104,13 @@
   border: 4px solid rgba(0,0,0,0.5);
 }
 
+// TO BE DYNAMIC: percentage: pe (a.to_f / b * 100).to_i,
 $configs: (
   chart-a-verifier: (
     svgSize: 230px,
     <% a = Surgery.where("(date='#{Date.yesterday}' or date='#{Date.tomorrow}') and status is null or status='à vérifier'").count%>
     <% b = Surgery.all.count %>
-    percentage: <%= (a.to_f / b * 100).to_i %>,
+    percentage: 100,
     strokeWidth: 15px,
     backgroundColor: rgba(0,0,0,0.1),
     foregroundColor: #E67E22,
@@ -122,7 +123,7 @@ $configs: (
     svgSize: 230px,
     <% a = Surgery.where("(date='#{Date.yesterday}' or date='#{Date.tomorrow}') and status='alerte'").count%>
     <% b = Surgery.all.count %>
-    percentage: <%= (a.to_f / b * 100).to_i %>,
+    percentage: 100,
     strokeWidth: 15px,
     backgroundColor: rgba(0,0,0,0.1),
     foregroundColor: #EE5F5B,
@@ -135,7 +136,7 @@ $configs: (
     svgSize: 230px,
     <% a = Surgery.where("(date='#{Date.yesterday}' or date='#{Date.tomorrow}') and status='non répondu'").count%>
     <% b = Surgery.all.count %>
-    percentage: <%= (a.to_f / b * 100).to_i %>,
+    percentage: 100,
     strokeWidth: 15px,
     backgroundColor: rgba(0,0,0,0.1),
     foregroundColor: #6C6D69,
@@ -148,7 +149,7 @@ $configs: (
     svgSize: 230px,
     <% a = Surgery.where("(date='#{Date.yesterday}' or date='#{Date.tomorrow}') and status='ok'").count%>
     <% b = Surgery.all.count %>
-    percentage: <%= (a.to_f / b * 100).to_i %>,
+    percentage: 100,
     strokeWidth: 15px,
     backgroundColor: rgba(0,0,0,0.1),
     foregroundColor: #32B796,
@@ -216,7 +217,8 @@ $labelData: '';
       height: map-get($param, labelFontSize);
       overflow: hidden;
       text-align: center;
-      color: map-get($param, labelColor);
+      color: white;
+      // map-get($param, labelColor);
       position: absolute;
       top: calc(50% - #{map-get($param, labelFontSize)/2});
       left: 0;
