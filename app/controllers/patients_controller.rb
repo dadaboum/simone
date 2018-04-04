@@ -25,10 +25,10 @@ class PatientsController < ApplicationController
     typeform_pre = Form.find(surgery.pre_form_id).typeform_id
     typeform_post = Form.find(surgery.post_form_id).typeform_id
     if Date.today < surgery.date
-      message = "Bonjour, #{patient.first_name} #{patient.last_name}, lien du questionnaire pré-opératoire : https://davidbenamran.typeform.com/to/#{typeform_pre}?surgery_id=#{surgery.id}"
+      message = "Bonjour #{patient.first_name} #{patient.last_name}, à la veille de votre opération, une rapide évaluation de votre état de santé est nécessaire, merci de répondre aux questions suivantes : https://davidbenamran.typeform.com/to/#{typeform_pre}?surgery_id=#{surgery.id}"
       event = Event.new(description: "relance message pré-opératoire", flag: "green")
     else
-      message = "Bonjour, #{patient.first_name} #{patient.last_name}, lien du questionnaire post-opératoire : https://davidbenamran.typeform.com/to/#{typeform_post}?surgery_id=#{surgery.id}"
+      message = "Bonjour #{patient.first_name} #{patient.last_name}, au lendemain de votre opération des ligaments croisés, une rapide évaluation de votre état de santé est nécessaire, merci de répondre aux questions suivantes : https://davidbenamran.typeform.com/to/#{typeform_post}?surgery_id=#{surgery.id}"
       event = Event.new(description: "relance message post-opératoire", flag: "green")
     end
     sms = TwilioTextMessenger.new(patient.phone_number, message).call
