@@ -26,9 +26,9 @@ puts "Created Nurse Simone"
 
 
 
-guilhem = Surgeon.create(name:"Dr Guilhem", email:"davidbenamran@gmail.com")
-pierre = Surgeon.create(name:"Dr Pierre", email:"davidbenamran@gmail.com")
-jacques = Surgeon.create(name:"Dr Jacques", email:"davidbenamran@gmail.com")
+guilhem = Surgeon.create(name:"Dr Guilhem Devert", email:"davidbenamran@gmail.com")
+pierre = Surgeon.create(name:"Dr Pierre Leroy", email:"davidbenamran@gmail.com")
+jacques = Surgeon.create(name:"Dr Jacques Lecoq", email:"davidbenamran@gmail.com")
 
 puts "Created Dr Guilhem, Dr Paul and Jacques"
 
@@ -38,7 +38,7 @@ david = Patient.new(first_name: "David", last_name: "Benamran", phone_number: "0
 david.hospital = clinique_du_sport
 david.save
 
-david2 = Patient.new(first_name: "Yves", last_name: "Dadaboom", phone_number: "0672306881")
+david2 = Patient.new(first_name: "Yves", last_name: "Daval", phone_number: "0672306881")
 david2.hospital = clinique_du_sport
 david2.save
 
