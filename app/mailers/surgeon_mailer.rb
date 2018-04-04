@@ -11,6 +11,6 @@ class SurgeonMailer < ApplicationMailer
     event.flag = "green"
     event.save!
 
-    mail(to: @surgeon.email, subject: "Relevé d'activités - Clinique du sport - #{@patient.last_name} #{@patient.first_name}")
+    mail(to: @surgeon.email, subject: "Votre patient #{@patient.first_name} #{@patient.last_name} a été contacté - Détails des échanges")
   end
 end
