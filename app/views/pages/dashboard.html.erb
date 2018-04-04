@@ -67,7 +67,7 @@
                     <desc>[long description here]</desc>
                     <circle class="circle-background"/>
                     <circle class="circle-foreground">
-                      <p class="chart-title color-green">Okay</p>
+                      <p class="chart-title color-green">Ok</p>
                       <p class="chart-subtitle"> <%= Surgery.where("(date='#{Date.yesterday}' or date='#{Date.tomorrow}') and status is null or status='ok'").count %> patients</p>
                     </circle>
                   </svg>
