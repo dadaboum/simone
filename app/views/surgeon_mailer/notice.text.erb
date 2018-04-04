@@ -1,9 +1,9 @@
 Bonjour <%= @surgeon.name %>,
 
-Patient : <%= @patient.last_name %> <%= @patient.first_name %>
+Votre patient <%= @patient.first_name %> <%= @patient.last_name %> a été contacté aujourd'hui par l'équipe d'infirmières dédiée au suivi de l'ambulatoire
 
-Evenements :
+Voici le détail des échanges :
 
 <% @events.each do |event| %>
-<%= event.created_at %>: <%= event.description %>
+  <%= event.created_at.strftime("%e %b %Y %H:%M:%S%p") %>: <%= event.description %>
 <% end %>

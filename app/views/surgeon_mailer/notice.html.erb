@@ -1,9 +1,9 @@
 <p>Bonjour <%= @surgeon.name %>,</p>
 <br>
-<p>Patient : <strong><%= @patient.last_name %> <%= @patient.first_name %> </p></strong>
+<p>Votre patient <strong><%= @patient.first_name %> <%= @patient.last_name %></strong> a été contacté aujourd'hui par l'équipe d'infirmières dédiée au suivi de l'ambulatoire</p>
 <br>
-<p>Evenements :</p>
+<p>Voici le détail des échanges : </p>
 
 <% @events.each do |event| %>
-  <p><%= event.created_at %>: <%= event.description %></p>
+  <p><%= event.created_at.strftime("%e %b %Y %H:%M:%S%p") %>: <%= event.description %></p>
 <% end %>
