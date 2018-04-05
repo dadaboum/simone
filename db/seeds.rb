@@ -134,7 +134,7 @@ david_event.save!
 
 david2_operation = Surgery.new(is_done: true, date: Date.yesterday)
 david2_operation.patient = david2
-david2_operation.surgery_type = Cataracte
+david2_operation.surgery_type = cataracte
 david2_operation.surgeon = guilhem
 david2_operation.pre_form = pre_form_knee
 david2_operation.pre_form_answered = true
