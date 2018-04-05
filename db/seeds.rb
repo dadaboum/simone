@@ -18,11 +18,11 @@ puts "Created hospital Clinique du sport"
 
 simone = User.new(email: "simone@gmail.com", password: "motdepasse")
 simone.hospital = clinique_du_sport
-simone.last_name = "Benamran"
-simone.first_name = "Paul"
+simone.last_name = "Barre"
+simone.first_name = "Karine"
 simone.save
 
-puts "Created Nurse Simone"
+puts "Created Nurse Karine"
 
 
 
@@ -38,11 +38,11 @@ david = Patient.new(first_name: "David", last_name: "Benamran", phone_number: "0
 david.hospital = clinique_du_sport
 david.save
 
-david2 = Patient.new(first_name: "Yves", last_name: "Daval", phone_number: "0672306881")
+david2 = Patient.new(first_name: "Simone", last_name: "Benamran", phone_number: "0610513661")
 david2.hospital = clinique_du_sport
 david2.save
 
-jonathan = Patient.new(first_name: "Jonathan", last_name: "Joubert", phone_number: "0677509667")
+jonathan = Patient.new(first_name: "Jonathan", last_name: "Joubert", phone_number: "0610513661")
 jonathan.hospital = clinique_du_sport
 jonathan.save
 
@@ -76,8 +76,9 @@ puts "Created patients David, Jonathan, Marie, Jean, PA and Paula"
 knee = SurgeryType.create(description: "Ligamentoplastie du genou")
 rtij = SurgeryType.create(description: "Rupture des tendons ischio-jambier")
 arthro = SurgeryType.create(description: "Arthroscopie")
+cataracte = SurgeryType.create(description: "Cataracte")
 
-puts "Created surgery type Ligamentoplastie, RTIJ and Arthroscopie"
+puts "Created surgery type Ligamentoplastie, RTIJ, Arthroscopie and Cataracte"
 
 
 
@@ -100,16 +101,23 @@ post_form_knee.save
 puts "Created J+1 form for the knee surgery"
 
 
+post_form_cataracte = Form.new(pre_or_post: "post")
+post_form_cataracte.surgery_type = cataracte
+post_form_cataracte.hospital = clinique_du_sport
+post_form_cataracte.typeform_id = "h1jCQs"
+post_form_cataracte.save
+
+puts "Created J+1 form for the cataracte surgery"
 
 david_operation = Surgery.new(is_done: true, date: Date.yesterday)
 david_operation.patient = david
-david_operation.surgery_type = knee
+david_operation.surgery_type = cataracte
 david_operation.surgeon = jacques
 david_operation.pre_form = pre_form_knee
 david_operation.pre_form_answered = true
 david_operation.status = "non répondu"
 david_operation.post_form_answered = false
-david_operation.post_form = post_form_knee
+david_operation.post_form = post_form_cataracte
 david_operation.validated = false
 david_operation.save!
 
@@ -126,13 +134,13 @@ david_event.save!
 
 david2_operation = Surgery.new(is_done: true, date: Date.yesterday)
 david2_operation.patient = david2
-david2_operation.surgery_type = knee
+david2_operation.surgery_type = Cataracte
 david2_operation.surgeon = guilhem
 david2_operation.pre_form = pre_form_knee
 david2_operation.pre_form_answered = true
 david2_operation.status = "non répondu"
 david2_operation.post_form_answered = false
-david2_operation.post_form = post_form_knee
+david2_operation.post_form = post_form_cataracte
 david2_operation.validated = false
 david2_operation.save!
 
@@ -149,13 +157,13 @@ david2_event3.save!
 
 jonathan_operation = Surgery.new(is_done: false, date: Date.tomorrow)
 jonathan_operation.patient = jonathan
-jonathan_operation.surgery_type = knee
+jonathan_operation.surgery_type = cataracte
 jonathan_operation.surgeon = jacques
 jonathan_operation.pre_form_answered = false
 jonathan_operation.post_form_answered = false
 jonathan_operation.status = "non répondu"
 jonathan_operation.pre_form = pre_form_knee
-jonathan_operation.post_form = post_form_knee
+jonathan_operation.post_form = post_form_cataracte
 jonathan_operation.validated = false
 jonathan_operation.save!
 
