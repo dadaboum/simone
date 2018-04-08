@@ -38,7 +38,7 @@ david = Patient.new(first_name: "David", last_name: "Benamran", phone_number: "0
 david.hospital = clinique_du_sport
 david.save
 
-david2 = Patient.new(first_name: "Simone", last_name: "Benamran", phone_number: "0610513661")
+david2 = Patient.new(first_name: "Frédérique", last_name: "Delouche", phone_number: "0652586544")
 david2.hospital = clinique_du_sport
 david2.save
 
@@ -134,13 +134,13 @@ david_event.save!
 
 david2_operation = Surgery.new(is_done: true, date: Date.yesterday)
 david2_operation.patient = david2
-david2_operation.surgery_type = cataracte
+david2_operation.surgery_type = knee
 david2_operation.surgeon = guilhem
 david2_operation.pre_form = pre_form_knee
 david2_operation.pre_form_answered = true
 david2_operation.status = "non répondu"
 david2_operation.post_form_answered = false
-david2_operation.post_form = post_form_cataracte
+david2_operation.post_form = post_form_knee
 david2_operation.validated = false
 david2_operation.save!
 
